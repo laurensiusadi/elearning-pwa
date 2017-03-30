@@ -23,18 +23,7 @@ class HomeController extends Controller
         ->orderBy('elearning.posting.created_at', 'desc')
         ->paginate(3);
 
-        return view('home', ['posts' => $posts]);
+        // return view('home', ['posts' => $posts]);
+        return view('home');
     }
-
-    // public function compile(Request $request) {
-    //     if($request->ajax()){
-    //         $file = fopen("test.cpp", 'w');
-    //         fwrite($file, $request->source);
-    //         fclose($file);
-    //
-    //         exec(trim(env('COMPILER'),"'") . ' 2>&1 test.cpp -O3 -o test.exe', $res, $ret);
-    //
-    //         return $res;
-    //     }
-    // }
 }
