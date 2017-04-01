@@ -1,0 +1,10 @@
+{
+  "name": "codekita - Offline Capable Code e-Learning Platform",
+  "short_name": "codekita",
+  "description": "Belajar code dengan kapabilitas offline",
+  "lang": "en-US",
+  "start_url": "/",
+  "display": "standalone",
+  "theme_color": "#00c6ff",
+  "background_color": "#00c6ff"
+}

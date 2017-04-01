@@ -27,8 +27,8 @@ class QuizController extends Controller
         ->get();
 
         $ismhs = false;
-        $user = User::find(Auth::id());
-        if ($user->is('mhs')) {
+        // $user = User::find(Auth::id());
+        if (User::find(Auth::id())->where('role_user', 'mhs')) { 
             $ismhs = true;
         }
 

@@ -3,15 +3,15 @@
 @section('content')
 <div class="container">
 <div class="section">
-    <form style="max-width:330px; margin: 0 auto;" role="form" method="POST" action="{{ url('/login') }}">
+    <form class="form-small" role="form" method="POST" action="{{ url('/login') }}">
         {{ csrf_field() }}
         <h4>Login</h4>
         <div class="row" style="padding-top:25px">
             <div class="input-field col s12 {{ $errors->has('email') ? 'has-error' : '' }}" >
-                <input placeholder="Your Email Address" id="email" name="email" type="email" class="validate" value="{{ old('email') }}">
+                <input placeholder="Your Email Address" id="email" name="email" type="email" class="validate" value="{{ old('email') }}" required>
                 <label for="email">Email</label>
             </div>
-            <div class="input-field col s12 {{ $errors->has('password') ? ' has-error' : '' }}">
+            <div class="input-field col s12 {{ $errors->has('password') ? ' has-error' : '' }}" required>
                 <input placeholder="Input password" name="password" type="password" class="validate">
                 <label for="password">Password</label>
             </div>
@@ -25,7 +25,7 @@
                 </button>
             </div>
             <div class="input-field col s12">
-                <button class="col s12 waves-effect waves-red btn-flat grey lighten-3">Register</button>
+                <a href="{{ url('/register') }}" class="btn col s12 waves-effect waves-dark btn-flat grey lighten-3">Register</a>
             </div>
         </div>
     </form>

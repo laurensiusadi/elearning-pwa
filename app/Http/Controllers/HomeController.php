@@ -7,6 +7,7 @@ use App\Http\Requests;
 use App\Post;
 use DB;
 use Input;
+use Auth;
 
 class HomeController extends Controller
 {
@@ -23,7 +24,12 @@ class HomeController extends Controller
         ->orderBy('elearning.posting.created_at', 'desc')
         ->paginate(3);
 
-        // return view('home', ['posts' => $posts]);
-        return view('home');
+        $enrolls = DB::table('elearning.enrollment')
+        ->leftJoin('elearning.kursus', 'elearning.kursus.id', '=', 'elearning.enrollment.kursus_id')
+        ->select('elearning.kursus.*', 'elearning.enrollment.id as enrole_id')
+        ->where('elearning.enrollment.user_id', '=', Auth::id())
+        ->get();
+
+        return view('home', ['posts' => $posts, 'enrolls' => $enrolls]);
     }
 }
