@@ -44,10 +44,10 @@
             <label for="password-confirm">Confirm Password</label>
         </div>
         <div class="input-field col s12">
-            <button class="col s12 btn gradient-2 waves-effect waves-light" type="submit" name="action">Register</button>
+            <button class="col s12 btn gradient-2 waves-effect waves-light" type="submit" name="action">Create account</button>
         </div>
         <div class="input-field col s12">
-            <a href="{{ url('/login') }}" class="btn col s12 waves-effect waves-dark btn-flat grey lighten-3">Login</a>
+            <a href="{{ url('/login') }}" class="col s12 center">Already have an account? Sign in</a>
         </div>
         </div>
     </form>

@@ -28,7 +28,7 @@ class QuizController extends Controller
 
         $ismhs = false;
         // $user = User::find(Auth::id());
-        if (User::find(Auth::id())->where('role_user', 'mhs')) { 
+        if (User::find(Auth::id())->where('role_user', 'mhs')) {
             $ismhs = true;
         }
 
@@ -87,8 +87,7 @@ class QuizController extends Controller
         $quiz = Quiz::find($quiz_id);
 
         $ismhs = false;
-        $user = User::find(Auth::id());
-        if ($user->is('mhs')) {
+        if (User::find(Auth::id())->where('role_user', 'mhs')) {
             $ismhs = true;
         }
 

@@ -25,9 +25,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="/css/materialize.min.css">
     <style>
-        html,body {
-            min-width: 320px;
-        }
+        html,body { min-width: 320px }
         .gradient-1 {
             background: #02AAB0; /* fallback for old browsers */
             background: -webkit-linear-gradient(to left, #02AAB0 , #00CDAC); /* Chrome 10-25, Safari 5.1-6 */
@@ -38,13 +36,14 @@
             background: -webkit-linear-gradient(to left, #00c6ff , #0072ff); /* Chrome 10-25, Safari 5.1-6 */
             background: linear-gradient(to left, #00c6ff , #0072ff); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
         }
-        .form-small {
-            max-width:330px;
-            margin: 0 auto;
-        }
-        form .chip { margin-top: -8px; margin-bottom: 16px;}
-        body { display: flex; min-height: 100vh; flex-direction: column; }
-        main { flex: 1 0 auto; padding-bottom: 50px}
+        .slate { background: #252e36; }
+        .form-small { max-width: 330px; margin: 0 auto }
+        form .chip { margin-top: -8px; margin-bottom: 16px }
+        body { display: flex; min-height: 100vh; flex-direction: column }
+        main { flex: 1 0 auto; padding-bottom: 50px; padding-top: 70px }
+        nav { top: 0; position: fixed; z-index: 999 ; transition: top 0.25s ease-in-out; box-shadow: 0 0 10px 0 rgba(0,0,0,0.25); -moz-box-shadow: 0 0 10px 0 rgba(0,0,0,0.25); -webkit-box-shadow: 0 0 10px 0 rgba(0,0,0,0.25); }
+        .nav-up { top: -52px }
+        @media only screen and (min-width: 601px) { .nav-up { top: -60px } }
     </style>
 </head>
 <body>
@@ -84,8 +83,37 @@
     (function($){
         $(function(){
             $('.button-collapse').sideNav();
-        }); // end of document ready
-    })(jQuery); // end of jQuery name space
+        });
+    })(jQuery);
+    </script>
+    <script type="text/javascript">
+        var didScroll;
+        var lastScrollTop = 0;
+        var delta = 10;
+        var navbarHeight = $('nav').outerHeight();
+        $(window).scroll(function(event){
+            didScroll = true;
+        });
+        setInterval(function() {
+            if (didScroll) {
+                hasScrolled();
+                didScroll = false;
+            }
+        }, 250);
+        function hasScrolled() {
+            var st = $(this).scrollTop();
+            // Make sure they scroll more than delta
+            if(Math.abs(lastScrollTop - st) <= delta)
+                return;
+            if (st > lastScrollTop && st > navbarHeight){
+                $('nav').addClass('nav-up');
+            } else {
+                if(st + $(window).height() < $(document).height()) {
+                    $('nav').removeClass('nav-up');
+                }
+            }
+            lastScrollTop = st;
+        }
     </script>
     <script>
         if ('serviceWorker' in navigator) {
@@ -98,28 +126,28 @@
             });
         }
     </script>
-    <footer class="page-footer black">
+    <footer class="page-footer slate">
         <div class="container">
             <div class="row">
                 <div class="col l6 s12">
-                    <h5 class="white-text">Footer Content</h5>
-                    <p class="grey-text text-lighten-4">You can use rows and columns here to organize your footer content.</p>
+                    <h5 class="grey-text text-lighten-4">Footer Content</h5>
+                    <p class="grey-text">You can use rows and columns here to organize your footer content.</p>
                 </div>
                 <div class="col l4 offset-l2 s12">
-                    <h5 class="white-text">Links</h5>
+                    <h5 class="grey-text text-lighten-4">Links</h5>
                     <ul>
-                        <li><a class="grey-text text-lighten-3" href="#!">Link 1</a></li>
-                        <li><a class="grey-text text-lighten-3" href="#!">Link 2</a></li>
-                        <li><a class="grey-text text-lighten-3" href="#!">Link 3</a></li>
-                        <li><a class="grey-text text-lighten-3" href="#!">Link 4</a></li>
+                        <li><a class="grey-text" href="#!">Link 1</a></li>
+                        <li><a class="grey-text" href="#!">Link 2</a></li>
+                        <li><a class="grey-text" href="#!">Link 3</a></li>
+                        <li><a class="grey-text" href="#!">Link 4</a></li>
                     </ul>
                 </div>
             </div>
         </div>
         <div class="footer-copyright">
-            <div class="container">
+            <div class="grey-text container">
             © 2017 Copyright Text
-            <a class="white-text right" href="https://laurensi.us">Made by Laurensius Adi</a>
+            <a class="grey-text right" href="https://laurensi.us">Made by Laurensius Adi</a>
             </div>
         </div>
     </footer>

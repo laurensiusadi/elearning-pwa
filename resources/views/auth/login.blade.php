@@ -25,7 +25,7 @@
                 </button>
             </div>
             <div class="input-field col s12">
-                <a href="{{ url('/register') }}" class="btn col s12 waves-effect waves-dark btn-flat grey lighten-3">Register</a>
+                <a href="{{ url('/register') }}" class="col s12 center">Or create new account here</a>
             </div>
         </div>
     </form>

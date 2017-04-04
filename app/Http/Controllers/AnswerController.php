@@ -21,8 +21,7 @@ class AnswerController extends Controller
         $quiz = Quiz::find($quiz_id);
 
         $ismhs = false;
-        $user = User::find(Auth::id());
-        if ($user->is('mhs')) {
+        if (User::find(Auth::id())->where('role_user', 'mhs')) {
             $ismhs = true;
         }
 
@@ -53,7 +52,7 @@ class AnswerController extends Controller
             ->get();
         }
 
-        return view('answer.index', ['participants' => User::hydrate($participants), 'course' => $course, 'quiz' => $quiz, 'courseid' => $course->id, 'enrollid' => $id, 'quizid' => $quiz_id, 'ismhs' => $ismhs]);
+        return view('answer.index', ['participants' => User::hydrate($participants->toArray()), 'course' => $course, 'quiz' => $quiz, 'courseid' => $course->id, 'enrollid' => $id, 'quizid' => $quiz_id, 'ismhs' => $ismhs]);
     }
 
     public function create($id, $quiz_id)

@@ -4,9 +4,6 @@
 <div class="container">
     <div class="row">
         <h3>Daftar Penugasan dari Kursus {{ $course->nama }}</h3>
-        <p>
-            @if($ismhs == false) Bukan Mahasiswa @else Mahasiswa @endif
-        </p>
 		<table id="striped" class="striped">
 			<thead>
 				<tr>
