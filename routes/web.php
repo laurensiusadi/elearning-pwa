@@ -22,6 +22,9 @@ Route::get('/logout', function(){
     Auth::logout();
     return redirect('/');
 });
+Route::get('/offline', function(){
+    return view('offline');
+});
 
 Route::post('/plagiarism', 'PlagiarismController@check');
 Route::get('/plagiarism/{course}/{quiz}/{filter}', 'PlagiarismController@index');

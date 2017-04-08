@@ -5,7 +5,7 @@
     <title>codekita</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <meta name="description" content="A front-end template that helps you build fast, modern mobile web apps.">
+    <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
     <!-- Add to homescreen for Chrome on Android -->
     <link rel="manifest" href="/manifest.json">
@@ -23,7 +23,8 @@
     <!-- <link rel="shortcut icon" href="images/favicon.png"> -->
     <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,light,bolditalic&amp;lang=en"> -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" href="/css/materialize.min.css">
+    <link rel="stylesheet" href="{!! asset('css/materialize.css') !!}">
+    @yield('style')
     <style>
         html,body { min-width: 320px }
         .gradient-1 {
@@ -56,6 +57,7 @@
                 @if (!Auth::check())
                     <li><a href="{{ url('login') }}">Please log in</a></li>
                 @else
+                    <li><a href="{{ url('home') }}">Home</a></li>
                     <li><a href="{{ url('user') }}">Welcome, {{ Auth::user()->name }}</a></li>
                     <li><a href="{{ url('logout') }}">Logout</a></li>
                 @endif
@@ -64,10 +66,10 @@
                 @if (!Auth::check())
                     <li><a href="{{ url('login') }}">Please log in</a></li>
                 @else
+                    <li><a href="{{ url('home') }}">Home</a></li>
                     <li><a href="{{ url('user') }}">Welcome, {{ Auth::user()->name }}</a></li>
                     <li><a href="{{ url('logout') }}">Logout</a></li>
                 @endif
-                <li><a href="#">Navbar Link</a></li>
             </ul>
             <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
         </div>
@@ -103,7 +105,7 @@
         function hasScrolled() {
             var st = $(this).scrollTop();
             // Make sure they scroll more than delta
-            if(Math.abs(lastScrollTop - st) <= delta)
+            if(Math.abs(lastScrollTop - st) <=  delta)
                 return;
             if (st > lastScrollTop && st > navbarHeight){
                 $('nav').addClass('nav-up');
@@ -126,6 +128,7 @@
             });
         }
     </script>
+    @yield('scripts')
     <footer class="page-footer slate">
         <div class="container">
             <div class="row">

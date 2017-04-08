@@ -1,14 +1,14 @@
 var cacheName = 'shell-content';
 var filesToCache = [
     '/css/app.css',
-    '/css/materialize.min.css',
+    '/css/materialize.css',
     '/js/app.js',
     '/js/jquery.min.js',
     '/js/materialize.min.js',
     '/fonts/roboto/Roboto-Medium.woff2',
     '/fonts/roboto/Roboto-Regular.woff2',
     '/fonts/roboto/Roboto-Light.woff2',
-    '/',
+    '/offline',
 ];
 
 self.addEventListener('install', function(e) {
@@ -55,3 +55,27 @@ self.addEventListener('fetch', function(e) {
         })
     );
 });
+
+// self.addEventListener('fetch', function(e) {
+//     console.log('[ServiceWorker] Fetch', e.request.url)
+//     e.respondWith(
+//         fetch(e.request).catch(function() {
+//             console.log('[ServiceWorker] Return cache', e.request.url);
+//             return caches.match(e.request);
+//         })
+//     );
+// });
+
+// self.addEventListener('fetch', function(e) {
+//     console.log('[ServiceWorker] Fetch', e.request.url)
+//     e.respondWith(
+//         // console.log('[ServiceWorker] Return cache', e.request.url)
+//         caches.match(e.request).then(function(response) {
+//             // console.log('[ServiceWorker] Network Fallback', e.request.url);
+//             return response || fetch(e.request);
+//         }).catch(function() {
+//             console.log('[ServiceWorker] Cache Fallback', e.request.url)
+//             return caches.match(e.request);
+//         })
+//     );
+// });
