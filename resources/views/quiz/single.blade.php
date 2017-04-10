@@ -1,7 +1,8 @@
 @extends('layouts.template')
 
 @section('style')
-<link rel="stylesheet" href="http://codemirror.net/lib/codemirror.css">
+<link rel="stylesheet" href="{!! asset('css/codemirror/codemirror.css') !!}">
+<link rel="stylesheet" href="{!! asset('css/codemirror/material.css') !!}">
 <style>
     #code_editors { height: 100vh }
     #code_editors .code_box { height: 33%; width: 100%; position: relative }
@@ -14,6 +15,24 @@
     /* Output Area */
     #output { height: 100vh; left: 40%; top: 0; right: 0; bottom: 0; border: 5px solid #444; border-left-width: 10px; overflow: hidden }
     #output iframe { width: 100%; height: 100%; border: 0 }
+    .cm-s-cc.CodeMirror{color:#fff}
+    .cm-s-cc.CodeMirror .cm-comment{color:#939598}
+    .cm-s-cc.CodeMirror .cm-property{color:#83fff5}
+    .cm-s-cc.CodeMirror .cm-string{color:#ffe083}
+    .cm-s-cc.CodeMirror .cm-atom{color:#cc7bc2}
+    .cm-s-cc.CodeMirror .cm-attribute{color:#b4d353}
+    .cm-s-cc.CodeMirror .cm-qualifier{color:#b4d353}
+    .cm-s-cc.CodeMirror .cm-variable{color:#ff8973}
+    .cm-s-cc.CodeMirror .cm-variable-2{color:#ff8973}
+    .cm-s-cc.CodeMirror .cm-variable-3{color:#ff8973}
+    .cm-s-cc.CodeMirror .cm-tag{color:#e85d7f}
+    .cm-s-cc.CodeMirror .cm-bracket{color:#e85d7f}
+    .cm-s-cc.CodeMirror .cm-keyword{color:#b3ccff}
+    .cm-s-cc.CodeMirror .cm-def{color:#b3ccff}
+    .cm-s-cc.CodeMirror .cm-number{color:#ff8973}
+    .cm-s-cc.CodeMirror .cm-operator{color:#fff}
+    .cm-s-cc.CodeMirror .cm-error{color:#fff}
+    .cm-s-cc.CodeMirror .cm-builtin{color:#fff}
 </style>
 @endsection
 
@@ -60,11 +79,11 @@
 @endsection
 
 @section('scripts')
-<script src="http://codemirror.net/lib/codemirror.js"></script>
-<script src="http://codemirror.net/mode/xml/xml.js"></script>
-<script src="http://codemirror.net/mode/htmlmixed/htmlmixed.js"></script>
-<script src="http://codemirror.net/mode/css/css.js"></script>
-<script src="http://codemirror.net/mode/javascript/javascript.js"></script>
+<script src="{!! asset('js/codemirror/codemirror.js') !!}"></script>
+<script src="{!! asset('js/codemirror/mode/xml.js') !!}"></script>
+<script src="{!! asset('js/codemirror/mode/htmlmixed.js') !!}"></script>
+<script src="{!! asset('js/codemirror/mode/css.js') !!}"></script>
+<script src="{!! asset('js/codemirror/mode/javascript.js') !!}"></script>
 <script>
     (function() {
 
@@ -119,6 +138,8 @@
         mode: 'text/html',
         gutter: true,
         lineNumbers: true,
+        lineWrapping: true,
+        theme: "material",
     };
 
     // HTML EDITOR
@@ -173,7 +194,7 @@
 
         cms[i].style.position = 'absolute';
         cms[i].style.top = '30px';
-        cms[i].style.bottom = '0';
+        cms[i].style.bottom = '30px';
         cms[i].style.left = '0';
         cms[i].style.right = '0';
     cms[i].style.height = '100%';
