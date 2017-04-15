@@ -41,9 +41,11 @@
         .form-small { max-width: 330px; margin: 0 auto }
         form .chip { margin-top: -8px; margin-bottom: 16px }
         body { display: flex; min-height: 100vh; flex-direction: column }
-        main { flex: 1 0 auto; padding-bottom: 50px; padding-top: 70px }
-        nav { top: 0; position: fixed; z-index: 999 ; transition: top 0.25s ease-in-out; box-shadow: 0 0 10px 0 rgba(0,0,0,0.25); -moz-box-shadow: 0 0 10px 0 rgba(0,0,0,0.25); -webkit-box-shadow: 0 0 10px 0 rgba(0,0,0,0.25); }
+        main { flex: 1 0 auto; padding-top: 48px }
+        nav { top: 0; position: fixed; z-index: 999 ; transition: top 0.25s ease-in-out; height: 48px; line-height: 48px; box-shadow: 0 0 10px 0 rgba(0,0,0,0.25); -moz-box-shadow: 0 0 10px 0 rgba(0,0,0,0.25); -webkit-box-shadow: 0 0 10px 0 rgba(0,0,0,0.25) }
+        nav .brand-logo { font-size: 20px }
         .nav-up { top: -52px }
+        .nav-wrapper { padding: 0 16px }
         @media only screen and (min-width: 601px) { .nav-up { top: -60px } }
     </style>
 </head>
@@ -51,7 +53,7 @@
     <!-- Always shows a header, even in smaller screens. -->
     <header>
     <nav class="gradient-1" role="navigation">
-        <div class="nav-wrapper container">
+        <div class="nav-wrapper">
             <a id="logo-container" href="{{ url('/') }}" class="brand-logo">codekita</a>
             <ul class="right hide-on-med-and-down">
                 @if (!Auth::check())
@@ -88,35 +90,6 @@
         });
     })(jQuery);
     </script>
-    <script type="text/javascript">
-        var didScroll;
-        var lastScrollTop = 0;
-        var delta = 10;
-        var navbarHeight = $('nav').outerHeight();
-        $(window).scroll(function(event){
-            didScroll = true;
-        });
-        setInterval(function() {
-            if (didScroll) {
-                hasScrolled();
-                didScroll = false;
-            }
-        }, 250);
-        function hasScrolled() {
-            var st = $(this).scrollTop();
-            // Make sure they scroll more than delta
-            if(Math.abs(lastScrollTop - st) <=  delta)
-                return;
-            if (st > lastScrollTop && st > navbarHeight){
-                $('nav').addClass('nav-up');
-            } else {
-                if(st + $(window).height() < $(document).height()) {
-                    $('nav').removeClass('nav-up');
-                }
-            }
-            lastScrollTop = st;
-        }
-    </script>
     <script>
         if ('serviceWorker' in navigator) {
             navigator.serviceWorker.register('/sw.js').then(function(registration) {
@@ -142,23 +115,6 @@
     </script>
     @yield('scripts')
     <footer class="page-footer slate">
-        <div class="container">
-            <div class="row">
-                <div class="col l6 s12">
-                    <h5 class="grey-text text-lighten-4">Footer Content</h5>
-                    <p class="grey-text">You can use rows and columns here to organize your footer content.</p>
-                </div>
-                <div class="col l4 offset-l2 s12">
-                    <h5 class="grey-text text-lighten-4">Links</h5>
-                    <ul>
-                        <li><a class="grey-text" href="#!">Link 1</a></li>
-                        <li><a class="grey-text" href="#!">Link 2</a></li>
-                        <li><a class="grey-text" href="#!">Link 3</a></li>
-                        <li><a class="grey-text" href="#!">Link 4</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
         <div class="footer-copyright">
             <div class="grey-text container">
             © 2017 Copyright Text

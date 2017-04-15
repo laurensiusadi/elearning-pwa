@@ -18,16 +18,17 @@
     </div>
     <div class="col l4 m5 s12">
         <h4>Pengumuman</h4>
+        <ul class="collection">
         @foreach($posts as $post)
-        <div class="card">
-            <div class="card-content">
-                <span class="card-title">{{ $post->judul }}</span>
-                <p>{{ $post->text }}</p><br />
+            <li class="collection-item">
+                <span class="title">{{ $post->judul }}</span>
+                <p>{{ $post->text }}<br />
                 <span class="grey-text">{{ $post->name }}<br />
                 {{ $post->created_at }}</span>
-            </div>
-        </div>
+                </p>
+            </li>
         @endforeach
+        </ul>
     </div>
     </div>
 </div>

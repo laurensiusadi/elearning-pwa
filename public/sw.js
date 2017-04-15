@@ -46,7 +46,7 @@ self.addEventListener('fetch', function(event) {
             var networkResponse = response.clone();
             caches.open(cacheName).then(function(cache) {
                 cache.put(event.request, networkResponse);
-            })
+            }).catch()
             return response;
         }).catch(function() {
             console.log('[ServiceWorker] Cache Fallback', event.request.url);

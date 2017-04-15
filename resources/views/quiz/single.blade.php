@@ -1,45 +1,29 @@
-@extends('layouts.template')
+@extends('layouts.code')
 
 @section('style')
-<link rel="stylesheet" href="{!! asset('css/codemirror/codemirror.css') !!}">
-<link rel="stylesheet" href="{!! asset('css/codemirror/material.css') !!}">
+<link rel="stylesheet" href="{!! asset('codemirror/codemirror.css') !!}">
+<link rel="stylesheet" href="{!! asset('codemirror/material.css') !!}">
+<link rel="stylesheet" href="{!! asset('codemirror/addon/lint/lint.css') !!}">
+<link rel="stylesheet" href="{!! asset('codemirror/addon/hint/show-hint.css') !!}">
+<link rel="stylesheet" href="{!! asset('codemirror/addon/fold/foldgutter.css') !!}">
 <style>
-    #code_editors { height: 100vh }
-    #code_editors .code_box { height: 33%; width: 100%; position: relative }
-    .code_box h3 { font-size: 13px; height: 30px; padding: 5px 10px; margin: 0; background: linear-gradient(#707070, #555); color: white; border-top: 1px solid #8F8F8F; border-bottom: 1px solid #202020; z-index: 10 }
+    /*#code_editors { height: 100vh }*/
+    /*#code_editors .code_box { margin-bottom: 30px; height: 33.3333%; width: 100%; position: relative }*/
     .code_box textarea { position: relative; left: 0; right: 0; top: 30px; bottom: 0; resize: none; border: 0; padding: 10px; font-family: monospace }
     .code_box textarea:focus { outline: none; background: #EFEFEF }
-    #html.code_box { z-index: 101 }
-    #css.code_box { z-index: 102 }
-    #js.code_box { z-index: 103 }
+    /*#html.code_box { z-index: 5 }
+    #css.code_box { z-index: 6 }
+    #js.code_box { z-index: 7 }*/
     /* Output Area */
-    #output { height: 100vh; left: 40%; top: 0; right: 0; bottom: 0; border: 5px solid #444; border-left-width: 10px; overflow: hidden }
+    #output { height: 440px; border: 5px solid #DDD; overflow: hidden }
     #output iframe { width: 100%; height: 100%; border: 0 }
-    .cm-s-cc.CodeMirror{color:#fff}
-    .cm-s-cc.CodeMirror .cm-comment{color:#939598}
-    .cm-s-cc.CodeMirror .cm-property{color:#83fff5}
-    .cm-s-cc.CodeMirror .cm-string{color:#ffe083}
-    .cm-s-cc.CodeMirror .cm-atom{color:#cc7bc2}
-    .cm-s-cc.CodeMirror .cm-attribute{color:#b4d353}
-    .cm-s-cc.CodeMirror .cm-qualifier{color:#b4d353}
-    .cm-s-cc.CodeMirror .cm-variable{color:#ff8973}
-    .cm-s-cc.CodeMirror .cm-variable-2{color:#ff8973}
-    .cm-s-cc.CodeMirror .cm-variable-3{color:#ff8973}
-    .cm-s-cc.CodeMirror .cm-tag{color:#e85d7f}
-    .cm-s-cc.CodeMirror .cm-bracket{color:#e85d7f}
-    .cm-s-cc.CodeMirror .cm-keyword{color:#b3ccff}
-    .cm-s-cc.CodeMirror .cm-def{color:#b3ccff}
-    .cm-s-cc.CodeMirror .cm-number{color:#ff8973}
-    .cm-s-cc.CodeMirror .cm-operator{color:#fff}
-    .cm-s-cc.CodeMirror .cm-error{color:#fff}
-    .cm-s-cc.CodeMirror .cm-builtin{color:#fff}
 </style>
 @endsection
 
 @section('content')
-    <div class="row">
+    <div class="row" style="margin: 5px;">
         <div class="col s12 l4">
-            <h3>Detail Penugasan</h3>
+            <h5>Detail Penugasan</h5>
             <!-- <a class="btn btn-sm btn-success pull-right" href="{{ url('enroll').'/'.$enrollid.'/quiz' }}">
     			<i class="fa fa-arrow-left"></i> Kembali
     		</a> -->
@@ -53,21 +37,32 @@
     		@endif
         </div>
         <div class="col s12 l4">
-        	<!-- Code Editors -->
-        	<section id="code_editors">
-        		<div id="html" class="code_box">
-        			<h3>HTML</h3>
-        			<textarea name="html"></textarea>
-        		</div>
-        		<div id="css" class="code_box">
-        			<h3>CSS</h3>
-        			<textarea name="css"></textarea>
-        		</div>
-        		<div id="js" class="code_box">
-        			<h3>JavaScript</h3>
-        			<textarea name="js"></textarea>
-        		</div>
-        	</section>
+            <!-- Code Editors -->
+            <div class="col s12">
+                <ul class="tabs" style="background-color: #1a2327">
+                    <li class="tab col s4"><a href="#html">HTML</a></li>
+                    <li class="tab col s4"><a href="#css">CSS</a></li>
+                    <li class="tab col s4"><a href="#js">JS</a></li>
+                </ul>
+            </div>
+    		<div id="html" class="col s12 code_box">
+    			<textarea name="html">
+<h4>Hello World!</h4>
+                </textarea>
+    		</div>
+    		<div id="css" class="col s12 code_box">
+    			<textarea name="css">
+body {
+    margin: 0;
+    padding: 0.5em;
+    font-family: arial, sans-serif;
+    color: #000;
+}
+                </textarea>
+    		</div>
+    		<div id="js" class="col s12 code_box">
+    			<textarea name="js"></textarea>
+    		</div>
         </div>
         <div class="col s12 l4">
         	<!-- Sandboxing -->
@@ -79,11 +74,21 @@
 @endsection
 
 @section('scripts')
-<script src="{!! asset('js/codemirror/codemirror.js') !!}"></script>
-<script src="{!! asset('js/codemirror/mode/xml.js') !!}"></script>
-<script src="{!! asset('js/codemirror/mode/htmlmixed.js') !!}"></script>
-<script src="{!! asset('js/codemirror/mode/css.js') !!}"></script>
-<script src="{!! asset('js/codemirror/mode/javascript.js') !!}"></script>
+<script src="{{ asset('codemirror/codemirror.js') }}"></script>
+<script src="{{ asset('codemirror/addon/comment/comment.js') }}"></script>
+<script src="{{ asset('codemirror/addon/lint/lint.js') }}"></script>
+<script src="{{ asset('codemirror/addon/hint/show-hint.js') }}"></script>
+<script src="{{ asset('codemirror/addon/fold/foldcode.js') }}"></script>
+<script src="{{ asset('codemirror/addon/fold/foldgutter.js') }}"></script>
+<script src="{{ asset('codemirror/grammars/css.js') }}"></script>
+<script src="{{ asset('codemirror/grammars/htmlmixed.js') }}"></script>
+<script src="{{ asset('codemirror/grammars/javascript.js') }}"></script>
+<script src="{{ asset('codemirror/codemirror_grammar.min.js') }}"></script>
+<script src="{{ asset('js/demo.js') }}"></script>
+<script src="{{ asset('codemirror/addon/mode/xml.js') }}"></script>
+<script src="{{ asset('codemirror/addon/mode/htmlmixed.js') }}"></script>
+<script src="{{ asset('codemirror/addon/mode/css.js') }}"></script>
+<script src="{{ asset('codemirror/addon/mode/javascript.js') }}"></script>
 <script>
     (function() {
 
@@ -143,67 +148,32 @@
     };
 
     // HTML EDITOR
-    var html_box = document.querySelector('#html textarea');
-    var html_editor = CodeMirror.fromTextArea(html_box, cm_opt);
-
+    var html_editor = codemirror_grammar_demo(document.querySelector("#html textarea"), [
+        {language : "htmlmixed", grammar : htmlmixed_grammar}
+    ]);
     html_editor.on('change', function (inst, changes) {
-    render();
+        render();
     });
 
     // CSS EDITOR
-    cm_opt.mode = 'css';
-    var css_box = document.querySelector('#css textarea');
-    var css_editor = CodeMirror.fromTextArea(css_box, cm_opt);
-
+    var css_editor = codemirror_grammar_demo(document.querySelector("#css textarea"), [
+        {language : "css", grammar : css_grammar}
+    ]);
     css_editor.on('change', function (inst, changes) {
-    render();
+        render();
     });
 
     // JAVASCRIPT EDITOR
-    cm_opt.mode = 'javascript';
-    var js_box = document.querySelector('#js textarea');
-    var js_editor = CodeMirror.fromTextArea(js_box, cm_opt);
-
+    var js_editor = codemirror_grammar_demo(document.querySelector("#js textarea"), [
+        {language : "javascript", grammar : js_grammar}
+    ]);
     js_editor.on('change', function (inst, changes) {
-    render();
+        render();
     });
 
-    // SETTING CODE EDITORS INITIAL CONTENT
-    html_editor.setValue('<p>Hello World</p>');
-    css_editor.setValue('body { color: red; }');
-
-
-    // RENDER CALL ON PAGE LOAD
-    // NOT NEEDED ANYMORE, SINCE WE RELY
-    // ON CODEMIRROR'S onChange OPTION THAT GETS
-    // TRIGGERED ON setValue
-    // render();
-
-
-    // NOT SO IMPORTANT - IF YOU NEED TO DO THIS
-    // THEN THIS SHOULD GO TO CSS
-
-    /*
-        Fixing the Height of CodeMirror.
-        You might want to do this in CSS instead
-        of JS and override the styles from the main
-        codemirror.css
-    */
-    var cms = document.querySelectorAll('.CodeMirror');
-    for (var i = 0; i < cms.length; i++) {
-
-        cms[i].style.position = 'absolute';
-        cms[i].style.top = '30px';
-        cms[i].style.bottom = '30px';
-        cms[i].style.left = '0';
-        cms[i].style.right = '0';
-    cms[i].style.height = '100%';
-    }
-    /*cms = document.querySelectorAll('.CodeMirror-scroll');
-    for (i = 0; i < cms.length; i++) {
-        cms[i].style.height = '100%';
-    }*/
-
+    window.onload = function() {
+        render();
+    };
     }());
     </script>
 @endsection
