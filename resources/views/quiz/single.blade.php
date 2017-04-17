@@ -23,18 +23,32 @@
 @section('content')
     <div class="row" style="margin: 5px;">
         <div class="col s12 l4">
-            <h5>Detail Penugasan</h5>
-            <!-- <a class="btn btn-sm btn-success pull-right" href="{{ url('enroll').'/'.$enrollid.'/quiz' }}">
-    			<i class="fa fa-arrow-left"></i> Kembali
-    		</a> -->
-    		<p>Nama: {{ $quiz->nama }}</p>
-    		<p>Waktu Pengerjaan: {{ $quiz->wmulai.' - '.$quiz->wselesai }}</p>
-    		<p>Deskripsi: {{ $quiz->des }}</p>
-    		@if($ismhs == false)
-    		<h6>Jawaban</h6>
-    		<div id="editor">{{ $quiz->jwb }}</div>
-    		<br><a id="compile" class="btn btn-warning">Compilability Test</a>
-    		@endif
+    		<!-- {{ $quiz->jwb }} -->
+
+            <ul class="collapsible z-depth-1" data-collapsible="accordion">
+                <li class="active">
+                    <div class="collapsible-header active">Detail Penugasan</div>
+                    <div class="collapsible-body">
+                        <span>
+                            <p>Nama: {{ $quiz->nama }}</p>
+                            <p>Waktu Pengerjaan: {{ $quiz->wmulai.' - '.$quiz->wselesai }}</p>
+                            <p>Deskripsi: {{ $quiz->des }}</p>
+                        </span>
+                    </div>
+                </li>
+                <li>
+                    <div class="collapsible-header">Pendahuluan</div>
+                    <div class="collapsible-body">
+                        <span>Lorem ipsum dolor sit amet.</span>
+                    </div>
+                </li>
+                <li>
+                    <div class="collapsible-header">Instruksi</div>
+                    <div class="collapsible-body">
+                        <span>Lorem ipsum dolor sit amet.</span>
+                    </div>
+                </li>
+            </ul>
         </div>
         <div class="col s12 l4">
             <!-- Code Editors -->
@@ -98,7 +112,7 @@ body {
             "<html>\n\t" +
       "<head>\n\t\t" +
       "<meta charset=\"utf-8\">\n\t\t" +
-      "<title>Test</title>\n\n\t\t\n\t" +
+      "<title>Render</title>\n\n\t\t\n\t" +
       "</head>\n\t" +
       "<body>\n\t\n\t" +
       "</body>\n" +
@@ -135,18 +149,6 @@ body {
         iframe_doc.close();
     };
 
-
-    // EDITORS
-
-    // CM OPTIONS
-    var cm_opt = {
-        mode: 'text/html',
-        gutter: true,
-        lineNumbers: true,
-        lineWrapping: true,
-        theme: "material",
-    };
-
     // HTML EDITOR
     var html_editor = codemirror_grammar_demo(document.querySelector("#html textarea"), [
         {language : "htmlmixed", grammar : htmlmixed_grammar}
@@ -173,6 +175,7 @@ body {
 
     window.onload = function() {
         render();
+        $('.collapsible').collapsible('open', 0);
     };
     }());
     </script>

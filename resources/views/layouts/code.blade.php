@@ -26,7 +26,7 @@
     <link rel="stylesheet" href="{!! asset('css/materialize.css') !!}">
     @yield('style')
     <style>
-        html,body { min-width: 320px }
+        html,body { min-width: 320px; background-color: #FCFCFC}
         .gradient-1 {
             background: #0575E6;  /* fallback for old browsers */
             background: -webkit-linear-gradient(to right, #021B79, #0575E6);  /* Chrome 10-25, Safari 5.1-6 */
@@ -107,7 +107,7 @@
                 navigator.serviceWorker.controller.addEventListener('statechange', function() {
                     console.log('[controllerchange][statechange] ' + 'A "statechange" has occured: ', this.state);
                     if (this.state === 'activated') {
-                        // document.getElementById('offlineNotification').classList.remove('hidden');
+                         Materialize.toast('You are offline ready!', 2000);
                     }
                 });
             });

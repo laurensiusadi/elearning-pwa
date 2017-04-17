@@ -4317,8 +4317,8 @@ nav .input-field label.active i {
     min-height: 64px;
   }
   nav, nav .nav-wrapper i, nav a.button-collapse, nav a.button-collapse i {
-    height: 64px;
-    line-height: 64px;
+    height: 48px;
+    line-height: 48px;
   }
   .navbar-fixed {
     height: 64px;
