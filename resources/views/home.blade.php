@@ -1,3 +1,4 @@
+<?php use Carbon\Carbon; ?>
 @extends('layouts.template')
 
 @section('content')
@@ -24,7 +25,8 @@
                 <span class="title">{{ $post->judul }}</span>
                 <p>{{ $post->text }}<br />
                 <span class="grey-text">{{ $post->name }}<br />
-                {{ $post->created_at }}</span>
+                <!-- {{ date('F d, Y H:i', strtotime($post->created_at)) }}<br /> -->
+                {{ Carbon::parse($post->created_at)->diffForHumans() }}</span>
                 </p>
             </li>
         @endforeach

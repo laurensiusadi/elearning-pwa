@@ -7,11 +7,11 @@
         {{ csrf_field() }}
         <h4>Login</h4>
         <div class="row" style="padding-top:25px">
-            <div class="input-field col s12 {{ $errors->has('email') ? 'has-error' : '' }}" >
+            <div class="input-field col s12" {{ $errors->has('email') ? 'data-error="wrong"' : '' }} >
                 <input placeholder="Your Email Address" id="email" name="email" type="email" class="validate" value="{{ old('email') }}" required>
                 <label for="email">Email</label>
             </div>
-            <div class="input-field col s12 {{ $errors->has('password') ? ' has-error' : '' }}" required>
+            <div class="input-field col s12" required {{ $errors->has('password') ? 'data-error="wrong"' : '' }} >
                 <input placeholder="Input password" name="password" type="password" class="validate">
                 <label for="password">Password</label>
             </div>

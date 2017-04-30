@@ -60,22 +60,23 @@
                 </ul>
             </div>
     		<div id="html" class="col s12 code_box">
-    			<textarea name="html">
-<h4>Hello World!</h4>
-                </textarea>
+<textarea name="html">
+<h4 id="coba">Hello World!</h4>
+</textarea>
     		</div>
     		<div id="css" class="col s12 code_box">
-    			<textarea name="css">
+<textarea name="css">
 body {
     margin: 0;
     padding: 0.5em;
     font-family: arial, sans-serif;
     color: #000;
 }
-                </textarea>
+</textarea>
     		</div>
     		<div id="js" class="col s12 code_box">
-    			<textarea name="js"></textarea>
+<textarea name="js">
+</textarea>
     		</div>
         </div>
         <div class="col s12 l4">
@@ -98,11 +99,13 @@ body {
 <script src="{{ asset('codemirror/grammars/htmlmixed.js') }}"></script>
 <script src="{{ asset('codemirror/grammars/javascript.js') }}"></script>
 <script src="{{ asset('codemirror/codemirror_grammar.min.js') }}"></script>
-<script src="{{ asset('js/demo.js') }}"></script>
 <script src="{{ asset('codemirror/addon/mode/xml.js') }}"></script>
 <script src="{{ asset('codemirror/addon/mode/htmlmixed.js') }}"></script>
 <script src="{{ asset('codemirror/addon/mode/css.js') }}"></script>
 <script src="{{ asset('codemirror/addon/mode/javascript.js') }}"></script>
+<script src="{{ asset('js/demo.js') }}"></script>
+<script src="{{ asset('js/jquery.expect.js') }}"></script>
+<script src="{{ asset('js/expect.js') }}"></script>
 <script>
     (function() {
 

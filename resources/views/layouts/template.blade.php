@@ -44,36 +44,13 @@
         main { flex: 1 0 auto; padding-bottom: 50px; padding-top: 70px }
         nav { top: 0; position: fixed; z-index: 999 ; transition: top 0.25s ease-in-out; box-shadow: 0 0 10px 0 rgba(0,0,0,0.25); -moz-box-shadow: 0 0 10px 0 rgba(0,0,0,0.25); -webkit-box-shadow: 0 0 10px 0 rgba(0,0,0,0.25); }
         .nav-up { top: -52px }
-        @media only screen and (min-width: 601px) { .nav-up { top: -60px } }
+        @media only screen and (min-width: 601px) { .nav-up { top: -44px } }
     </style>
 </head>
 <body>
     <!-- Always shows a header, even in smaller screens. -->
     <header>
-    <nav class="gradient-1" role="navigation">
-        <div class="nav-wrapper container">
-            <a id="logo-container" href="{{ url('/') }}" class="brand-logo">codekita</a>
-            <ul class="right hide-on-med-and-down">
-                @if (!Auth::check())
-                    <li><a href="{{ url('login') }}">Please log in</a></li>
-                @else
-                    <li><a href="{{ url('home') }}">Home</a></li>
-                    <li><a href="{{ url('user') }}">Welcome, {{ Auth::user()->name }}</a></li>
-                    <li><a href="{{ url('logout') }}">Logout</a></li>
-                @endif
-            </ul>
-            <ul id="nav-mobile" class="side-nav">
-                @if (!Auth::check())
-                    <li><a href="{{ url('login') }}">Please log in</a></li>
-                @else
-                    <li><a href="{{ url('home') }}">Home</a></li>
-                    <li><a href="{{ url('user') }}">Welcome, {{ Auth::user()->name }}</a></li>
-                    <li><a href="{{ url('logout') }}">Logout</a></li>
-                @endif
-            </ul>
-            <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
-        </div>
-    </nav>
+    @include('partials.nav')
     </header>
     <main>
         @yield('content')
@@ -84,39 +61,15 @@
     <script type="text/javascript">
     (function($){
         $(function(){
-            $('.button-collapse').sideNav();
+            $('.button-collapse').sideNav({
+                menuWidth: 300,
+                closeOnClick: true,
+                draggable: true
+            });
         });
     })(jQuery);
     </script>
-    <script type="text/javascript">
-        var didScroll;
-        var lastScrollTop = 0;
-        var delta = 10;
-        var navbarHeight = $('nav').outerHeight();
-        $(window).scroll(function(event){
-            didScroll = true;
-        });
-        setInterval(function() {
-            if (didScroll) {
-                hasScrolled();
-                didScroll = false;
-            }
-        }, 250);
-        function hasScrolled() {
-            var st = $(this).scrollTop();
-            // Make sure they scroll more than delta
-            if(Math.abs(lastScrollTop - st) <=  delta)
-                return;
-            if (st > lastScrollTop && st > navbarHeight){
-                $('nav').addClass('nav-up');
-            } else {
-                if(st + $(window).height() < $(document).height()) {
-                    $('nav').removeClass('nav-up');
-                }
-            }
-            lastScrollTop = st;
-        }
-    </script>
+    @include('partials.navscroll')
     <script>
         if ('serviceWorker' in navigator) {
             navigator.serviceWorker.register('/sw.js').then(function(registration) {
