@@ -17,4 +17,14 @@ class Enrollment extends Model
     {
     	return $this->hasMany('App\Answer', 'enroll_id');
     }
+
+    public function course()
+    {
+        return $this->belongsTo('App\Course', 'kursus_id');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo('App\User');
+    }
 }

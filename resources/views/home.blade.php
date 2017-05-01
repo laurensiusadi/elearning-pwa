@@ -9,7 +9,9 @@
         @foreach($enrolls as $enroll)
         <div class="card">
             <div class="card-content">
-                <span class="card-title">{{ $enroll->nama }}</span>
+                <span class="card-title">{{ $enroll->course->nama }}</span>
+                <h6 class="grey-text lighten-2">{{ $enroll->course->subject->nama }}</h6>
+                <h6 class="grey-text lighten-2">{{ $enroll->course->period->nama }}</h6>
             </div>
             <div class="card-action">
                 <a href="{{ url('enroll').'/'.$enroll->enrole_id.'/quiz' }}">Masuk</a>
@@ -24,7 +26,7 @@
             <li class="collection-item">
                 <span class="title">{{ $post->judul }}</span>
                 <p>{{ $post->text }}<br />
-                <span class="grey-text">{{ $post->name }}<br />
+                <span class="grey-text">{{ $post->user->name }}<br />
                 <!-- {{ date('F d, Y H:i', strtotime($post->created_at)) }}<br /> -->
                 {{ Carbon::parse($post->created_at)->diffForHumans() }}</span>
                 </p>

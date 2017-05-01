@@ -8,9 +8,9 @@ class Quiz extends Model
 {
     protected $table = 'elearning.tugas';
 
-    public function enroll()
+    public function enrollment()
     {
-    	return $this->belongsTo('App\Enrollment');
+    	return $this->belongsTo('App\Enrollment', 'enroll_id');
     }
 
 	public function answers()

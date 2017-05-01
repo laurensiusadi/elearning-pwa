@@ -5,11 +5,13 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Kodeine\Acl\Traits\HasRole;
+use Kodeine\Acl\Models\Eloquent\Role as Role;
 
 class User extends Authenticatable
 {
     use Notifiable;
-    
+    use HasRole;
+
     /**
      * The attributes that are mass assignable.
      *
@@ -35,6 +37,16 @@ class User extends Authenticatable
      */
     public function roles()
     {
-        return $this->belongsToMany('Kodeine\Acl\Models\Eloquent\Role', 'role_user', 'user_id', 'role_id')->withTimestamps();
+        return $this->belongsToMany('Role', 'role_user', 'user_id', 'role_id')->withTimestamps();
+    }
+
+    public function posts()
+    {
+        return $this->hasMany(Post::class);
+    }
+
+    public function enrollments()
+    {
+        return $this->hasMany(Enrollment::class);
     }
 }

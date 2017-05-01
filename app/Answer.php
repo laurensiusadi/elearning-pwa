@@ -10,12 +10,12 @@ class Answer extends Model
 
 	public function enroll()
     {
-    	return $this->belongsTo('App\Enrollment');
+    	return $this->belongsTo('App\Enrollment', 'enroll_id');
     }
 
     public function quiz()
     {
-    	return $this->belongsTo('App\Quiz');
+    	return $this->belongsTo('App\Quiz', 'tugas_id');
     }
 
     public function details()
