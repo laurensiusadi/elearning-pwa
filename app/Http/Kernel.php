@@ -40,6 +40,10 @@ class Kernel extends HttpKernel
             'throttle:60,1',
             'bindings',
         ],
+
+        'acl' => [
+            'Kodeine\Acl\Middleware\HasPermission'
+        ],
     ];
 
     /**

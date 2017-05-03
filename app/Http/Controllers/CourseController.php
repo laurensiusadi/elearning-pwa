@@ -15,11 +15,13 @@ class CourseController extends Controller
 {
     public function index()
     {
-        $courses = DB::table('elearning.kursus as k')
-        ->join('elearning.periode as p', 'p.id', '=', 'k.periode_id')
-        ->join('elearning.matakuliah as m', 'm.id', '=', 'k.mk_id')
-        ->select('k.*', 'p.nama as namaperiode', 'm.nama as namamatakuliah')
-        ->get();
+        // $courses = DB::table('elearning.kursus as k')
+        // ->join('elearning.periode as p', 'p.id', '=', 'k.periode_id')
+        // ->join('elearning.matakuliah as m', 'm.id', '=', 'k.mk_id')
+        // ->select('k.*', 'p.nama as namaperiode', 'm.nama as namamatakuliah')
+        // ->get();
+
+        $courses = Course::all();
 
         return view('course.index', ['courses' => $courses]);
     }
@@ -45,6 +47,7 @@ class CourseController extends Controller
         $course->periode_id = $request->periode_id;
         $course->mk_id = $request->mk_id;
         $course->nama = $request->nama;
+        $course->type = $request->type;
         $course->save();
 
         if (!file_exists($course->id)) {

@@ -25,34 +25,12 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="{!! asset('css/materialize.css') !!}">
     @yield('style')
-    <style>
-        html,body { min-width: 320px; background-color: #FCFCFC}
-        .gradient-1 {
-            background: #0575E6;  /* fallback for old browsers */
-            background: -webkit-linear-gradient(to right, #021B79, #0575E6);  /* Chrome 10-25, Safari 5.1-6 */
-            background: linear-gradient(to right, #021B79, #0575E6); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-        }
-        .gradient-2 {
-            background: #00c6ff; /* fallback for old browsers */
-            background: -webkit-linear-gradient(to left, #00c6ff , #0072ff); /* Chrome 10-25, Safari 5.1-6 */
-            background: linear-gradient(to left, #00c6ff , #0072ff); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-        }
-        .slate { background: #252e36; }
-        .form-small { max-width: 330px; margin: 0 auto }
-        form .chip { margin-top: -8px; margin-bottom: 16px }
-        body { display: flex; min-height: 100vh; flex-direction: column }
-        main { flex: 1 0 auto; padding-top: 48px }
-        nav { top: 0; position: fixed; z-index: 999 ; transition: top 0.25s ease-in-out; height: 48px; line-height: 48px; box-shadow: 0 0 10px 0 rgba(0,0,0,0.25); -moz-box-shadow: 0 0 10px 0 rgba(0,0,0,0.25); -webkit-box-shadow: 0 0 10px 0 rgba(0,0,0,0.25) }
-        nav .brand-logo { font-size: 20px }
-        .nav-up { top: -52px }
-        .nav-wrapper { padding: 0 16px }
-        @media only screen and (min-width: 601px) { .nav-up { top: -60px } }
-    </style>
+    @include('partials.style')
 </head>
 <body>
     <!-- Always shows a header, even in smaller screens. -->
     <header>
-    @include('layouts.nav')
+    @include('partials.nav')
     </header>
     <main>
         @yield('content')

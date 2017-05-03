@@ -40,7 +40,7 @@ class PostController extends Controller
         $post->text = $request->text;
         $post->save();
 
-        return redirect('post')->with('message', 'Pengumuman baru berhasil ditambahkan');
+        return back()->with('message', 'Pengumuman baru berhasil ditambahkan');
     }
 
     public function show($id)
@@ -94,6 +94,6 @@ class PostController extends Controller
             return redirect('post')->with('error', 'Pengumuman gagal dihapus, data masih direferensikan');
         }
 
-        return redirect('post')->with('message', 'Pengumuman berhasil dihapus');
+        return back()->with('message', 'Pengumuman berhasil dihapus');
     }
 }

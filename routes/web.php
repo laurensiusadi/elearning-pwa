@@ -11,7 +11,7 @@
 |
 */
 
-Route::auth();
+Auth::routes();
 
 Route::get('/', function(){
     return view('welcome');
@@ -38,7 +38,7 @@ Route::get('/similarity/{course}/{quiz}/{nrp}', 'SimilarityController@show');
 // 	return view('welcome');
 // });
 
-Route::group(['middleware' => ['auth'],
+Route::group(['middleware' => ['auth', 'acl'],
     'is' => env('ROLE_ADMIN')],
     function () {
         Route::resource('/user', 'UserController');
@@ -55,7 +55,7 @@ Route::group(['middleware' => ['auth'],
     });
 
 
-Route::group(['middleware' => ['auth'],
+Route::group(['middleware' => ['auth', 'acl'],
     'is' => env('ROLE_DOSEN')],
     function () {
         Route::get('/enroll/{id}/quiz/create', 'QuizController@create');
@@ -65,7 +65,7 @@ Route::group(['middleware' => ['auth'],
         Route::delete('/enroll/{id}/quiz/{quiz_id}', 'QuizController@destroy');
     });
 
-Route::group(['middleware' => ['auth'],
+Route::group(['middleware' => ['auth', 'acl'],
     'is' => env('ROLE_MHS')],
     function () {
         Route::get('/enroll/{id}/quiz/{quiz_id}/answer/create', 'AnswerController@create');
@@ -75,13 +75,13 @@ Route::group(['middleware' => ['auth'],
         Route::delete('/enroll/{id}/quiz/{quiz_id}/answer/{answer_id}', 'AnswerController@destroy');
     });
 
-Route::group(['middleware' => ['auth'],
+Route::group(['middleware' => ['auth', 'acl'],
     'is' => env('ROLE_ADMIN').'|'.env('ROLE_DOSEN')],
     function () {
         Route::resource('/post', 'PostController');
     });
 
-Route::group(['middleware' => ['auth'],
+Route::group(['middleware' => ['auth', 'acl'],
     'is' => env('ROLE_DOSEN').'|'.env('ROLE_MHS')],
     function () {
         Route::get('/enroll', 'EnrollController@index');
@@ -96,7 +96,3 @@ Route::group(['middleware' => ['auth'],
         Route::get('/enroll/{id}/quiz/{quiz_id}/answer', 'AnswerController@index');
         Route::get('/enroll/{id}/quiz/{quiz_id}/answer/{answer_id}', 'AnswerController@show');
     });
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index');

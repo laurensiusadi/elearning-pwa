@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use Kodeine\Acl\Models\Eloquent\Role;
 use App\Http\Requests;
 use App\User;
 use App\Enrollment;
@@ -21,7 +22,8 @@ class AnswerController extends Controller
         $quiz = Quiz::find($quiz_id);
 
         $ismhs = false;
-        if (User::find(Auth::id())->where('role_user', 'mhs')) {
+        $user = Auth::user();
+        if (Auth::user()->hasRole('mhs')) {
             $ismhs = true;
         }
 
