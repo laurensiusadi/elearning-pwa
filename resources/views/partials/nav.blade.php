@@ -16,9 +16,25 @@
                 <li><a href="{{ url('home') }}">Home</a></li>
                 <li><a href="{{ url('user') }}">Welcome, {{ Auth::user()->name }}</a></li>
                 <li><a href="{{ url('logout') }}">Logout</a></li>
+                @if(Auth::user()->hasRole('dosen'))
+                <li><div class="divider"></div></li>
+                <!-- <li><a class="subheader">Quiz</a></li>
+                <li><a href="{{ url('enroll').'/'.$enroll->id.'/quiz/create' }}">Create New Quiz</a></li> -->
+                @endif
+                @if(Auth::user()->hasRole('admin'))
+                <li><div class="divider"></div></li>
+                <li><a href="{{ url('post') }}"><i class="material-icons left">notifications_none</i>Pengumuman</a></li>
+                <li><a href="{{ url('user') }}"><i class="material-icons left">account_circle</i>Pengguna</a></li>
+                <li><a href="{{ url('role') }}"><i class="material-icons left">supervisor_account</i>Role</a></li>
+                <li><a href="{{ url('permission') }}"><i class="material-icons left">visibility_off</i>Permission</a></li>
+                <li><a href="{{ url('period') }}"><i class="material-icons left">today</i>Periode Perkuliahan</a></li>
+                <li><a href="{{ url('subject') }}"><i class="material-icons left">class</i>Mata Kuliah</a></li>
+                <li><a href="{{ url('convention') }}"><i class="material-icons left">library_books</i>Code Convention</a></li>
+                <li><a href="{{ url('course') }}"><i class="material-icons left">assignment</i>Kursus</a></li>
+                @endif
             @endif
         </ul>
-        <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+        <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons left">menu</i></a>
     </div>
 </nav>
 <ul id="dropdown-user" class="dropdown-content" style="top:48px;">

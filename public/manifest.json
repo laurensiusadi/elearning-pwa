@@ -4,7 +4,7 @@
   "description": "Belajar code dengan kapabilitas offline",
   "lang": "en-US",
   "start_url": "/",
-  "display": "standalone",
+  "display": "fullscreen",
   "theme_color": "#0072ff",
   "background_color": "#0072ff"
 }

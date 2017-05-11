@@ -11,13 +11,11 @@ class PermissionController extends Controller
 {
     public function index()
     {
-        $permissions = DB::table('permissions')
-        ->whereNull('inherit_id')
-        ->get();
+        $permissions = Permission::whereNull('inherit_id')->get();
 
-        return view('permission.index', ['permissions' => Permission::hydrate($permissions)]);
+        return view('permission.index', ['permissions' => $permissions]);
     }
-    
+
     public function create()
     {
         return view('permission.create');

@@ -38,7 +38,6 @@
 
     <script src="/js/jquery.min.js"></script>
     <script src="/js/materialize.min.js"></script>
-    <!-- @include('partials.navscroll') -->
     <script type="text/javascript">
     (function($){
         $(function(){
@@ -74,6 +73,7 @@
         }
     </script>
     @yield('scripts')
+    @include('partials.session')
     <footer class="page-footer slate">
         <div class="container">
             <div class="row">

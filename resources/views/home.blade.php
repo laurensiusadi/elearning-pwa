@@ -5,6 +5,9 @@
 <div class="container">
     <div class="row">
     <div class="col l8 m7 s12">
+        @if(Auth::user()->hasRole('admin'))
+        @include('admin.home')
+        @else
         <h4>Kursus Saya</h4>
         @foreach($enrolls as $enroll)
         <div class="card z-depth-0">
@@ -18,6 +21,7 @@
             </div>
         </div>
         @endforeach
+        @endif
     </div>
     <div class="col l4 m5 s12">
         <h4>Pengumuman</h4>
@@ -47,8 +51,15 @@
         @foreach($posts as $post)
             <!-- <li class="collection-item"> --><div class="card-panel z-depth-0">
                 @if(Auth::user()->hasRole('admin|dosen'))
-                <a class="modal-trigger right" href="#modal{{ $post->id }}">Delete</a>
-                    @include('post.deletemodal')
+                <a class="delete modal-trigger right" href="#modal{{ $post->id }}">Delete</a>
+                @component('partials.deletemodal')
+                    @slot('id')
+                        {{ $post->id }}
+                    @endslot
+                    @slot('action')
+                        /post/{{ $post->id }}
+                    @endslot
+                @endcomponent
                 @endif
                 <span class="title">{{ $post->judul }}</span>
                 <p>{{ $post->text }}<br />
@@ -58,13 +69,13 @@
                 </p>
             <!-- </li> --></div>
         @endforeach
+        {{ $posts->links() }}
         <!-- </ul> -->
     </div>
     </div>
 </div>
 @endsection
 @section('scripts')
-@include('partials.session')
 <script>
     $(document).ready(function(){
       $('.modal').modal();

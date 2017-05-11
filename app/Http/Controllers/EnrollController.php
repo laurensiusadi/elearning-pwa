@@ -9,6 +9,7 @@ use Auth;
 use App\Http\Requests;
 use App\Enrollment;
 use App\Course;
+use App\User;
 use DB;
 
 class EnrollController extends Controller
@@ -41,19 +42,10 @@ class EnrollController extends Controller
     public function show($id)
     {
         $course = Course::find($id);
+        $enrolls = $course->enrolls;
+        $users = User::latest()->get();
 
-        $enrolls = DB::table('users')
-        ->leftJoin('elearning.enrollment', function ($join) use ($id) {
-            $join->on('elearning.enrollment.user_id', '=', 'users.id');
-            $join->on('elearning.enrollment.kursus_id', '=', DB::raw($id));
-        })
-        ->leftJoin('elearning.kursus', 'elearning.kursus.id', '=', 'elearning.enrollment.kursus_id')
-        ->leftJoin('role_user', 'role_user.user_id', '=', 'users.id')
-        ->leftJoin('roles', 'roles.id', '=', 'role_user.role_id')
-        ->select('users.nomorinduk as nomorinduk', 'users.name as namauser', 'users.email', 'roles.name as namarole', 'elearning.enrollment.id', 'users.id as userid')
-        ->get();
-
-        return view('enroll.single', ['enrolls' => Enrollment::hydrate($enrolls), 'course' => $course]);
+        return view('enroll.single', compact('course','enrolls','users'));
     }
 
     public function edit($id)

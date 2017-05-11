@@ -7,7 +7,7 @@
         <h3>Penugasan {{ $quiz->nama }}</h3>
     </div>
     <div class="row">
-        <table id="striped" class="table table-bordered table-striped">
+        <table class="table highlight">
 			<thead>
 				<tr>
 					<th>NRP / NIDN</th>

@@ -2668,7 +2668,7 @@ video.responsive-video {
   height: 30px;
 }
 
-.pagination li a {
+.pagination li a, .pagination li span {
   color: #444;
   display: inline-block;
   font-size: 1.2rem;
@@ -2676,7 +2676,7 @@ video.responsive-video {
   line-height: 30px;
 }
 
-.pagination li.active a {
+.pagination li.active a, .pagination li.active span  {
   color: #fff;
 }
 
@@ -2923,7 +2923,7 @@ thead {
 }
 
 td, th {
-  padding: 15px 5px;
+  padding: 8px 5px;
   display: table-cell;
   text-align: left;
   vertical-align: middle;
@@ -5546,9 +5546,8 @@ button.btn-floating {
 .modal .modal-footer {
   border-radius: 0 0 2px 2px;
   background-color: #fafafa;
-  padding: 3px 10px;
+  padding: 3px 14px;
   height: 56px;
-  width: 100%;
 }
 
 .modal .modal-footer .btn, .modal .modal-footer .btn-large, .modal .modal-footer .btn-flat {
@@ -8289,7 +8288,7 @@ input[type=range]:focus::-ms-fill-upper {
 
 @media (min-height: 35.875em) {
   .picker--opened .picker__frame {
-    top: 10%;
+    top: 5%;
     bottom: auto;
   }
 }

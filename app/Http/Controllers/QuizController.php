@@ -18,26 +18,29 @@ class QuizController extends Controller
     {
         $enroll = Enrollment::find($id);
         $course = Course::find($enroll->kursus_id);
-
-        $quizes = DB::table('elearning.tugas')
-        ->leftJoin('elearning.enrollment', 'elearning.enrollment.id', '=', 'elearning.tugas.enroll_id')
-        ->leftJoin('elearning.kursus', 'elearning.kursus.id', '=', 'elearning.enrollment.kursus_id')
-        ->select('elearning.tugas.*')
-        ->where('elearning.kursus.id', '=', $course->id)
-        ->get();
+        $quizes = $enroll->quizes;
+        // $quizes = DB::table('elearning.tugas')
+        // ->leftJoin('elearning.enrollment', 'elearning.enrollment.id', '=', 'elearning.tugas.enroll_id')
+        // ->leftJoin('elearning.kursus', 'elearning.kursus.id', '=', 'elearning.enrollment.kursus_id')
+        // ->select('elearning.tugas.*')
+        // ->where('elearning.kursus.id', '=', $course->id)
+        // ->get();
 
         $ismhs = false;
         // $user = User::find(Auth::id());
-        if (User::find(Auth::id())->where('role_user', 'mhs')) {
+        if (Auth::user()->hasRole('mhs')) {
             $ismhs = true;
         }
 
-        return view('quiz.index', ['course' => $course, 'quizes' => $quizes, 'enrollid' => $id, 'ismhs' => $ismhs]);
+        return view('quiz.index', compact('course', 'enroll', 'quizes', 'ismhs'));
     }
 
     public function create($id)
     {
-        return view('quiz.create', ['enrollid' => $id]);
+        $enroll = Enrollment::find($id);
+        $course = Course::find($enroll->kursus_id);
+        $quizes = $enroll->quizes;
+        return view('quiz.create', compact('course', 'enroll', 'quizes'));
     }
 
     public function store(Request $request, $id)
@@ -160,6 +163,6 @@ class QuizController extends Controller
             $status = rmdir($courseid->kursus_id . "/" . $quiz_id);
         }
 
-        return redirect('enroll/'.$id.'/quiz')->with('message', 'Penugasan berhasil dihapus');
+        return back()->with('message', 'Penugasan berhasil dihapus');
     }
 }

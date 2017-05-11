@@ -100,9 +100,7 @@ class UserController extends Controller
         $validator = $this->validator($request->all());
 
         if ($validator->fails()) {
-            $this->throwValidationException(
-                $request, $validator
-                );
+            return back()->with('error','Pengguna tidak berhasil diupdate');
         }
 
         // input biasa

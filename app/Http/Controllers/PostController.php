@@ -13,12 +13,9 @@ class PostController extends Controller
 {
     public function index()
     {
-        $posts = DB::table('elearning.posting')
-        ->select('elearning.posting.*')
-        ->where('elearning.posting.user_id', '=', Auth::id())
-        ->get();
+        $posts = Post::latest()->paginate(3);
 
-        return view('post.index', ['posts' => $posts]);
+        return view('post.index', compact('posts'));
     }
 
     public function create()

@@ -31,7 +31,7 @@ class CourseController extends Controller
         $periods = Period::all();
         $subjects = Subject::all();
 
-        return view('course.create', ['periods' => $periods, 'subjects' => $subjects]);
+        return view('course.create', compact('periods','subjects'));
     }
 
     public function store(Request $request)
@@ -50,21 +50,22 @@ class CourseController extends Controller
         $course->type = $request->type;
         $course->save();
 
-        if (!file_exists($course->id)) {
-            mkdir('kumpulan_sourcecode/'.$course->id);
-        }
+        // if (!file_exists($course->id)) {
+        //     mkdir('kumpulan_sourcecode/'.$course->id);
+        // }
 
         return redirect('course')->with('message', 'Kursus baru berhasil ditambahkan');
     }
 
     public function show($id)
     {
-        $course = DB::table('elearning.kursus as k')
-        ->join('elearning.periode as p', 'p.id', '=', 'k.periode_id')
-        ->join('elearning.matakuliah as m', 'm.id', '=', 'k.mk_id')
-        ->select('k.*', 'p.nama as namaperiode', 'm.nama as namamatakuliah')
-        ->where('k.id', '=', $id)
-        ->get();
+        // $course = DB::table('elearning.kursus as k')
+        // ->join('elearning.periode as p', 'p.id', '=', 'k.periode_id')
+        // ->join('elearning.matakuliah as m', 'm.id', '=', 'k.mk_id')
+        // ->select('k.*', 'p.nama as namaperiode', 'm.nama as namamatakuliah')
+        // ->where('k.id', '=', $id)
+        // ->get();
+        $course = Course::find($id);
 
         if (!$course) {
             abort('404');
@@ -118,6 +119,6 @@ class CourseController extends Controller
             $status = rmdir($id);
         }
 
-        return redirect('course')->with('message', 'Kursus berhasil dihapus');
+        return redirect('course')->with('message', 'Kursus '.$course->nama.' berhasil dihapus');
     }
 }
