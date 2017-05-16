@@ -6,10 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Period extends Model
 {
-    protected $table = 'elearning.periode';
+    protected $table = 'elearningnew.period';
 
-    public function courses()
+    public function classroom()
     {
-        return $this->hasMany('App\Course','periode_id');
+        return $this->hasMany('App\Classroom','period_id');
     }
 }

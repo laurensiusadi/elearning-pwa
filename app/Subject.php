@@ -6,10 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Subject extends Model
 {
-    protected $table = 'elearning.matakuliah';
+    protected $table = 'elearningnew.subject';
 
-    public function courses()
+    public function classrooms()
     {
-        return $this->hasMany('App\Course','mk_id');
+        return $this->hasMany('App\Classroom','subject_id');
     }
 }

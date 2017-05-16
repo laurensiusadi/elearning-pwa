@@ -25,8 +25,6 @@ class PeriodController extends Controller
             'nama' => 'required',
             'tahun' => 'required|digits:4',
             'semester' => 'required|digits:1',
-            'mulai' => 'date',
-            'selesai' => 'date',
         ]);
 
         // input biasa

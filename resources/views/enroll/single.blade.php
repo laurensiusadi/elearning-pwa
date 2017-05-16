@@ -6,9 +6,9 @@
 <div class="container">
     <div class="row">
         <h5>Daftar Enrollment</h5>
-        <h4 style="margin-top:0">Kursus {{ $course->nama }}</h4>
+        <h4 style="margin-top:0">Kelas {{ $classroom->nama }}</h4>
         <div class="card-panel z-depth-0">
-        <form class="form" role="form" method="POST" action="{{ url('enroll').'/'.$course->id }}">
+        <form class="form" role="form" method="POST" action="{{ url('enroll').'/'.$classroom->id }}">
             <button type="submit" class="btn gradient-2 left"><i class="material-icons left">save</i> Simpan</button>
             {!! csrf_field() !!}
             <input type="hidden" name="_method" value="put"></input>
@@ -26,7 +26,7 @@
     				@foreach($users as $user)
     				<tr>
     					<td data-label="Enrollment">
-                            @if(!empty($user->enrollments->where('kursus_id',$course->id)->first()))
+                            @if(!empty($user->enrollments->where('classroom_id',$classroom->id)->first()))
                             <div class="switch">
                                 <label>
                                 No

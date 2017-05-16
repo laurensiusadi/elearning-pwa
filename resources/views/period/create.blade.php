@@ -5,18 +5,18 @@
 <div class="row">
     <h5>Tambah Periode Perkuliahan</h5>
     <div class="card-panel z-depth-0">
-        <form role="form" method="POST" action="{{ url('/period') }}">
+        <form role="form" method="POST" action="{{ url('period') }}">
             {{ csrf_field() }}
             <div class="input-field">
                 <input placeholder="" name="nama" type="text" required>
                 <label for="nama">Nama</label>
             </div>
             <div class="input-field">
-                <input placeholder="" name="tahun" type="text" required>
+                <input placeholder="" name="tahun" type="tel" required>
                 <label for="tahun">Tahun</label>
             </div>
             <div class="input-field">
-                <input placeholder="" name="semester" type="text" required>
+                <input placeholder="" name="semester" type="tel" required>
                 <label for="semester">Semester</label>
             </div>
             <div class="input-field">

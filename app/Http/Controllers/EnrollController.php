@@ -8,7 +8,7 @@ use Illuminate\Database\QueryException;
 use Auth;
 use App\Http\Requests;
 use App\Enrollment;
-use App\Course;
+use App\Classroom;
 use App\User;
 use DB;
 
@@ -16,10 +16,10 @@ class EnrollController extends Controller
 {
     public function index()
     {
-        $enrolls = DB::table('elearning.enrollment')
-        ->leftJoin('elearning.kursus', 'elearning.kursus.id', '=', 'elearning.enrollment.kursus_id')
-        ->select('elearning.kursus.*', 'elearning.enrollment.id as enrole_id')
-        ->where('elearning.enrollment.user_id', '=', Auth::id())
+        $enrolls = DB::table('elearningnew.enrollment')
+        ->leftJoin('elearningnew.classroom', 'elearningnew.classroom.id', '=', 'elearningnew.enrollment.classroom_id')
+        ->select('elearningnew.classroom.*', 'elearningnew.enrollment.id as enroll_id')
+        ->where('elearningnew.enrollment.user_id', '=', Auth::id())
         ->get();
 
         return view('enroll.index', ['enrolls' => $enrolls]);
@@ -34,49 +34,49 @@ class EnrollController extends Controller
     {
         // input biasa
         $enroll = new Enrollment;
-        $enroll->kursus_id = $request['kursus_id'];
+        $enroll->classroom_id = $request['classroom_id'];
         $enroll->user_id = $request['user_id'];
         $enroll->save();
     }
 
     public function show($id)
     {
-        $course = Course::find($id);
-        $enrolls = $course->enrolls;
+        $classroom = Classroom::find($id);
+        $enrolls = $classroom->enrolls;
         $users = User::latest()->get();
 
-        return view('enroll.single', compact('course','enrolls','users'));
+        return view('enroll.single', compact('classroom','enrolls','users'));
     }
 
     public function edit($id)
     {
-        $course = Course::find($id);
+        $classroom = Classroom::find($id);
 
         $enrolls = DB::table('users')
-        ->leftJoin('elearning.enrollment', function ($join) use ($id) {
-            $join->on('elearning.enrollment.user_id', '=', 'users.id');
-            $join->on('elearning.enrollment.kursus_id', '=', DB::raw($id));
+        ->leftJoin('elearningnew.enrollment', function ($join) use ($id) {
+            $join->on('elearningnew.enrollment.user_id', '=', 'users.id');
+            $join->on('elearningnew.enrollment.classroom_id', '=', DB::raw($id));
         })
-        ->leftJoin('elearning.kursus', 'elearning.kursus.id', '=', 'elearning.enrollment.kursus_id')
+        ->leftJoin('elearningnew.classroom', 'elearningnew.classroom.id', '=', 'elearningnew.enrollment.classroom_id')
         ->leftJoin('role_user', 'role_user.user_id', '=', 'users.id')
         ->leftJoin('roles', 'roles.id', '=', 'role_user.role_id')
-        ->select('users.nomorinduk as nomorinduk', 'users.name as namauser', 'users.email', 'roles.name as namarole', 'elearning.enrollment.id', 'users.id as userid')
+        ->select('users.nomorinduk as nomorinduk', 'users.name as namauser', 'users.email', 'roles.name as namarole', 'elearningnew.enrollment.id', 'users.id as userid')
         ->get();
 
-        return view('enroll.edit', ['enrolls' => Enrollment::hydrate($enrolls), 'course' => $course]);
+        return view('enroll.edit', ['enrolls' => Enrollment::hydrate($enrolls), 'classroom' => $classroom]);
     }
 
     public function update(Request $request, $id)
     {
         foreach ($request['user_id'] as $user_id) {
-            $isexist = DB::table('elearning.enrollment')
+            $isexist = DB::table('elearningnew.enrollment')
             ->select('enrollment.id')
             ->where('user_id', '=', $user_id)
-            ->where('kursus_id', '=', $id)
+            ->where('classroom_id', '=', $id)
             ->first();
 
             $record = array();
-            $record['kursus_id'] = $id;
+            $record['classroom_id'] = $id;
             $record['user_id'] = $user_id;
 
             if (!empty($request['data::'.$user_id]) && empty($isexist)) {

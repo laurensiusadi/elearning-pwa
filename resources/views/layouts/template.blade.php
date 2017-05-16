@@ -26,11 +26,32 @@
     <link rel="stylesheet" href="{!! asset('css/materialize.css') !!}">
     @yield('style')
     @include('partials.style')
+    @if(Auth::check() AND Auth::user()->hasRole('admin'))
+    <style>
+        .container { width: 88% }
+        header, main, footer { padding-left: 300px }
+        .side-nav { overflow-y: scroll; padding-bottom: 100px }
+        @media only screen and (max-width : 992px) {
+            header, main, footer { padding-left: 0 }
+            .side-nav li:first-child { display: none }
+        }
+        @media only screen and (min-width : 993px) {
+            main { padding-top: 20px }
+            nav { background-color: transparent; box-shadow: none}
+            .side-nav li:first-child { line-height: 56px }
+            .side-nav li:first-child a { background-color: #0072FF; color: white; font-size: 1.6rem; line-height: 56px; height: 96px; padding-top: 40px}
+        }
+    </style>
+    @endif
 </head>
 <body>
     <!-- Always shows a header, even in smaller screens. -->
     <header>
-    @include('partials.nav')
+        @if(Auth::check() AND Auth::user()->hasRole('admin'))
+        @include('partials.adminnav')
+        @else
+        @include('partials.nav')
+        @endif
     </header>
     <main>
         @yield('content')
@@ -38,6 +59,19 @@
 
     <script src="/js/jquery.min.js"></script>
     <script src="/js/materialize.min.js"></script>
+    @if(Auth::check() AND Auth::user()->hasRole('admin'))
+    <script type="text/javascript">
+    (function($){
+        $(function(){
+            $('.button-collapse').sideNav({
+                menuWidth: 300,
+                closeOnClick: false,
+                draggable: true
+            });
+        });
+    })(jQuery);
+    </script>
+    @else
     <script type="text/javascript">
     (function($){
         $(function(){
@@ -49,6 +83,7 @@
         });
     })(jQuery);
     </script>
+    @endif
     <script>
         if ('serviceWorker' in navigator) {
             navigator.serviceWorker.register('/sw.js').then(function(registration) {
@@ -66,7 +101,7 @@
                 navigator.serviceWorker.controller.addEventListener('statechange', function() {
                     console.log('[controllerchange][statechange] ' + 'A "statechange" has occured: ', this.state);
                     if (this.state === 'activated') {
-                        // document.getElementById('offlineNotification').classList.remove('hidden');
+                        Materialize.toast('Offline ready', 4000, 'green accent-4');
                     }
                 });
             });

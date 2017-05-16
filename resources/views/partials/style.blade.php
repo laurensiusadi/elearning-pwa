@@ -17,6 +17,7 @@
     body { display: flex; min-height: 100vh; flex-direction: column }
     main { flex: 1 0 auto; padding-bottom: 50px; padding-top: 70px }
     nav { top: 0; position: fixed; z-index: 999 ; transition: top 0.25s ease-in-out; box-shadow: 0 0 10px 0 rgba(0,0,0,0.25); -moz-box-shadow: 0 0 10px 0 rgba(0,0,0,0.25); -webkit-box-shadow: 0 0 10px 0 rgba(0,0,0,0.25); }
+    nav { background-color: #0072ff }
     .nav-up { top: -52px }
     .card-panel > a.delete { color: lightgrey }
     .card-panel:hover a.delete { color:red; text-decoration: none; cursor: pointer }

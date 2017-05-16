@@ -8,13 +8,13 @@
         @if(Auth::user()->hasRole('admin'))
         @include('admin.home')
         @else
-        <h4>Kursus Saya</h4>
+        <h4>Kelas Saya</h4>
         @foreach($enrolls as $enroll)
         <div class="card z-depth-0">
             <div class="card-content">
-                <span class="card-title">{{ $enroll->course->nama }}</span>
-                <p>{{ $enroll->course->subject->nama }}</p>
-                <p>{{ $enroll->course->period->nama }}</p>
+                <span class="card-title">{{ $enroll->classroom->nama }}</span>
+                <p>{{ $enroll->classroom->subject->nama }}</p>
+                <p>{{ $enroll->classroom->period->nama }}</p>
             </div>
             <div class="card-action">
             <a class="btn gradient-2 waves-effect waves-light" href="{{ url('enroll').'/'.$enroll->id.'/quiz' }}">Masuk</a>
@@ -25,9 +25,8 @@
     </div>
     <div class="col l4 m5 s12">
         <h4>Pengumuman</h4>
-        <!-- <ul class="collection"> -->
             @if(Auth::user()->hasRole('admin|dosen'))
-            <!-- <li class="collection-item"> --><div class="card z-depth-0">
+            <div class="card z-depth-0">
             <div class="card-content">
                 <h5>Pengumuman Baru</h5></br>
                 <form role="form" method="POST" action="{{ url('/post') }}">
@@ -46,31 +45,29 @@
                         </button>
                     </div>
                 </form><p></p>
-            <!-- </li> --></div></div>
+            </div></div>
             @endif
-        @foreach($posts as $post)
-            <!-- <li class="collection-item"> --><div class="card-panel z-depth-0">
-                @if(Auth::user()->hasRole('admin|dosen'))
-                <a class="delete modal-trigger right" href="#modal{{ $post->id }}">Delete</a>
-                @component('partials.deletemodal')
-                    @slot('id')
-                        {{ $post->id }}
-                    @endslot
-                    @slot('action')
-                        /post/{{ $post->id }}
-                    @endslot
-                @endcomponent
-                @endif
-                <span class="title">{{ $post->judul }}</span>
-                <p>{{ $post->text }}<br />
-                <span class="grey-text">{{ $post->user->name }}<br />
-                <!-- {{ date('F d, Y H:i', strtotime($post->created_at)) }}<br /> -->
-                {{ Carbon::parse($post->created_at)->diffForHumans() }}</span>
-                </p>
-            <!-- </li> --></div>
-        @endforeach
-        {{ $posts->links() }}
-        <!-- </ul> -->
+            @foreach($posts as $post)
+                <div class="card-panel z-depth-0">
+                    @if(Auth::user()->hasRole('admin|dosen'))
+                    <a class="delete modal-trigger right" href="#modal{{ $post->id }}">Delete</a>
+                    @component('partials.deletemodal')
+                        @slot('id')
+                            {{ $post->id }}
+                        @endslot
+                        @slot('action')
+                            /post/{{ $post->id }}
+                        @endslot
+                    @endcomponent
+                    @endif
+                    <span class="title">{{ $post->judul }}</span>
+                    <p>{{ $post->text }}<br />
+                    <span class="grey-text">{{ $post->user->name }}<br />
+                    {{ Carbon::parse($post->created_at)->diffForHumans() }}</span>
+                    </p>
+                </div>
+            @endforeach
+            {{ $posts->links() }}
     </div>
     </div>
 </div>

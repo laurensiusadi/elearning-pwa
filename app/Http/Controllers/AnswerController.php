@@ -8,7 +8,7 @@ use Kodeine\Acl\Models\Eloquent\Role;
 use App\Http\Requests;
 use App\User;
 use App\Enrollment;
-use App\Course;
+use App\Classroom;
 use App\Quiz;
 use App\Answer;
 use App\Detail;
@@ -28,33 +28,33 @@ class AnswerController extends Controller
         }
 
         $enroll = Enrollment::find($id);
-        $course = Course::find($enroll->kursus_id);
+        $classroom = Classroom::find($enroll->classroom_id);
 
         if ($ismhs == true) {
-            $participants = DB::table('elearning.enrollment')
-            ->leftJoin('users', 'users.id', '=', 'elearning.enrollment.user_id')
-            ->leftJoin('elearning.pengumpulan', function ($join) use ($quiz_id) {
-                $join->on('elearning.pengumpulan.enroll_id', '=', 'elearning.enrollment.id');
-                $join->on('elearning.pengumpulan.tugas_id', '=', DB::raw($quiz_id));
+            $participants = DB::table('elearningnew.enrollment')
+            ->leftJoin('users', 'users.id', '=', 'elearningnew.enrollment.user_id')
+            ->leftJoin('elearningnew.pengumpulan', function ($join) use ($quiz_id) {
+                $join->on('elearningnew.pengumpulan.enroll_id', '=', 'elearningnew.enrollment.id');
+                $join->on('elearningnew.pengumpulan.tugas_id', '=', DB::raw($quiz_id));
             })
-            ->select('users.nomorinduk as nomorinduk', 'users.name as username', 'elearning.pengumpulan.id as answerid')
-            ->where('elearning.enrollment.kursus_id', '=', $course->id)
-            ->where('elearning.enrollment.user_id', '=', Auth::id())
+            ->select('users.nomorinduk as nomorinduk', 'users.name as username', 'elearningnew.pengumpulan.id as answerid')
+            ->where('elearningnew.enrollment.classroom_id', '=', $classroom->id)
+            ->where('elearningnew.enrollment.user_id', '=', Auth::id())
             ->get();
         } else {
-            $participants = DB::table('elearning.enrollment')
-            ->leftJoin('users', 'users.id', '=', 'elearning.enrollment.user_id')
-            ->leftJoin('elearning.pengumpulan', function ($join) use ($quiz_id) {
-                $join->on('elearning.pengumpulan.enroll_id', '=', 'elearning.enrollment.id');
-                $join->on('elearning.pengumpulan.tugas_id', '=', DB::raw($quiz_id));
+            $participants = DB::table('elearningnew.enrollment')
+            ->leftJoin('users', 'users.id', '=', 'elearningnew.enrollment.user_id')
+            ->leftJoin('elearningnew.pengumpulan', function ($join) use ($quiz_id) {
+                $join->on('elearningnew.pengumpulan.enroll_id', '=', 'elearningnew.enrollment.id');
+                $join->on('elearningnew.pengumpulan.tugas_id', '=', DB::raw($quiz_id));
             })
-            ->select('users.nomorinduk as nomorinduk', 'users.name as username', 'elearning.pengumpulan.id as answerid')
-            ->where('elearning.enrollment.kursus_id', '=', $course->id)
-            ->where('elearning.enrollment.user_id', '!=', Auth::id())
+            ->select('users.nomorinduk as nomorinduk', 'users.name as username', 'elearningnew.pengumpulan.id as answerid')
+            ->where('elearningnew.enrollment.classroom_id', '=', $classroom->id)
+            ->where('elearningnew.enrollment.user_id', '!=', Auth::id())
             ->get();
         }
 
-        return view('answer.index', ['participants' => User::hydrate($participants->toArray()), 'course' => $course, 'quiz' => $quiz, 'courseid' => $course->id, 'enrollid' => $id, 'quizid' => $quiz_id, 'ismhs' => $ismhs]);
+        return view('answer.index', ['participants' => User::hydrate($participants->toArray()), 'classroom' => $classroom, 'quiz' => $quiz, 'classroomid' => $classroom->id, 'enrollid' => $id, 'quizid' => $quiz_id, 'ismhs' => $ismhs]);
     }
 
     public function create($id, $quiz_id)
@@ -86,32 +86,32 @@ class AnswerController extends Controller
         $detail->kode = $request->kode;
         $detail->save();
 
-        $courseid = DB::table('elearning.enrollment')
-        ->select('elearning.enrollment.kursus_id')
-        ->where('elearning.enrollment.id', '=', $id)
+        $classroomid = DB::table('elearningnew.enrollment')
+        ->select('elearningnew.enrollment.classroom_id')
+        ->where('elearningnew.enrollment.id', '=', $id)
         ->first();
 
-        if (!file_exists('kumpulan_sourcecode/'.$courseid->kursus_id . "/" . $quiz->id)) {
-            mkdir('kumpulan_sourcecode/'.$courseid->kursus_id."/".$quiz->id, 0777, true);
+        if (!file_exists('kumpulan_sourcecode/'.$classroomid->classroom_id . "/" . $quiz->id)) {
+            mkdir('kumpulan_sourcecode/'.$classroomid->classroom_id."/".$quiz->id, 0777, true);
         }
 
-        $file = fopen('kumpulan_sourcecode/'.$courseid->kursus_id.'/'.$quiz_id.'/'.$id.'.cpp', 'w');
+        $file = fopen('kumpulan_sourcecode/'.$classroomid->classroom_id.'/'.$quiz_id.'/'.$id.'.cpp', 'w');
         fwrite($file, $detail->kode);
         fclose($file);
 
-        if (!file_exists('similarity_plugin/input/'.$courseid->kursus_id . "/" . $quiz->id)) {
-            mkdir('similarity_plugin/input/'.$courseid->kursus_id."/".$quiz->id, 0777, true);
+        if (!file_exists('similarity_plugin/input/'.$classroomid->classroom_id . "/" . $quiz->id)) {
+            mkdir('similarity_plugin/input/'.$classroomid->classroom_id."/".$quiz->id, 0777, true);
         }
 
-        $filesimilarity = fopen('similarity_plugin/input/'.$enroll->kursus_id.'/'.$quiz_id.'/'.$enroll->kursus_id.' '.$quiz_id.' '.$user->nomorinduk.'--'.$quiz->nama.'.cpp', 'w');
+        $filesimilarity = fopen('similarity_plugin/input/'.$enroll->classroom_id.'/'.$quiz_id.'/'.$enroll->classroom_id.' '.$quiz_id.' '.$user->nomorinduk.'--'.$quiz->nama.'.cpp', 'w');
         fwrite($filesimilarity, $detail->kode);
         fclose($filesimilarity);
 
-        if (!file_exists('plagiarism_plugin/input/'.$courseid->kursus_id . "/" . $quiz->id)) {
-            mkdir('plagiarism_plugin/input/'.$courseid->kursus_id."/".$quiz->id, 0777, true);
+        if (!file_exists('plagiarism_plugin/input/'.$classroomid->classroom_id . "/" . $quiz->id)) {
+            mkdir('plagiarism_plugin/input/'.$classroomid->classroom_id."/".$quiz->id, 0777, true);
         }
 
-        $fileclustering = fopen('plagiarism_plugin/input/'.$enroll->kursus_id.'/'.$quiz_id.'/'.$enroll->kursus_id.' '.$quiz_id.' '.$user->nomorinduk.'--'.$quiz->nama.'.cpp', 'w');
+        $fileclustering = fopen('plagiarism_plugin/input/'.$enroll->classroom_id.'/'.$quiz_id.'/'.$enroll->classroom_id.' '.$quiz_id.' '.$user->nomorinduk.'--'.$quiz->nama.'.cpp', 'w');
         fwrite($fileclustering, $detail->kode);
         fclose($fileclustering);
 
@@ -121,10 +121,10 @@ class AnswerController extends Controller
     public function show($id, $quiz_id, $answer_id)
     {
         $enroll = Enrollment::find($id);
-        $course = Course::find($enroll->kursus_id);
+        $classroom = Classroom::find($enroll->classroom_id);
         $user = User::find($enroll->user_id);
-        $detail = DB::table('elearning.detail')
-        ->select('elearning.detail.*')
+        $detail = DB::table('elearningnew.detail')
+        ->select('elearningnew.detail.*')
         ->where('kumpul_id', '=', $answer_id)
         ->get();
 
@@ -143,7 +143,7 @@ class AnswerController extends Controller
 
         $quiz = Quiz::find($quiz_id);
         $answer = Answer::find($answer_id);
-        return view('answer.single', ['enrollid' => $id, 'quizid' => $quiz_id, 'answerid' => $answer_id, 'course' => $course, 'quiz' => $quiz, 'answer' => $answer, 'user' => $user, 'detailpercobaan' => json_encode($detailpercobaan), 'detaildurasi' => json_encode($detaildurasi), 'detailconventionerr' => json_encode($detailconventionerr), 'detailsyntaxerr' => json_encode($detailsyntaxerr), 'jumlahpercobaan' => $jumlahpercobaan]);
+        return view('answer.single', ['enrollid' => $id, 'quizid' => $quiz_id, 'answerid' => $answer_id, 'classroom' => $classroom, 'quiz' => $quiz, 'answer' => $answer, 'user' => $user, 'detailpercobaan' => json_encode($detailpercobaan), 'detaildurasi' => json_encode($detaildurasi), 'detailconventionerr' => json_encode($detailconventionerr), 'detailsyntaxerr' => json_encode($detailsyntaxerr), 'jumlahpercobaan' => $jumlahpercobaan]);
     }
 
     public function edit($id, $quiz_id, $answer_id)
@@ -178,32 +178,32 @@ class AnswerController extends Controller
         $detail->kode = $request->kode;
         $detail->save();
 
-        $courseid = DB::table('elearning.enrollment')
-        ->select('elearning.enrollment.kursus_id')
-        ->where('elearning.enrollment.id', '=', $id)
+        $classroomid = DB::table('elearningnew.enrollment')
+        ->select('elearningnew.enrollment.classroom_id')
+        ->where('elearningnew.enrollment.id', '=', $id)
         ->first();
 
-        if (!file_exists('kumpulan_sourcecode/'.$courseid->kursus_id . "/" . $quiz->id)) {
-            mkdir('kumpulan_sourcecode/'.$courseid->kursus_id."/".$quiz->id, 0777, true);
+        if (!file_exists('kumpulan_sourcecode/'.$classroomid->classroom_id . "/" . $quiz->id)) {
+            mkdir('kumpulan_sourcecode/'.$classroomid->classroom_id."/".$quiz->id, 0777, true);
         }
 
-        $file = fopen('kumpulan_sourcecode/'.$courseid->kursus_id.'/'.$quiz_id.'/'.$id.'.cpp', 'w');
+        $file = fopen('kumpulan_sourcecode/'.$classroomid->classroom_id.'/'.$quiz_id.'/'.$id.'.cpp', 'w');
         fwrite($file, $detail->kode);
         fclose($file);
 
-        if (!file_exists('similarity_plugin/input/'.$courseid->kursus_id . "/" . $quiz->id)) {
-            mkdir('similarity_plugin/input/'.$courseid->kursus_id."/".$quiz->id, 0777, true);
+        if (!file_exists('similarity_plugin/input/'.$classroomid->classroom_id . "/" . $quiz->id)) {
+            mkdir('similarity_plugin/input/'.$classroomid->classroom_id."/".$quiz->id, 0777, true);
         }
 
-        $filesimilarity = fopen('similarity_plugin/input/'.$enroll->kursus_id.'/'.$quiz_id.'/'.$enroll->kursus_id.' '.$quiz_id.' '.$user->nomorinduk.'--'.$quiz->nama.'.cpp', 'w');
+        $filesimilarity = fopen('similarity_plugin/input/'.$enroll->classroom_id.'/'.$quiz_id.'/'.$enroll->classroom_id.' '.$quiz_id.' '.$user->nomorinduk.'--'.$quiz->nama.'.cpp', 'w');
         fwrite($filesimilarity, $detail->kode);
         fclose($filesimilarity);
 
-        if (!file_exists('plagiarism_plugin/input/'.$courseid->kursus_id . "/" . $quiz->id)) {
-            mkdir('plagiarism_plugin/input/'.$courseid->kursus_id."/".$quiz->id, 0777, true);
+        if (!file_exists('plagiarism_plugin/input/'.$classroomid->classroom_id . "/" . $quiz->id)) {
+            mkdir('plagiarism_plugin/input/'.$classroomid->classroom_id."/".$quiz->id, 0777, true);
         }
 
-        $fileclustering = fopen('plagiarism_plugin/input/'.$enroll->kursus_id.'/'.$quiz_id.'/'.$enroll->kursus_id.' '.$quiz_id.' '.$user->nomorinduk.'--'.$quiz->nama.'.cpp', 'w');
+        $fileclustering = fopen('plagiarism_plugin/input/'.$enroll->classroom_id.'/'.$quiz_id.'/'.$enroll->classroom_id.' '.$quiz_id.' '.$user->nomorinduk.'--'.$quiz->nama.'.cpp', 'w');
         fwrite($fileclustering, $detail->kode);
         fclose($fileclustering);
 

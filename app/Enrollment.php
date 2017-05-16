@@ -6,21 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Enrollment extends Model
 {
-    protected $table = 'elearning.enrollment';
+    protected $table = 'elearningnew.enrollment';
 
-    public function quizes()
+    public function classroom()
     {
-    	return $this->hasMany('App\Quiz', 'enroll_id');
-    }
-
-	public function answers()
-    {
-    	return $this->hasMany('App\Answer', 'enroll_id');
-    }
-
-    public function course()
-    {
-        return $this->belongsTo('App\Course', 'kursus_id');
+        return $this->belongsTo('App\Classroom', 'classroom_id');
     }
 
     public function user()

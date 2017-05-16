@@ -6,15 +6,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class Quiz extends Model
 {
-    protected $table = 'elearning.tugas';
+    protected $table = 'elearningnew.quiz';
 
-    public function enrollment()
+    public function classroom()
     {
-    	return $this->belongsTo('App\Enrollment', 'enroll_id');
+    	return $this->belongsTo('App\Classroom', 'classroom_id');
     }
 
-	public function answers()
+	public function questions()
     {
-    	return $this->hasMany('App\Answer', 'tugas_id');
+    	return $this->hasMany('App\Question', 'question_id');
     }
 }

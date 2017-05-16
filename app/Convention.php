@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class Convention extends Model
 {
-    protected $table = 'elearning.convention';
+    protected $table = 'elearningnew.convention';
 }

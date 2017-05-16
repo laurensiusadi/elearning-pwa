@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use DB;
-use App\Course;
+use App\Classroom;
 use App\Quiz;
 
 class SimilarityController extends Controller
@@ -15,7 +15,7 @@ class SimilarityController extends Controller
     {
         chdir('similarity_plugin');
         $inputfile = fopen('Path/pathFolderSourceCode.txt', 'w');
-        $input = "input/" . "\r\n" . $request->courseid . "\r\n" . $request->quizid . "\r\n" . "output/";
+        $input = "input/" . "\r\n" . $request->classroomid . "\r\n" . $request->quizid . "\r\n" . "output/";
         fwrite($inputfile, $input);
         fclose($inputfile);
         shell_exec("java -jar " . trim(env('SIMILARITY'), "' > /dev/null"));
@@ -23,17 +23,17 @@ class SimilarityController extends Controller
         return "true";
     }
 
-    public function index($courseid, $quizid)
+    public function index($classroomid, $quizid)
     {
-        $course = Course::find($courseid);
+        $classroom = Classroom::find($classroomid);
         $quiz = Quiz::find($quizid);
 
         $similaritys = DB::table('sc_similarity')
         ->select('*')
-        ->where('kelas', '=', $courseid)
+        ->where('kelas', '=', $classroomid)
         ->where('kodesoal', '=', $quizid)
         ->get();
 
-        return view('similarity.index', ['courseid' => $courseid, 'quizid' => $quizid, 'similaritys' => $similaritys, 'course' => $course, 'quiz' => $quiz]);
+        return view('similarity.index', ['classroomid' => $classroomid, 'quizid' => $quizid, 'similaritys' => $similaritys, 'classroom' => $classroom, 'quiz' => $quiz]);
     }
 }

@@ -7,7 +7,8 @@
     <div class="row">
         <h4>Daftar Permission</h4>
         <div class="card-panel z-depth-0">
-            <a class="btn green accent-4 left" href="/permission/create">Add Permission</a>
+            <a class="btn green accent-4 left" href="#modaladd">Add Permission</a>
+            @include('permission.createmodal')
             <table id="datatable" class="table highlight">
     			<thead>
     				<tr>

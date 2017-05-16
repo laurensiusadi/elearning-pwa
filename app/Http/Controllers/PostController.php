@@ -8,14 +8,20 @@ use DB;
 
 use App\Http\Requests;
 use App\Post;
+use App\Classroom;
 
 class PostController extends Controller
 {
     public function index()
     {
         $posts = Post::latest()->paginate(3);
+        if (Auth::user()->hasRole('dosen')) {
+            $classrooms = Classroom::all();
+        } else {
+            $classrooms = Classroom::all();
+        }
 
-        return view('post.index', compact('posts'));
+        return view('post.index', compact('posts', 'classrooms'));
     }
 
     public function create()
@@ -26,15 +32,14 @@ class PostController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'judul' => 'required',
-            'text' => 'required',
+            'content' => 'required',
             ]);
 
         // input biasa
         $post = new Post;
         $post->user_id = Auth::id();
-        $post->judul = $request->judul;
-        $post->text = $request->text;
+        $post->classroom_id = $request->classroom;
+        $post->content = $request->content;
         $post->save();
 
         return back()->with('message', 'Pengumuman baru berhasil ditambahkan');
@@ -42,9 +47,9 @@ class PostController extends Controller
 
     public function show($id)
     {
-        $post = DB::table('elearning.posting')
-        ->select('elearning.posting.*')
-        ->where('elearning.posting.id', '=', $id)
+        $post = DB::table('elearningnew.posting')
+        ->select('elearningnew.posting.*')
+        ->where('elearningnew.posting.id', '=', $id)
         ->get();
 
         if (!$post) {

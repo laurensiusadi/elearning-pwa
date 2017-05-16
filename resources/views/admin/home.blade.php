@@ -35,9 +35,9 @@
         <i class="material-icons blue-grey-text">library_books</i>&nbsp;&nbsp;Code Convention
         </div>
     </div></a>
-    <a href="{{ url('course') }}"><div class="col s12 m12 l6">
+    <a href="{{ url('classroom') }}"><div class="col s12 m12 l6">
         <div class="card-panel black-text valign-wrapper">
-        <i class="material-icons blue-grey-text">assignment</i>&nbsp;&nbsp;Kursus
+        <i class="material-icons blue-grey-text">assignment</i>&nbsp;&nbsp;Kelas
         </div>
     </div></a>
 </div>

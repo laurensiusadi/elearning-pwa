@@ -27,12 +27,12 @@ Route::get('/offline', function(){
 });
 
 Route::post('/plagiarism', 'PlagiarismController@check');
-Route::get('/plagiarism/{course}/{quiz}/{filter}', 'PlagiarismController@index');
-Route::get('/plagiarism/{course}/{quiz}/{filter}/{nrp}', 'PlagiarismController@show');
+Route::get('/plagiarism/{classroom}/{quiz}/{filter}', 'PlagiarismController@index');
+Route::get('/plagiarism/{classroom}/{quiz}/{filter}/{nrp}', 'PlagiarismController@show');
 
 Route::post('/similarity', 'SimilarityController@check');
-Route::get('/similarity/{course}/{quiz}', 'SimilarityController@index');
-Route::get('/similarity/{course}/{quiz}/{nrp}', 'SimilarityController@show');
+Route::get('/similarity/{classroom}/{quiz}', 'SimilarityController@index');
+Route::get('/similarity/{classroom}/{quiz}/{nrp}', 'SimilarityController@show');
 
 // Route::get('/', function () {
 // 	return view('welcome');
@@ -50,7 +50,7 @@ Route::group(['middleware' => ['auth', 'acl'],
         Route::resource('/period', 'PeriodController');
         Route::resource('/subject', 'SubjectController');
         Route::resource('/convention', 'ConventionController');
-        Route::resource('/course', 'CourseController');
+        Route::resource('/classroom', 'ClassroomController');
         Route::resource('/enroll', 'EnrollController');
     });
 

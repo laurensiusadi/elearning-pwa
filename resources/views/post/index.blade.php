@@ -12,12 +12,17 @@
                 <form role="form" method="POST" action="{{ url('/post') }}">
                     {{ csrf_field() }}
                     <div class="input-field">
-                        <input placeholder="" name="judul" type="text" required>
-                        <label for="judul">Judul</label>
+                        <select name="classroom">
+                            <option value="0">Pengumuman Umum</option>
+                            @foreach($classrooms as $classroom)
+                                <option value="{{ $classroom->id }}">{{ $classroom->nama }}</option>
+                            @endforeach
+                        </select>
+                        <label>Classroom</label>
                     </div>
                     <div class="input-field">
-                        <textarea placeholder="" class="materialize-textarea" name="text" type="text" required></textarea>
-                        <label for="text">Deskripsi</label>
+                        <textarea placeholder="" class="materialize-textarea" name="content" type="text" required></textarea>
+                        <label for="text">Konten</label>
                     </div>
                     <div class="input-field">
                         <button class="btn btn-flat grey lighten-4 waves-effect waves-dark" type="submit" name="action" style="padding-inline-start:45px; width:100%">Buat
@@ -41,11 +46,15 @@
                         @endslot
                     @endcomponent
                 @endif
-                <p><strong>{{ $post->judul }}</strong><br />
-                {{ $post->text }}<br />
+                <p>{{ $post->content }}<br />
                 <span class="grey-text">{{ $post->user->name }}&nbsp;&bull;
                 <!-- {{ date('F d, Y H:i', strtotime($post->created_at)) }}<br /> -->
-                {{ Carbon::parse($post->created_at)->diffForHumans() }}</span>
+                {{ Carbon::parse($post->created_at)->diffForHumans() }}
+                @if($post->classroom_id != 0)
+                    &bull;&nbsp;{{ $post->classroom->nama }}
+                @else
+                    &bull;&nbsp;Umum
+                @endif</span>
                 </p>
             </div>
             @endforeach
@@ -58,6 +67,7 @@
 <script>
     $(document).ready(function(){
       $('.modal').modal();
+      $('select').material_select();
     });
 </script>
 @endsection

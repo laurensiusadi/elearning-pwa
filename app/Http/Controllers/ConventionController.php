@@ -101,7 +101,7 @@ class ConventionController extends Controller
 
     public function getConventionRule($for)
     {
-        $regex = DB::table('elearning.convention')
+        $regex = DB::table('elearningnew.convention')
         ->select('regex')
         ->where('for', '=', $for)
         ->get();
@@ -111,7 +111,7 @@ class ConventionController extends Controller
 
     public function getConventionMessage($for)
     {
-        $message = DB::table('elearning.convention')
+        $message = DB::table('elearningnew.convention')
         ->select('deskripsi')
         ->where('for', '=', $for)
         ->get();
@@ -121,7 +121,7 @@ class ConventionController extends Controller
 
     public function getConventionMinimal($for)
     {
-        $min = DB::table('elearning.convention')
+        $min = DB::table('elearningnew.convention')
         ->select('min', 'pesanmin')
         ->where('for', '=', $for)
         ->get();

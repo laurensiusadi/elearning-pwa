@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
-use App\Course;
+use App\Classroom;
 use App\Quiz;
 
 class PlagiarismController extends Controller
@@ -14,7 +14,7 @@ class PlagiarismController extends Controller
         set_time_limit(0);
     	chdir('plagiarism_plugin');
     	$inputfile = fopen('inputPath/input.txt', 'w');
-    	$input = "input/".$request->courseid."/".$request->quizid. "/\r\n" . $request->courseid . "\r\n" . $request->quizid;
+    	$input = "input/".$request->classroomid."/".$request->quizid. "/\r\n" . $request->classroomid . "\r\n" . $request->quizid;
     	fwrite($inputfile, $input);
     	fclose($inputfile);
         shell_exec("ulimit -t 600");
@@ -23,19 +23,19 @@ class PlagiarismController extends Controller
         return "true";
     }
 
-    public function index($courseid, $quizid, $filter) {
-        $course = Course::find($courseid);
+    public function index($classroomid, $quizid, $filter) {
+        $classroom = Classroom::find($classroomid);
         $quiz = Quiz::find($quizid);
         $enrollid = $quiz->enroll_id;
 
         try {
-            $result = @file_get_contents('plagiarism_plugin/outputCluster/Hasil_Cluster'.$courseid.'_'.$quizid.'.txt');
+            $result = @file_get_contents('plagiarism_plugin/outputCluster/Hasil_Cluster'.$classroomid.'_'.$quizid.'.txt');
         } catch (ErrorException $e) {
-            return view('plagiarism.index', ['listcluster' => array(), 'fixedcluster' => array(), 'courseid' => $courseid, 'enrollid' => $enrollid, 'quizid' => $quizid, 'selected' => $filter, 'course' => $course, 'quiz' => $quiz, 'proc' => array(), 'listclusterforchart' => json_encode(array()), 'standardeviasiforchart' => json_encode(array())]);
+            return view('plagiarism.index', ['listcluster' => array(), 'fixedcluster' => array(), 'classroomid' => $classroomid, 'enrollid' => $enrollid, 'quizid' => $quizid, 'selected' => $filter, 'classroom' => $classroom, 'quiz' => $quiz, 'proc' => array(), 'listclusterforchart' => json_encode(array()), 'standardeviasiforchart' => json_encode(array())]);
         }
 
         if($result == "") {
-            return view('plagiarism.index', ['listcluster' => array(), 'fixedcluster' => array(), 'courseid' => $courseid, 'enrollid' => $enrollid, 'quizid' => $quizid, 'selected' => $filter, 'course' => $course, 'quiz' => $quiz, 'proc' => array(), 'listclusterforchart' => json_encode(array()), 'standardeviasiforchart' => json_encode(array())]);
+            return view('plagiarism.index', ['listcluster' => array(), 'fixedcluster' => array(), 'classroomid' => $classroomid, 'enrollid' => $enrollid, 'quizid' => $quizid, 'selected' => $filter, 'classroom' => $classroom, 'quiz' => $quiz, 'proc' => array(), 'listclusterforchart' => json_encode(array()), 'standardeviasiforchart' => json_encode(array())]);
         }
 
         $clusterdirty = explode('-----------------------------------------------JUMLAH CLUSTER = ', $result);
@@ -87,23 +87,23 @@ class PlagiarismController extends Controller
             $filter = $listcluster[0];
         }
 
-        return view('plagiarism.index', ['listcluster' => $listcluster, 'fixedcluster' => $fixedcluster[$filter], 'courseid' => $courseid, 'enrollid' => $enrollid, 'quizid' => $quizid, 'selected' => $filter, 'course' => $course, 'quiz' => $quiz, 'listclusterforchart' => json_encode(array_reverse($listcluster)), 'standardeviasiforchart' => json_encode(array_reverse($standardeviasi)), 'proc' => $proc[$filter]]);
+        return view('plagiarism.index', ['listcluster' => $listcluster, 'fixedcluster' => $fixedcluster[$filter], 'classroomid' => $classroomid, 'enrollid' => $enrollid, 'quizid' => $quizid, 'selected' => $filter, 'classroom' => $classroom, 'quiz' => $quiz, 'listclusterforchart' => json_encode(array_reverse($listcluster)), 'standardeviasiforchart' => json_encode(array_reverse($standardeviasi)), 'proc' => $proc[$filter]]);
     }
 
-    public function show($courseid, $quizid, $filter, $nrp) {
-        $course = Course::find($courseid);
+    public function show($classroomid, $quizid, $filter, $nrp) {
+        $classroom = Classroom::find($classroomid);
         $quiz = Quiz::find($quizid);
 
-        $filepath = '/'.$courseid.' '.$quizid.' '.$nrp.'--.+?\.cpp/';
+        $filepath = '/'.$classroomid.' '.$quizid.' '.$nrp.'--.+?\.cpp/';
 
         $answer = '';
-        chdir('plagiarism_plugin/input/'.$courseid.'/'.$quizid);
-        foreach (glob($courseid." ".$quizid." ".$nrp."--*.cpp") as $filename) {
+        chdir('plagiarism_plugin/input/'.$classroomid.'/'.$quizid);
+        foreach (glob($classroomid." ".$quizid." ".$nrp."--*.cpp") as $filename) {
             if(preg_match($filepath, $filename)) {
                 $answer = @file_get_contents($filename);
             }
         }
         chdir("../../../..");
-        return view('plagiarism.single', ['course' => $course, 'quiz' => $quiz, 'filter' => $filter, 'answer' => $answer, 'nrp' => $nrp]);
+        return view('plagiarism.single', ['classroom' => $classroom, 'quiz' => $quiz, 'filter' => $filter, 'answer' => $answer, 'nrp' => $nrp]);
     }
 }
