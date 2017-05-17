@@ -3,13 +3,13 @@
 @section('content')
 <div class="container">
     <div class="row">
-        <h4>Buat Kelas Baru</h4>
+        <h4>Buat Classroom Baru</h4>
         <div class="card-panel z-depth-0">
             <form role="form" method="POST" action="{{ url('classroom') }}">
                 {{ csrf_field() }}
                 <div class="input-field">
                     <input placeholder="" name="nama" type="text" required>
-                    <label for="nama">Nama Kelas</label>
+                    <label for="nama">Nama Classroom</label>
                 </div>
                 <div class="input-field">
                     <select name="period_id">

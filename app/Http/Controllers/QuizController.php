@@ -7,7 +7,7 @@ use Illuminate\Database\QueryException;
 use App\Http\Requests;
 use App\User;
 use App\Enrollment;
-use App\Course;
+use App\Classroom;
 use App\Quiz;
 use Auth;
 use DB;
@@ -16,15 +16,8 @@ class QuizController extends Controller
 {
     public function index($id)
     {
-        $enroll = Enrollment::find($id);
-        $course = Course::find($enroll->kursus_id);
-        $quizes = $enroll->quizes;
-        // $quizes = DB::table('elearning.tugas')
-        // ->leftJoin('elearning.enrollment', 'elearning.enrollment.id', '=', 'elearning.tugas.enroll_id')
-        // ->leftJoin('elearning.kursus', 'elearning.kursus.id', '=', 'elearning.enrollment.kursus_id')
-        // ->select('elearning.tugas.*')
-        // ->where('elearning.kursus.id', '=', $course->id)
-        // ->get();
+        $classroom = Classroom::find($id);
+        $quizes = $classroom->quizes;
 
         $ismhs = false;
         // $user = User::find(Auth::id());
@@ -32,57 +25,55 @@ class QuizController extends Controller
             $ismhs = true;
         }
 
-        return view('quiz.index', compact('course', 'enroll', 'quizes', 'ismhs'));
+        return view('quiz.index', ['classroom' => $classroom, 'quizes' => $quizes, 'ismhs' => $ismhs]);
     }
 
     public function create($id)
     {
         $enroll = Enrollment::find($id);
-        $course = Course::find($enroll->kursus_id);
-        $quizes = $enroll->quizes;
-        return view('quiz.create', compact('course', 'enroll', 'quizes'));
+        $classroom = Classroom::find($enroll->classroom_id);
+        $quizes = $classroom->quizes;
+        return view('quiz.create', compact('classroom', 'enroll', 'quizes'));
     }
 
     public function store(Request $request, $id)
     {
         $this->validate($request, [
             'nama' => 'required',
-            'waktupengerjaan' => 'required',
-            'des' => 'required',
+            'mulai' => 'required',
+            'selesai' => 'required',
             ]);
 
         // input biasa
         $quiz = new Quiz;
-        $quiz->enroll_id = $id;
+        $quiz->classroom_id = $id;
         $quiz->nama = $request->nama;
-        $quiz->wmulai = explode(' - ', $request->waktupengerjaan)[0];
-        $quiz->wselesai = explode(' - ', $request->waktupengerjaan)[1];
-        $quiz->des = $request->des;
-        $quiz->jwb = $request->jwb;
+        $quiz->mulai = $request->mulai;
+        $quiz->selesai = $request->selesai;
         $quiz->save();
 
-        $courseid = DB::table('elearning.enrollment')
-        ->select('elearning.enrollment.kursus_id')
-        ->where('elearning.enrollment.id', '=', $id)
+        $classroomid = DB::table('elearningnew.enrollment')
+        ->select('elearningnew.enrollment.classroom_id')
+        ->where('elearningnew.enrollment.id', '=', $id)
         ->first();
 
-        if (!file_exists('kumpulan_sourcecode/'.$courseid->kursus_id . "/" . $quiz->id)) {
-            mkdir('kumpulan_sourcecode/'.$courseid->kursus_id."/".$quiz->id, 0777, true);
+        if (!file_exists('kumpulan_sourcecode/'.$classroomid->classroom_id . "/" . $quiz->id)) {
+            mkdir('kumpulan_sourcecode/'.$classroomid->classroom_id."/".$quiz->id, 0777, true);
         }
 
-        $file = fopen('kumpulan_sourcecode/'.$courseid->kursus_id.'/'.$quiz->id.'/dosen'.$id.'.cpp', 'w');
+        $file = fopen('kumpulan_sourcecode/'.$classroomid->classroom_id.'/'.$quiz->id.'/dosen'.$id.'.cpp', 'w');
         fwrite($file, $quiz->jwb);
         fclose($file);
 
-        if (!file_exists('similarity_plugin/input/'.$courseid->kursus_id . "/" . $quiz->id)) {
-            mkdir('similarity_plugin/input/'.$courseid->kursus_id."/".$quiz->id, 0777, true);
+        if (!file_exists('similarity_plugin/input/'.$classroomid->classroom_id . "/" . $quiz->id)) {
+            mkdir('similarity_plugin/input/'.$classroomid->classroom_id."/".$quiz->id, 0777, true);
         }
 
-        $filesimilarity = fopen('similarity_plugin/input/'.$courseid->kursus_id.'/'.$quiz->id.'/0_'.$quiz->id.'_dosen_'.$quiz->nama.'.cpp', 'w');
+        $filesimilarity = fopen('similarity_plugin/input/'.$classroomid->classroom_id.'/'.$quiz->id.'/0_'.$quiz->id.'_dosen_'.$quiz->nama.'.cpp', 'w');
         fwrite($filesimilarity, $quiz->jwb);
         fclose($filesimilarity);
 
-        return redirect('enroll/'.$id.'/quiz/'.$quiz->id)->with('message', 'Penugasan baru berhasil ditambahkan');
+        return redirect('classroom/'.$id.'/quiz/'.$quiz->id)->with('message', 'Quiz baru berhasil ditambahkan');
     }
 
     public function show($id, $quiz_id)
@@ -120,49 +111,46 @@ class QuizController extends Controller
         $quiz->jwb = $request->jwb;
         $quiz->save();
 
-        $courseid = DB::table('elearning.enrollment')
-        ->select('elearning.enrollment.kursus_id')
-        ->where('elearning.enrollment.id', '=', $id)
+        $classroomid = DB::table('elearningnew.enrollment')
+        ->select('elearningnew.enrollment.classroom_id')
+        ->where('elearningnew.enrollment.id', '=', $id)
         ->first();
 
-        if (!file_exists('kumpulan_sourcecode/'.$courseid->kursus_id . "/" . $quiz->id)) {
-            mkdir('kumpulan_sourcecode/'.$courseid->kursus_id."/".$quiz->id, 0777, true);
+        if (!file_exists('kumpulan_sourcecode/'.$classroomid->classroom_id . "/" . $quiz->id)) {
+            mkdir('kumpulan_sourcecode/'.$classroomid->classroom_id."/".$quiz->id, 0777, true);
         }
 
-        $file = fopen('kumpulan_sourcecode/'.$courseid->kursus_id.'/'.$quiz_id.'/dosen'.$id.'.cpp', 'w');
+        $file = fopen('kumpulan_sourcecode/'.$classroomid->classroom_id.'/'.$quiz_id.'/dosen'.$id.'.cpp', 'w');
         fwrite($file, $quiz->jwb);
         fclose($file);
 
-        if (!file_exists('similarity_plugin/input/'.$courseid->kursus_id . "/" . $quiz->id)) {
-            mkdir('similarity_plugin/input/'.$courseid->kursus_id."/".$quiz->id, 0777, true);
+        if (!file_exists('similarity_plugin/input/'.$classroomid->classroom_id . "/" . $quiz->id)) {
+            mkdir('similarity_plugin/input/'.$classroomid->classroom_id."/".$quiz->id, 0777, true);
         }
 
-        $filesimilarity = fopen('similarity_plugin/input/'.$courseid->kursus_id.'/'.$quiz->id.'/0_'.$quiz->id.'_dosen_'.$quiz->nama.'.cpp', 'w');
+        $filesimilarity = fopen('similarity_plugin/input/'.$classroomid->classroom_id.'/'.$quiz->id.'/0_'.$quiz->id.'_dosen_'.$quiz->nama.'.cpp', 'w');
         fwrite($filesimilarity, $quiz->jwb);
         fclose($filesimilarity);
 
-        return redirect('enroll/'.$id.'/quiz/'.$quiz_id)->with('message', 'Penugasan berhasil diupdate');
+        return redirect('classroom/'.$id.'/quiz/'.$quiz_id)->with('message', 'Quiz berhasil diupdate');
     }
 
-    public function destroy($id, $quiz_id)
+    public function destroy($id)
     {
-        $quiz = Quiz::find($quiz_id);
+        $quiz = Quiz::find($id);
 
         try {
             $quiz->delete();
         } catch (QueryException $e) {
-            return redirect('enroll/'.$id.'/quiz')->with('error', 'Penugasan gagal dihapus, data masih direferensikan');
+            return redirect('classroom/'.$id.'/quiz')->with('error', 'Quiz gagal dihapus, data masih direferensikan');
         }
 
-        $courseid = DB::table('elearning.enrollment')
-        ->select('elearning.enrollment.kursus_id')
-        ->where('elearning.enrollment.id', '=', $id)
-        ->first();
+        $classroomid = $quiz->classroom->id;
 
-        if (file_exists($courseid->kursus_id . "/" . $quiz_id)) {
-            $status = rmdir($courseid->kursus_id . "/" . $quiz_id);
+        if (file_exists($classroomid . "/" . $id)) {
+            $status = rmdir($classroomid . "/" . $id);
         }
 
-        return back()->with('message', 'Penugasan berhasil dihapus');
+        return back()->with('message', 'Quiz berhasil dihapus');
     }
 }

@@ -3,8 +3,8 @@
 @section('content')
 <div class="container">
     <div class="row">
-        <h6>Kelas {{ $classroom->nama }}</h6>
-        <h3>Penugasan {{ $quiz->nama }}</h3>
+        <h6>Classroom {{ $classroom->nama }}</h6>
+        <h3>Quiz {{ $quiz->nama }}</h3>
     </div>
     <div class="row">
         <table class="table highlight">

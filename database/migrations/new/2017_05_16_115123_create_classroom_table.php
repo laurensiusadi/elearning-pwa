@@ -15,7 +15,7 @@ class CreateClassroomTable extends Migration
     {
         Schema::create('classroom', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name', 40);
+            $table->string('nama', 40);
             $table->timestamps();
             $table->integer('period_id')->unsigned();
             $table->integer('subject_id')->unsigned();

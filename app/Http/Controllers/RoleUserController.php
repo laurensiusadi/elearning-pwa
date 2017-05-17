@@ -38,7 +38,7 @@ class RoleUserController extends Controller
         ->select('roles.*', 'role_user.user_id')
         ->get();
 
-        return view('roleuser.single', ['roles' => $roles, 'userid' => $id, 'username' => $user->name]);
+        return view('roleuser.single', ['roles' => $roles, 'userid' => $id, 'username' => $user->name, 'nomorinduk' => $user->nomorinduk]);
     }
 
     public function edit($id)
@@ -70,6 +70,8 @@ class RoleUserController extends Controller
                 $user->assignRole($role_id);
             } elseif (empty($request['data::'.$role_id]) && !empty($isexist)) {
                 $user->revokeRole($role_id);
+            } else {
+                return redirect('roleuser/'.$id)->with('error', 'Role tidak terupdate');
             }
         }
 

@@ -115,7 +115,7 @@ class AnswerController extends Controller
         fwrite($fileclustering, $detail->kode);
         fclose($fileclustering);
 
-        return redirect('enroll/'.$id.'/quiz/'.$quiz_id.'/answer/'.$answer->id)->with('message', 'Jawaban baru berhasil ditambahkan');
+        return redirect('classroom/'.$id.'/quiz/'.$quiz_id.'/answer/'.$answer->id)->with('message', 'Jawaban baru berhasil ditambahkan');
     }
 
     public function show($id, $quiz_id, $answer_id)
@@ -207,7 +207,7 @@ class AnswerController extends Controller
         fwrite($fileclustering, $detail->kode);
         fclose($fileclustering);
 
-        return redirect('enroll/'.$id.'/quiz/'.$quiz_id.'/answer/'.$answer_id)->with('message', 'Jawaban berhasil diupdate');
+        return redirect('classroom/'.$id.'/quiz/'.$quiz_id.'/answer/'.$answer_id)->with('message', 'Jawaban berhasil diupdate');
     }
 
     public function destroy($id)

@@ -8,7 +8,7 @@
         <li><a href="{{ url('logout') }}">Logout</a></li>
         <li><div class="divider"></div></li>
         <li><a href="{{ url('post') }}"><i class="material-icons left">notifications_none</i>Pengumuman</a></li>
-        <li><a href="{{ url('classroom') }}"><i class="material-icons left">assignment</i>Kelas</a></li>
+        <li><a href="{{ url('classroom') }}"><i class="material-icons left">assignment</i>Classroom</a></li>
         <li><a href="{{ url('user') }}"><i class="material-icons left">account_circle</i>Pengguna</a></li>
         <li><a href="{{ url('period') }}"><i class="material-icons left">today</i>Periode Perkuliahan</a></li>
         <li><a href="{{ url('subject') }}"><i class="material-icons left">class</i>Mata Kuliah</a></li>

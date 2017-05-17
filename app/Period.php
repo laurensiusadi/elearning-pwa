@@ -8,7 +8,7 @@ class Period extends Model
 {
     protected $table = 'elearningnew.period';
 
-    public function classroom()
+    public function classrooms()
     {
         return $this->hasMany('App\Classroom','period_id');
     }

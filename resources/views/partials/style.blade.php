@@ -25,6 +25,7 @@
     .btn-small { padding: 0 0.75rem }
     .modal { max-height: 80%}
     #datatable_filter input::placeholder { color:grey }
+    .dataTables_wrapper .input-field > .select-wrapper { width: 100%; margin: 0 0 1rem; display: inline-block }
     @media only screen and (max-width: 601px) {
         .nav-up { top: -44px }
         .btn i { font-size: 1rem }

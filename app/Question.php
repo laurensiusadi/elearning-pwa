@@ -20,11 +20,6 @@ class Question extends Model
 
     public function quizes()
     {
-        return $this->hasMany('App\Quiz', 'quiz_id');
-    }
-
-    public function quiz()
-    {
-        return $this->belongsToMany('App\Quiz', 'quiz_id');
+        return $this->belongsToMany('App\Quiz', 'quiz_question', 'question_id', 'quiz_id');
     }
 }

@@ -15,6 +15,6 @@ class Quiz extends Model
 
 	public function questions()
     {
-    	return $this->hasMany('App\Question', 'question_id');
+    	return $this->belongsToMany('App\Question', 'quiz_question', 'quiz_id', 'question_id');
     }
 }

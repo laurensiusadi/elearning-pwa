@@ -8,16 +8,16 @@
         @if(Auth::user()->hasRole('admin'))
         @include('admin.home')
         @else
-        <h4>Kelas Saya</h4>
-        @foreach($enrolls as $enroll)
+        <h4>Classroom Saya</h4>
+        @foreach(Auth::user()->classrooms as $classroom)
         <div class="card z-depth-0">
             <div class="card-content">
-                <span class="card-title">{{ $enroll->classroom->nama }}</span>
-                <p>{{ $enroll->classroom->subject->nama }}</p>
-                <p>{{ $enroll->classroom->period->nama }}</p>
+                <span class="card-title">{{ $classroom->nama }}</span>
+                <p>{{ $classroom->subject->nama }}</p>
+                <p>{{ $classroom->period->nama }}</p>
             </div>
             <div class="card-action">
-            <a class="btn gradient-2 waves-effect waves-light" href="{{ url('enroll').'/'.$enroll->id.'/quiz' }}">Masuk</a>
+            <a class="btn gradient-2 waves-effect waves-light" href="/classroom/{{ $classroom->id }}/quiz/">Masuk</a>
             </div>
         </div>
         @endforeach

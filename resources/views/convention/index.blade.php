@@ -8,7 +8,7 @@
         <h4>Daftar Code Convention</h4>
         <div class="card-panel z-depth-0">
             <a class="btn green accent-4 left" href="/convention/create">Add Convention</a>
-            <table id="datatable" class="table highlight">
+            <table id="datatable" class="table highlight bordered">
     			<thead>
     				<tr>
     					<th>Aturan Untuk</th>

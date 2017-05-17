@@ -23,11 +23,10 @@
 @section('content')
     <div class="row" style="margin: 5px;">
         <div class="col s12 l4">
-    		<!-- {{ $quiz->jwb }} -->
-
+    
             <ul class="collapsible z-depth-1" data-collapsible="accordion">
                 <li class="active">
-                    <div class="collapsible-header active">Detail Penugasan</div>
+                    <div class="collapsible-header active">Detail Quiz</div>
                     <div class="collapsible-body">
                         <span>
                             <p>Nama: {{ $quiz->nama }}</p>

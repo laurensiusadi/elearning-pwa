@@ -32,7 +32,7 @@
                 <li><a href="{{ url('period') }}"><i class="material-icons left">today</i>Periode Perkuliahan</a></li>
                 <li><a href="{{ url('subject') }}"><i class="material-icons left">class</i>Mata Kuliah</a></li>
                 <li><a href="{{ url('convention') }}"><i class="material-icons left">library_books</i>Code Convention</a></li>
-                <li><a href="{{ url('classroom') }}"><i class="material-icons left">assignment</i>Kelas</a></li>
+                <li><a href="{{ url('classroom') }}"><i class="material-icons left">assignment</i>Classroom</a></li>
                 @endif
             @endif
         </ul>

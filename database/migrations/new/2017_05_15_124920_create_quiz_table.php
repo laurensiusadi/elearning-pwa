@@ -15,8 +15,8 @@ class CreateQuizTable extends Migration
     {
         Schema::create('quiz', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('question_id')->unsigned();
             $table->integer('classroom_id')->unsigned();
+            $table->string('nama');
             $table->timestamp('mulai');
             $table->timestamp('selesai');
             $table->timestamps();

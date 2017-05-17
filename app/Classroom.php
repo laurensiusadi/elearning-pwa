@@ -32,4 +32,9 @@ class Classroom extends Model
     {
         return $this->hasMany('App\Post', 'classroom_id');
     }
+
+    public function users()
+    {
+        return $this->belongsToMany('App\User', 'elearningnew.enrollment', 'classroom_id', 'user_id')->withTimestamps();
+    }
 }

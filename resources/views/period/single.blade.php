@@ -37,7 +37,7 @@
                 <table class="table highlight">
     			<thead>
     				<tr>
-    					<th>Nama Kelas</th>
+    					<th>Nama Classroom</th>
     					<th>Matakuliah</th>
     					<th>Action</th>
     				</tr>
@@ -49,7 +49,7 @@
     					<td>{{ $classroom->subject->nama }}</td>
     					<td>
     						<a class="btn btn-small blue tooltipped" data-position="bottom" data-delay="50" data-tooltip="Detail" href="{{ url('classroom').'/'.$classroom->id }}"><i class="material-icons">list</i></a>
-                            <a class="btn btn-small green tooltipped" data-position="bottom" data-delay="50" data-tooltip="Enrollment" href="{{ url('enroll').'/'.$classroom->id }}"><i class="material-icons">group</i></a>
+                            <a class="btn btn-small green tooltipped" data-position="bottom" data-delay="50" data-tooltip="Enrollment" href="{{ url('classroom').'/'.$classroom->id }}"><i class="material-icons">group</i></a>
     						<a class="btn btn-small amber tooltipped" data-position="bottom" data-delay="50" data-tooltip="Edit" href="{{ url('classroom').'/'.$classroom->id }}/edit"><i class="material-icons">edit</i></a>
                             <a class="btn btn-small red modal-trigger tooltipped" data-position="bottom" data-delay="50" data-tooltip="Delete" href="#modal{{ $classroom->id }}"><i class="material-icons">delete</i></a>
                             @component('partials.deletemodal')

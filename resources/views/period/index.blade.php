@@ -9,7 +9,7 @@
         <h4>Daftar Periode Perkuliahan</h4>
         <div class="card-panel z-depth-0">
             <a class="btn green accent-4 left" href="/period/create">Add Periode</a>
-            <table id="datatable" class="table highlight">
+            <table id="datatable" class="table highlight bordered">
     			<thead>
     				<tr>
     					<th>Nama Periode</th>

@@ -15,15 +15,11 @@ class ClassroomController extends Controller
 {
     public function index()
     {
-        // $classrooms = DB::table('elearningnew.classroom as k')
-        // ->join('elearningnew.period as p', 'p.id', '=', 'k.period_id')
-        // ->join('elearningnew.matakuliah as m', 'm.id', '=', 'k.subject_id')
-        // ->select('k.*', 'p.nama as namaperiode', 'm.nama as namamatakuliah')
-        // ->get();
-
         $classrooms = Classroom::all();
+        $periods = Period::all();
+        $subjects = Subject::all();
 
-        return view('classroom.index', ['classrooms' => $classrooms]);
+        return view('classroom.index', compact('classrooms','periods','subjects'));
     }
 
     public function create()

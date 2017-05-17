@@ -9,7 +9,7 @@
         <div class="card-panel z-depth-0">
         <a class="btn green accent-4 left" href="#modaladd">Add Role</a>
         @include('role.createmodal')
-        <table id="datatable" class="table highlight">
+        <table id="datatable" class="table highlight bordered">
 			<thead>
 				<tr>
 					<th>Nama Role</th>
