@@ -170,6 +170,7 @@ return [
          */
         Laravel\Tinker\TinkerServiceProvider::class,
         Kodeine\Acl\AclServiceProvider::class,
+        Alfheim\CriticalCss\CriticalCssServiceProvider::class,
 
         /*
          * Application Service Providers...

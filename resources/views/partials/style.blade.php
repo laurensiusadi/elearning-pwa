@@ -15,10 +15,13 @@
     .form-small { max-width: 330px; margin: 0 auto }
     form .chip { margin-top: -8px; margin-bottom: 16px }
     body { display: flex; min-height: 100vh; flex-direction: column }
-    main { flex: 1 0 auto; padding-bottom: 50px; padding-top: 70px }
+    main { flex: 1 0 auto; padding-bottom: 50px; padding-top: 60px }
     nav { top: 0; position: fixed; z-index: 999 ; transition: top 0.25s ease-in-out; box-shadow: 0 0 10px 0 rgba(0,0,0,0.25); -moz-box-shadow: 0 0 10px 0 rgba(0,0,0,0.25); -webkit-box-shadow: 0 0 10px 0 rgba(0,0,0,0.25); }
     nav { background-color: #0072ff }
     .nav-up { top: -52px }
+    .container.full { margin: 0 auto; width: 97%; padding: 0 8px;}
+    .container > .row > .col > h4 { margin-top:0 }
+    .col > .col { padding-left: 0; padding-right: 0 }
     .card-panel > a.delete { color: lightgrey }
     .card-panel:hover a.delete { color:red; text-decoration: none; cursor: pointer }
     .card .card-title, .card-panel .title { font-weight: 500}

@@ -20,6 +20,6 @@ class Question extends Model
 
     public function quizes()
     {
-        return $this->belongsToMany('App\Quiz', 'quiz_question', 'question_id', 'quiz_id');
+        return $this->belongsToMany('App\Quiz', 'elearningnew.quiz_questions', 'question_id', 'quiz_id')->withTimestamps();
     }
 }

@@ -22,17 +22,8 @@
                 <li><a href="{{ url('logout') }}">Logout</a></li>
                 @if(Auth::user()->hasRole('dosen'))
                 <li><div class="divider"></div></li>
-                @endif
-                @if(Auth::user()->hasRole('admin'))
-                <li><div class="divider"></div></li>
-                <li><a href="{{ url('post') }}"><i class="material-icons left">notifications_none</i>Pengumuman</a></li>
-                <li><a href="{{ url('user') }}"><i class="material-icons left">account_circle</i>Pengguna</a></li>
-                <li><a href="{{ url('role') }}"><i class="material-icons left">supervisor_account</i>Role</a></li>
-                <li><a href="{{ url('permission') }}"><i class="material-icons left">visibility_off</i>Permission</a></li>
-                <li><a href="{{ url('period') }}"><i class="material-icons left">today</i>Periode Perkuliahan</a></li>
-                <li><a href="{{ url('subject') }}"><i class="material-icons left">class</i>Mata Kuliah</a></li>
-                <li><a href="{{ url('convention') }}"><i class="material-icons left">library_books</i>Code Convention</a></li>
                 <li><a href="{{ url('classroom') }}"><i class="material-icons left">assignment</i>Classroom</a></li>
+                <li><a href="{{ url('question') }}"><i class="material-icons">question_answer</i>Question</a></li>
                 @endif
             @endif
         </ul>

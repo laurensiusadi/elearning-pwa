@@ -23,9 +23,12 @@
     <!-- <link rel="shortcut icon" href="images/favicon.png"> -->
     <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,light,bolditalic&amp;lang=en"> -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" href="{!! asset('css/materialize.css') !!}">
+    <link rel="stylesheet" href="{!! asset('css/materialize-prod.css') !!}">
     @yield('style')
     @include('partials.style')
+    <style>
+        main { flex: 1 0 auto; padding-top: 56px; padding-bottom: 0 }
+    </style>
 </head>
 <body>
     <!-- Always shows a header, even in smaller screens. -->
@@ -71,7 +74,7 @@
     @yield('scripts')
     <footer class="page-footer slate">
         <div class="footer-copyright">
-            <div class="grey-text container">
+            <div class="grey-text container full">
             © 2017 Copyright Text
             <a class="grey-text right" href="https://laurensi.us">Made by Laurensius Adi</a>
             </div>

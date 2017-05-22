@@ -2,9 +2,11 @@ var cacheName = 'shell-content';
 var filesToCache = [
     '/css/app.css',
     '/css/materialize.css',
-    '/js/app.js',
+    '/js/all.js',
     '/js/jquery.min.js',
     '/js/materialize.min.js',
+    '/js/codemirror.js',
+    '/js/trumbowyg.min.js',
     '/fonts/roboto/Roboto-Medium.woff2',
     '/fonts/roboto/Roboto-Regular.woff2',
     '/fonts/roboto/Roboto-Light.woff2',

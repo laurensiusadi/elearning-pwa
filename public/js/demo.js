@@ -16,7 +16,7 @@ function codemirror_grammar_demo(code, langs)
             foldGutter: true,
         };
         var editor = CodeMirror.fromTextArea(code, opts);
-        editor.setSize(null, 400);
+        editor.setSize(null, 446);
         return editor;
     }
 
@@ -96,6 +96,6 @@ function codemirror_grammar_demo(code, langs)
     opts[main_mode.matchType] = true;
     var editor = CodeMirror.fromTextArea(code, opts);
 
-    editor.setSize(null, 400);
+    editor.setSize(null, 446);
     return editor;
 }

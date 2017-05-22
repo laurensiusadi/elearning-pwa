@@ -6,7 +6,7 @@
 <div class="container">
     <div class="row">
         <h5>Detail Informasi</h5>
-        <h4 style="margin-top:0">Role User</h4>
+        <h4>Role User</h4>
         <div class="card-panel z-depth-0">
             <form class="form" role="form" method="POST" action="{{ url('roleuser').'/'.$userid }}">
                 <span class="left">Nama: {{ $username }}</br>

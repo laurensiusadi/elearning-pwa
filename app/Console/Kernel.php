@@ -13,7 +13,8 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        //
+        \Alfheim\CriticalCss\Console\CriticalCssMake::class,
+        \Alfheim\CriticalCss\Console\CriticalCssClear::class,
     ];
 
     /**

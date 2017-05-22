@@ -70,7 +70,7 @@ class EnrollController extends Controller
     {
         foreach ($request['user_id'] as $user_id) {
             $isexist = DB::table('elearningnew.enrollment')
-            ->select('enrollment.id')
+            ->select('id')
             ->where('user_id', '=', $user_id)
             ->where('classroom_id', '=', $id)
             ->first();
@@ -84,12 +84,12 @@ class EnrollController extends Controller
             } elseif (empty($request['data::'.$user_id]) && !empty($isexist)) {
                 $err = self::destroy($isexist->id);
                 if ($err) {
-                    return redirect('classroom/'.$id)->with('error', 'Enrollment gagal dihapus, data masih direferensikan');
+                    return redirect('enroll/'.$id)->with('error', 'Enrollment gagal dihapus, data masih direferensikan');
                 }
             }
         }
-        
-        return redirect('classroom/'.$id)->with('message', 'Enrollment berhasil diupdate');
+
+        return redirect('enroll/'.$id)->with('message', 'Enrollment berhasil diupdate');
     }
 
     public function destroy($id)

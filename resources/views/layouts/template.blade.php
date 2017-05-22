@@ -36,7 +36,7 @@
             .side-nav li:first-child { display: none }
         }
         @media only screen and (min-width : 993px) {
-            main { padding-top: 20px }
+            main { padding-top: 40px }
             nav { background-color: transparent; box-shadow: none}
             .side-nav li:first-child { line-height: 56px }
             .side-nav li:first-child a { background-color: #0072FF; color: white; font-size: 1.6rem; line-height: 56px; height: 96px; padding-top: 40px}

@@ -60,21 +60,14 @@ class RoleUserController extends Controller
     {
         $user = User::find($id);
         foreach ($request['roles_id'] as $role_id) {
-            $isexist = DB::table('role_user')
-            ->select(DB::raw(1))
-            ->where('role_id', '=', $role_id)
-            ->where('user_id', '=', $id)
-            ->get();
-
-            if (!empty($request['data::'.$role_id]) && empty($isexist)) {
+            if (!empty($request['data::'.$role_id])) {
                 $user->assignRole($role_id);
-            } elseif (empty($request['data::'.$role_id]) && !empty($isexist)) {
+            } elseif (empty($request['data::'.$role_id])) {
                 $user->revokeRole($role_id);
             } else {
                 return redirect('roleuser/'.$id)->with('error', 'Role tidak terupdate');
             }
         }
-
         return redirect('roleuser/'.$id)->with('message', 'Role berhasil diupdate');
     }
 

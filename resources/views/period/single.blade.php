@@ -5,7 +5,7 @@
 <div class="container">
     <div class="row">
         <h5>Periode Perkuliahan</h5>
-        <h4 style="margin-top:0">{{ $period->nama }}</h4>
+        <h4>{{ $period->nama }}</h4>
         <div class="row">
             <div class="col s12 m6 l3">
                 <div class="card-panel z-depth-0">

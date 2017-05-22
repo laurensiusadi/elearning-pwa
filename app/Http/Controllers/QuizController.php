@@ -91,7 +91,7 @@ class QuizController extends Controller
     public function edit($id, $quiz_id)
     {
         $quiz = Quiz::find($quiz_id);
-        return view('quiz.edit', ['enrollid' => $id, 'quizid' => $quiz_id, 'quiz' => $quiz]);
+        return view('quiz.edit', ['classroom_id' => $id, 'quiz_id' => $quiz_id, 'quiz' => $quiz]);
     }
 
     public function update(Request $request, $id, $quiz_id)

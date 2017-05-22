@@ -7,36 +7,18 @@
         {{ csrf_field() }}
         <h4>Register</h4>
         <div class="row" style="padding-top:25px">
-        <div class="input-field col s12 {{ $errors->has('name') ? ' has-error' : '' }}">
+        <div class="input-field col s12">
             <input placeholder="Your Full Name" id="name" type="text" class="validate" name="name" value="{{ old('name') }}" required autofocus>
-            @if ($errors->has('name'))
-                <span class="chip red lighten-1 white-text">
-                    {{ $errors->first('name') }}
-                    <i class="close material-icons">close</i>
-                </span>
-            @endif
             <label for="name">Name</label>
         </div>
 
-        <div class="input-field col s12 {{ $errors->has('email') ? ' has-error' : '' }}">
+        <div class="input-field col s12">
             <input placeholder="Your Email Address" id="email" type="email" class="validate" name="email" value="{{ old('email') }}" required autofocus>
-            @if ($errors->has('email'))
-                <span class="chip red lighten-1 white-text">
-                    {{ $errors->first('email') }}
-                    <i class="close material-icons">close</i>
-                </span>
-            @endif
             <label for="email">Email</label>
         </div>
 
-        <div class="input-field col s12{{ $errors->has('password') ? ' has-error' : '' }}">
+        <div class="input-field col s12">
             <input placeholder="Keep it secret" id="password" type="password" class="validate" name="password" required>
-            @if ($errors->has('password'))
-                <span class="chip red lighten-1 white-text">
-                    {{ $errors->first('password') }}
-                    <i class="close material-icons">close</i>
-                </span>
-            @endif
             <label for="password">Password</label>
         </div>
         <div class="input-field col s12">

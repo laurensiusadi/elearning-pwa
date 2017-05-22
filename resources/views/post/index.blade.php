@@ -47,7 +47,7 @@
                     @endcomponent
                 @endif
                 <p>{{ $post->content }}<br />
-                <span class="grey-text">{{ $post->user->name }}&nbsp;&bull;
+                <span class="grey-text small">{{ $post->user->name }}&nbsp;&bull;
                 <!-- {{ date('F d, Y H:i', strtotime($post->created_at)) }}<br /> -->
                 {{ Carbon::parse($post->created_at)->diffForHumans() }}
                 @if($post->classroom_id != 0)

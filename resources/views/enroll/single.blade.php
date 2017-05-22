@@ -6,9 +6,9 @@
 <div class="container">
     <div class="row">
         <h5>Daftar Enrollment</h5>
-        <h4 style="margin-top:0">Classroom {{ $classroom->nama }}</h4>
+        <h4>Classroom {{ $classroom->nama }}</h4>
         <div class="card-panel z-depth-0">
-        <form class="form" role="form" method="POST" action="{{ url('classroom').'/'.$classroom->id }}">
+        <form class="form" role="form" method="POST" action="{{ url('enroll').'/'.$classroom->id }}">
             <button type="submit" class="btn gradient-2 left"><i class="material-icons left">save</i> Simpan</button>
             {!! csrf_field() !!}
             <input type="hidden" name="_method" value="put"></input>
@@ -50,7 +50,7 @@
     					<td data-label="User">{{ $user->name }}</td>
     					<td data-label="Email">{{ $user->email }}</td>
     					<td data-label="Role">@if(!empty($user->roles->first()))
-                            {{ $user->roles->first()['name'] }}
+                            {{ $user->roles->implode('name', ', ') }}
                             @else &mdash; @endif
                             <input type="hidden" name="user_id[]" value="{{ $user->id }}"></input>
                         </td>
