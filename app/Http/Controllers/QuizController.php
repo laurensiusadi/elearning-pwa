@@ -9,6 +9,7 @@ use App\User;
 use App\Enrollment;
 use App\Classroom;
 use App\Quiz;
+use App\Question;
 use Auth;
 use DB;
 
@@ -91,7 +92,9 @@ class QuizController extends Controller
     public function edit($id, $quiz_id)
     {
         $quiz = Quiz::find($quiz_id);
-        return view('quiz.edit', ['classroom_id' => $id, 'quiz_id' => $quiz_id, 'quiz' => $quiz]);
+        $classroomId = $id;
+        $allQuestions = Question::all();
+        return view('quiz.edit', compact('quiz', 'classroomId', 'allQuestions'));
     }
 
     public function update(Request $request, $id, $quiz_id)

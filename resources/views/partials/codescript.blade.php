@@ -1,4 +1,4 @@
-<script src="{{ asset('codemirror/codemirror.js') }}"></script>
+<!-- <script src="{{ asset('codemirror/codemirror.js') }}"></script> -->
 <script src="{{ asset('codemirror/addon/comment/comment.js') }}"></script>
 <script src="{{ asset('codemirror/addon/lint/lint.js') }}"></script>
 <script src="{{ asset('codemirror/addon/hint/show-hint.js') }}"></script>
@@ -13,6 +13,6 @@
 <script src="{{ asset('codemirror/addon/mode/css.js') }}"></script>
 <script src="{{ asset('codemirror/addon/mode/javascript.js') }}"></script>
 <script src="{{ asset('js/demo.js') }}"></script>
-<script src="{{ asset('js/jquery.expect.js') }}"></script>
+<!-- <script src="{{ asset('js/jquery.expect.js') }}"></script>
 <script src="{{ asset('js/expect.js') }}"></script>
-<script src="{{ asset('js/main.js') }}"></script>
+<script src="{{ asset('js/main.js') }}"></script> -->

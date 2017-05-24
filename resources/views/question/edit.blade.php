@@ -1,9 +1,5 @@
 @extends('layouts.code')
 
-@section('title')
-    Question Create
-@endsection
-
 @section('style')
 <link rel="stylesheet" href="{!! asset('codemirror/codemirror.css') !!}">
 <link rel="stylesheet" href="{!! asset('codemirror/material.css') !!}">
@@ -18,16 +14,17 @@
 <div class="container full">
     <!-- <h5>Buat Soal Baru</h5> -->
     <div class="row" style="margin-bottom: 0">
-        <form role="form" action="{{ url('question') }}" method="POST">
+        <form role="form" action="/question/{{$question->id}}/" method="POST">
+            {{ csrf_field() }}
+            <input type="hidden" name="_method" value="put"/>
             <div class="col s12 m12 l4">
                 <div class="card-panel z-depth-0" style="padding-bottom:20px">
-                    {{ csrf_field() }}
                     <div class="input-field" style="margin-top:0.5rem">
-                        <input placeholder="" name="topik" type="text" required>
+                        <input placeholder="" value="{{ $question->topik }}" name="topik" type="text" required>
                         <label for="topik">Topik</label>
                     </div>
                     <div class="input-field">
-                        <textarea id="desc" placeholder="Penjelasan tentang topik dan arahan mengerjakan" name="deskripsi"></textarea>
+                        <textarea id="desc" placeholder="Penjelasan tentang topik dan arahan mengerjakan" name="deskripsi">{!! $question->deskripsi !!}</textarea>
                         <label class="active" for="deskripsi" style="padding-bottom:6px">Deskripsi</label>
                     </div>
                     <div class="input-field">
@@ -79,13 +76,13 @@
 <script src="{{ asset('js/demo.js') }}"></script>
 <script>
     (function() {
-        var html_editor = codemirror_grammar_demo(document.querySelector("#html textarea"), [
+        var html_editor = codemirror_grammar(document.querySelector("#html textarea"), [
             {language : "htmlmixed", grammar : htmlmixed_grammar}
         ]);
-        var css_editor = codemirror_grammar_demo(document.querySelector("#css textarea"), [
+        var css_editor = codemirror_grammar(document.querySelector("#css textarea"), [
             {language : "css", grammar : css_grammar}
         ]);
-        var js_editor = codemirror_grammar_demo(document.querySelector("#js textarea"), [
+        var js_editor = codemirror_grammar(document.querySelector("#js textarea"), [
             {language : "javascript", grammar : js_grammar}
         ]);
     }());

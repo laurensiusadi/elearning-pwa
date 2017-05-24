@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>codekita</title>
+    <title>coderoom</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="description" content="">
@@ -27,7 +27,7 @@
     @yield('style')
     @include('partials.style')
     <style>
-        main { flex: 1 0 auto; padding-top: 56px; padding-bottom: 0 }
+        main { flex: 1 0 auto; padding-top: 48px; padding-bottom: 0 }
     </style>
 </head>
 <body>

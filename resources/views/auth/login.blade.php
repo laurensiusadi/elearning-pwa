@@ -15,14 +15,8 @@
                 <input placeholder="Input password" name="password" type="password" class="validate">
                 <label for="password">Password</label>
             </div>
-            <div class="col s12">
-                <input type="checkbox" name="remember" id="remember" />
-                <label for="remember">Remember Me</label>
-            </div>
             <div class="input-field col s12" style="padding-top:40px">
-                <button class="col s12 btn gradient-2 waves-effect waves-light" type="submit" name="action" style="padding-inline-start:45px;">Login
-                    <i class="material-icons right">send</i>
-                </button>
+                <button class="col s12 btn gradient-2 waves-effect waves-light" type="submit" name="action">Login</button>
             </div>
             <div class="input-field col s12">
                 <a href="{{ url('/register') }}" class="col s12 center">Or create new account here</a>

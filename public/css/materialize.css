@@ -2872,7 +2872,7 @@ ul.staggered-list li {
 
 .page-footer .footer-copyright {
   overflow: hidden;
-  min-height: 50px;
+  min-height: 48px;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
@@ -4164,7 +4164,7 @@ nav .button-collapse {
   position: relative;
   z-index: 1;
   height: 56px;
-  margin: 0 18px;
+  margin: 0 0 0 18px;
 }
 
 nav .button-collapse i {
@@ -6576,7 +6576,7 @@ form p:last-child {
 [type="checkbox"].filled-in:checked + label:before {
   top: 0;
   left: 1px;
-  width: 8px;
+  width: 6px;
   height: 13px;
   border-top: 2px solid transparent;
   border-left: 2px solid transparent;

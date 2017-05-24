@@ -13,11 +13,13 @@
             @if($quiz->questions->count() == 0)
             <h6>Belum ada soal</h6>
             @else
-            <ul class="collapsible" data-collapsible="accordion">
+            <ul class="collection">
                 @foreach($quiz->questions as $question)
-                <li>
-                <div class="collapsible-header">{{ $question->topik }}</div>
-                <div class="collapsible-body"><span>{{ $question->deskripsi }}</span></div>
+                <li class="collection-item">{{ $loop->index+1 }}. {{ $question->topik }}
+                    <a href="/classroom/{{ $quiz->classroom->id }}/quiz/{{ $quiz->id }}/question/{{ $question->id }}" class="btn-link right">Enter</a>
+                    @if(Auth::user()->hasRole('dosen'))
+                    <a href="/question/{{ $question->id }}/edit" class="btn-link right">Edit&nbsp;&nbsp;</a>
+                    @endif
                 </li>
                 @endforeach
             </ul>

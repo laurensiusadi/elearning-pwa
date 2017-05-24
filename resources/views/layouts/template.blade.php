@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>codekita</title>
+    <title>coderoom</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="description" content="">
@@ -110,7 +110,7 @@
     @yield('scripts')
     @include('partials.session')
     <footer class="page-footer slate">
-        <div class="container">
+        <!-- <div class="container">
             <div class="row">
                 <div class="col l6 s12">
                     <h5 class="grey-text text-lighten-4">Footer Content</h5>
@@ -126,9 +126,9 @@
                     </ul>
                 </div>
             </div>
-        </div>
+        </div> -->
         <div class="footer-copyright">
-            <div class="grey-text container">
+            <div class="grey-text container full">
             © 2017 Copyright Text
             <a class="grey-text right" href="https://laurensi.us">Made by Laurensius Adi</a>
             </div>

@@ -33,7 +33,7 @@
         <ul class="collection">
         @if(count($quizes) > 0)
         @foreach( $quizes as $quiz)
-        <li class="collection-item">{{ $loop->index+1 }}. {{ $quiz->nama }}</li>
+        <li class="collection-item">{{ $loop->index+1 }}. {{ $quiz->nama }}<a href="/classroom/{{$classroom->id}}/quiz/{{$quiz->id}}/question" class="right">Enter</a></li>
         @endforeach
         @else
         <li class="collection-item">Belum ada soal</li>

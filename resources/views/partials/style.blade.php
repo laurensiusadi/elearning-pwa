@@ -15,7 +15,7 @@
     .form-small { max-width: 330px; margin: 0 auto }
     form .chip { margin-top: -8px; margin-bottom: 16px }
     body { display: flex; min-height: 100vh; flex-direction: column }
-    main { flex: 1 0 auto; padding-bottom: 50px; padding-top: 60px }
+    main { flex: 1 0 auto; padding-bottom: 30px; padding-top: 60px }
     nav { top: 0; position: fixed; z-index: 999 ; transition: top 0.25s ease-in-out; box-shadow: 0 0 10px 0 rgba(0,0,0,0.25); -moz-box-shadow: 0 0 10px 0 rgba(0,0,0,0.25); -webkit-box-shadow: 0 0 10px 0 rgba(0,0,0,0.25); }
     nav { background-color: #0072ff }
     .nav-up { top: -52px }
@@ -28,6 +28,7 @@
     .btn-small { padding: 0 0.75rem }
     .modal { max-height: 80%}
     #datatable_filter input::placeholder { color:grey }
+    .dataTables_wrapper label { font-size: 0.9em }
     .dataTables_wrapper .input-field > .select-wrapper { width: 100%; margin: 0 0 1rem; display: inline-block }
     @media only screen and (max-width: 601px) {
         .nav-up { top: -44px }
@@ -44,7 +45,7 @@
         #datatable_filter input { margin: 8px auto 0; width: 94% }
         .card-panel > a, .card-panel > form > button { float:none; width:100% }
         .row > h4, .row > h5 { text-align: center }
-        .btn { margin: 2px auto; padding: 0 0.5rem; height: 30px; line-height: 30px }
+        .btn { margin: 2px auto; padding: 0 0.75rem; height: 30px; line-height: 30px }
         /*.tooltipped { padding: 0 0.8rem; margin: 0 4px }*/
     }
 </style>

@@ -9,7 +9,7 @@
             <h4>Classroom {{ $classroom->nama }}</h4>
             @if($ismhs == false)
             <a href="{{ url('classroom').'/'.$classroom->id.'/quiz/create' }}"
-                class="btn green accent-3 waves-effect">Tambah Quiz</a>
+                class="btn green accent-3 waves-effect" style="margin-bottom: 0.5rem">Tambah Quiz</a>
             @endif
 			@foreach($quizes as $quiz)
             <div class="card z-depth-0">
@@ -37,6 +37,7 @@
 			@endforeach
         </div>
         <div class="col l4 m5 s12">
+            <h5>&nbsp;</h5>
             <h4>Pengumuman</h4>
             @if(Auth::user()->hasRole('admin|dosen'))
             <div class="card z-depth-0">
@@ -60,6 +61,7 @@
                     </div>
                 </form><p></p>
             </div></div>
+            @endif
             @foreach($classroom->posts as $post)
                 <div class="card-panel z-depth-0">
                     @if(Auth::user()->hasRole('admin|dosen'))
@@ -76,15 +78,9 @@
                     <p>{{ $post->content }}<br />
                     <span class="grey-text small">{{ $post->user->name }}&nbsp;&bull;
                     {{ Carbon::parse($post->created_at)->diffForHumans() }}
-                    @if($post->classroom_id != 0)
-                        &bull;&nbsp;{{ $post->classroom->nama }}
-                    @else
-                        &bull;&nbsp;Umum
-                    @endif</span>
                     </p>
                 </div>
             @endforeach
-            @endif
         </div>
     </div>
 </div>

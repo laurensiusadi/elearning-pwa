@@ -42,6 +42,8 @@ class QuestionController extends Controller
         $question->topik = $request->topik;
         $question->deskripsi = $request->deskripsi;
         $question->save();
+
+        return redirect('question')->with('message', 'Soal berhasil dibuat');
     }
 
     /**
@@ -63,7 +65,8 @@ class QuestionController extends Controller
      */
     public function edit($id)
     {
-        //
+        $question = Question::find($id);
+        return view('question.edit', compact('question'));
     }
 
     /**
@@ -75,7 +78,12 @@ class QuestionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $question = Question::find($id);
+        $question->topik = $request->topik;
+        $question->deskripsi = $request->deskripsi;
+        $question->save();
+
+        return redirect('question')->with('message', 'Soal berhasil diupdate');
     }
 
     /**
@@ -86,6 +94,13 @@ class QuestionController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $question = Question::find($id);
+        try {
+            $question->delete();
+        } catch (QueryException $e) {
+            return back()->with('error', 'Soal gagal dihapus');
+        }
+
+        return back()->with('message', 'Soal berhasil dihapus');
     }
 }

@@ -13,23 +13,13 @@ var base_tpl =
   "</html>";
 
 var prepareSource = function() {
-    var html = html_editor.getValue(),
-            css = css_editor.getValue(),
-            js = js_editor.getValue(),
-            src = '';
+    var code = '<!DOCTYPE html><html><head>';
+    code += '<style>'  + css_editor.getValue() + '</style>';
+    code += '<body>' + html_editor.getValue();
+    code += '<script>' + js_editor.getValue() + '</script>';
+    code += '</body></html>';
 
-    // HTML
-    src = base_tpl.replace('</body>', html + '</body>');
-
-    // CSS
-    css = '<style>' + css + '</style>';
-    src = src.replace('</head>', css + '</head>');
-
-    // Javascript
-    js = '<script>' + js + '<\/script>';
-    src = src.replace('</body>', js + '</body>');
-
-    return src;
+    return code;
 };
 
 var render = function() {
@@ -41,29 +31,35 @@ var render = function() {
     iframe_doc.open();
     iframe_doc.write(source);
     iframe_doc.close();
+
+    Materialize.toast('Rendered', 1000, 'grey');
 };
 
 // HTML EDITOR
-var html_editor = codemirror_grammar_demo(document.querySelector("#html textarea"), [
+var html_editor = codemirror_grammar(document.querySelector("#html textarea"), [
     {language : "htmlmixed", grammar : htmlmixed_grammar}
 ]);
-html_editor.on('change', function (inst, changes) {
-    render();
-});
+// html_editor.on('change', function (inst, changes) {
+//     render();
+// });
 
 // CSS EDITOR
-var css_editor = codemirror_grammar_demo(document.querySelector("#css textarea"), [
+var css_editor = codemirror_grammar(document.querySelector("#css textarea"), [
     {language : "css", grammar : css_grammar}
 ]);
-css_editor.on('change', function (inst, changes) {
-    render();
-});
+// css_editor.on('change', function (inst, changes) {
+//     render();
+// });
 
 // JAVASCRIPT EDITOR
-var js_editor = codemirror_grammar_demo(document.querySelector("#js textarea"), [
+var js_editor = codemirror_grammar(document.querySelector("#js textarea"), [
     {language : "javascript", grammar : js_grammar}
 ]);
-js_editor.on('change', function (inst, changes) {
+// js_editor.on('change', function (inst, changes) {
+//     render();
+// });
+
+$("#run").click(function(){
     render();
 });
 

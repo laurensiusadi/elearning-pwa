@@ -20,7 +20,7 @@ Route::get('/home', 'HomeController@index');
 Route::post('/compile', 'HomeController@compile');
 Route::get('/logout', function(){
     Auth::logout();
-    return redirect('/');
+    return redirect('/')->with('message', 'Log out successfully');
 });
 Route::get('/offline', function(){
     return view('offline');
@@ -65,10 +65,10 @@ Route::group(['middleware' => ['auth', 'acl'],
             Route::get('/classroom/{id}/quiz/{quiz_id}/edit', 'QuizController@edit');
             Route::put('/classroom/{id}/quiz/{quiz_id}', 'QuizController@update');
             Route::delete('/classroom/{id}/quiz/{quiz_id}', 'QuizController@destroy');
+            Route::get('/classroom/{id}/quiz/{quiz_id}/question/create', 'QuizQuestionController@create');
         });
-        Route::get('/question', 'QuestionController@index');
-        Route::get('/question/create', 'QuestionController@create');
-        Route::post('/question', 'QuestionController@store');
+        Route::resource('/question', 'QuestionController');
+        Route::resource('/quizquestion', 'QuizQuestionController');
     });
 
 Route::group(['middleware' => ['auth', 'acl', 'enroll'],
