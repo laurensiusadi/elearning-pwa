@@ -30,7 +30,7 @@
                 <tr>
                     <td data-label="Assign">
                     @if($quiz->questions()->where('question_id', $question->id)->exists())
-                    <input type="checkbox" class="filled-in" id="check" checked="checked" name="data::{{ $question->id }}"/><label for="check">Yes</label>
+                    <input type="checkbox" class="filled-in" id="check" checked="checked" name="data::{{ $question->id }}"/><label for="check"><!--&nbsp;--></label>
                     @else
                     <input type="checkbox" class="filled-in" id="check" name="data::{{ $question->id }}"/><label for="check">No</label>
                     @endif

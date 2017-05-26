@@ -68,17 +68,19 @@ Route::group(['middleware' => ['auth', 'acl'],
             Route::get('/classroom/{id}/quiz/{quiz_id}/question/create', 'QuizQuestionController@create');
         });
         Route::resource('/question', 'QuestionController');
+        Route::resource('/question/{id}/key', 'KeyController');
         Route::resource('/quizquestion', 'QuizQuestionController');
     });
 
 Route::group(['middleware' => ['auth', 'acl', 'enroll'],
     'is' => env('ROLE_MHS')],
     function () {
-        Route::get('/classroom/{id}/quiz/{quiz_id}/answer/create', 'AnswerController@create');
-        Route::post('/classroom/{id}/quiz/{quiz_id}/answer', 'AnswerController@store');
-        Route::get('/classroom/{id}/quiz/{quiz_id}/answer/{answer_id}/edit', 'AnswerController@edit');
-        Route::put('/classroom/{id}/quiz/{quiz_id}/answer/{answer_id}', 'AnswerController@update');
-        Route::delete('/classroom/{id}/quiz/{quiz_id}/answer/{answer_id}', 'AnswerController@destroy');
+        Route::get('/classroom/{id}/quiz/{quiz_id}/question/{question_id}', 'QuizQuestionController@show');
+        Route::get('/classroom/{id}/quiz/{quiz_id}/question/{question_id}/answer/create', 'AnswerController@create');
+        Route::post('/classroom/{id}/quiz/{quiz_id}/question/{question_id}/answer', 'AnswerController@store');
+        Route::get('/classroom/{id}/quiz/{quiz_id}/question/{question_id}/answer/{answer_id}/edit', 'AnswerController@edit');
+        Route::put('/classroom/{id}/quiz/{quiz_id}/question/{question_id}/answer', 'AnswerController@update');
+        Route::delete('/classroom/{id}/quiz/{quiz_id}/question/{question_id}/answer/{answer_id}', 'AnswerController@destroy');
     });
 
 Route::group(['middleware' => ['auth', 'acl'],
@@ -101,7 +103,6 @@ Route::group(['middleware' => ['auth', 'acl'],
             Route::get('/classroom/{id}/quiz/{quiz_id}', 'QuizController@show');
 
             Route::get('/classroom/{id}/quiz/{quiz_id}/question', 'QuizQuestionController@index');
-            Route::get('/classroom/{id}/quiz/{quiz_id}/question/{question_id}', 'QuizQuestionController@show');
 
             Route::get('/classroom/{id}/quiz/{quiz_id}/answer', 'AnswerController@index');
             Route::get('/classroom/{id}/quiz/{quiz_id}/answer/{answer_id}', 'AnswerController@show');

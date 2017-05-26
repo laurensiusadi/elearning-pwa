@@ -8,7 +8,7 @@
             <h5>Daftar Quiz</h5>
             <h4>Classroom {{ $classroom->nama }}</h4>
             @if($ismhs == false)
-            <a href="{{ url('classroom').'/'.$classroom->id.'/quiz/create' }}"
+            <a href="/classroom/{{$classroom->id}}/quiz/create"
                 class="btn green accent-3 waves-effect" style="margin-bottom: 0.5rem">Tambah Quiz</a>
             @endif
 			@foreach($quizes as $quiz)
@@ -17,6 +17,7 @@
     				<span class="card-title">{{ $quiz->nama }}</span>
     				<p><span class="grey-text">Mulai:</span> {{ Carbon::parse($quiz->mulai)->toDayDateTimeString() }}</p>
                     <p><span class="grey-text">Selesai:</span> {{ Carbon::parse($quiz->selesai)->toDayDateTimeString() }}</p>
+                    <p>{{$quiz->questions->count()}} Soal</p>
                 </div>
                 <div class="card-action">
 					<a class="btn btn-small blue tooltipped" data-position="bottom" data-delay="50" data-tooltip="Detail" href="/classroom/{{ $classroom->id }}/quiz/{{$quiz->id}}/question"><i class="material-icons">list</i></a>

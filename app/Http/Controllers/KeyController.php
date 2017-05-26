@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Key;
+use App\Question;
 
 class KeyController extends Controller
 {
@@ -32,9 +34,16 @@ class KeyController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $id)
     {
-        //
+        $question = Question::find($id);
+
+        $key = new Key;
+        $key->question_id = $id;
+        $key->checklist = $request->checklist;
+        $key->save();
+
+        return back()->with('message','Challenges berhasil ditambahkan');
     }
 
     /**

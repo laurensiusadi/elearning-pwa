@@ -10,4 +10,5 @@
 #output iframe {width:100%;height:100%;border:0}
 #browser{height:48px;border:1px solid #ddd;border-bottom:none;padding:6px}
 #browser>div{padding-left:16px;height:36px;line-height:36px;border:1px solid #cacaca; border-radius:2px}
+.description code {padding: 2px 5px; margin:0 2px; background-color: rgba(0,114,255,0.15); border-radius: 5px}
 </style>

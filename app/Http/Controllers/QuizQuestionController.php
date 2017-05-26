@@ -7,6 +7,7 @@ use App\Classroom;
 use App\Quiz;
 use App\Question;
 use App\User;
+use App\Answer;
 use Auth;
 
 class QuizQuestionController extends Controller
@@ -29,12 +30,19 @@ class QuizQuestionController extends Controller
     {
         $quiz = Quiz::find($quiz_id);
         $question = Question::find($question_id);
-        $ismhs = false;
-        if (User::find(Auth::id())->where('role_user', 'mhs')) {
-            $ismhs = true;
+        if(Auth::user()->hasRole('mhs') AND Answer::where('question_id', $question_id)->where('user_id', Auth::user()->id)->get()->count() == 0 )
+        {
+            $answer = new Answer;
+            $answer->user_id = Auth::user()->id;
+            $answer->question_id = $question_id;
+            $answer->code_html = $question->template_html;
+            $answer->code_css = $question->template_css;
+            $answer->code_js = $question->template_js;
+            $answer->save();
         }
+        $answer = Answer::where('question_id', $question_id)->where('user_id', Auth::user()->id)->get()->first();
 
-        return view('question.single', compact('quiz', 'question', 'ismhs'));
+        return view('question.single', compact('quiz', 'question', 'answer'));
     }
 
     public function update(Request $request, $id)

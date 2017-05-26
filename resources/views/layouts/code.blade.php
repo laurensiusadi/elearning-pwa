@@ -27,7 +27,7 @@
     @yield('style')
     @include('partials.style')
     <style>
-        main { flex: 1 0 auto; padding-top: 48px; padding-bottom: 0 }
+        main { flex: 1 0 auto; padding-top: 54px; padding-bottom: 0 }
     </style>
 </head>
 <body>

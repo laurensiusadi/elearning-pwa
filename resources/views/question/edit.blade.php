@@ -42,28 +42,41 @@
                     </ul>
                 </div>
         		<div id="html" class="col s12 code_box">
-                    <textarea name="html"></textarea>
+                    <textarea name="html">{!! $question->template_html !!}</textarea>
         		</div>
         		<div id="css" class="col s12 code_box">
-                    <textarea name="css"></textarea>
+                    <textarea name="css">{!! $question->template_css !!}</textarea>
         		</div>
         		<div id="js" class="col s12 code_box">
-                    <textarea name="js"></textarea>
+                    <textarea name="js">{!! $question->template_js !!}</textarea>
         		</div>
             </div>
         </form>
         <div class="col s12 m12 l4">
             <div class="card-panel z-depth-0">
-                <form>
+                <form method="POST" action="/classroom/{{$question->quiz->classroom->id}}/question/{{$question->id}}/answer">
+                    {{ csrf_field() }}
                     <div class="input-field">
-                        <input placeholder="$expect('h1').to.be.attr('color', 'red')" type="text" name="checklist" class="autocomplete" style="font-family: monospace"/>
+                        <textarea placeholder="$expect('h1').to.be.attr('color', 'red')" type="text" name="checklist" class="materialize-textarea" style="font-family: monospace"></textarea>
                         <label for="checklist">Challenges</label>
                     </div>
-                    <div class="input-field">
+                    <!-- <div class="input-field">
                         <input placeholder="H1 element must be red" type="text" name="message"/>
                         <label for="message">Message</label>
-                    </div>
+                    </div> -->
+                    <div class="input-field">
+                        <a class="grey-text lighten-2" href="#modalexcept"><i class="material-icons">help</i></a>
+                        <button class="btn green waves-effect waves-dark right" type="submit" name="action">Save<i class="material-icons right">save</i></button>
+                    </div><p class="clearfix"></p>
                 </form>
+            </div>
+            <div class="card-panel z-depth-0">
+                <h6>Challenges</h6>
+                <ul class="collection" style="font-family:monospace;max-height:154px;overflow-y:auto;">
+                    @foreach($question->keys as $key)
+                        <li class="collection-item">{{ $loop->index+1 }}.&nbsp;{{ $key->checklist }}</li>
+                    @endforeach
+                </ul>
             </div>
         </div>
     </div>

@@ -81,9 +81,12 @@ class QuestionController extends Controller
         $question = Question::find($id);
         $question->topik = $request->topik;
         $question->deskripsi = $request->deskripsi;
+        $question->template_html = $request->html;
+        $question->template_css = $request->css;
+        $question->template_js = $request->js;
         $question->save();
 
-        return redirect('question')->with('message', 'Soal berhasil diupdate');
+        return back()->with('message', 'Soal berhasil diupdate');
     }
 
     /**
