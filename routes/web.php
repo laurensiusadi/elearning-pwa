@@ -68,8 +68,9 @@ Route::group(['middleware' => ['auth', 'acl'],
             Route::get('/classroom/{id}/quiz/{quiz_id}/question/create', 'QuizQuestionController@create');
         });
         Route::resource('/question', 'QuestionController');
-        Route::resource('/question/{id}/key', 'KeyController');
         Route::resource('/quizquestion', 'QuizQuestionController');
+        Route::post('/question/{question_id}/key', 'KeyController@store');
+        Route::put('/question/{question_id}/key/{key_id}', 'KeyController@update');
     });
 
 Route::group(['middleware' => ['auth', 'acl', 'enroll'],

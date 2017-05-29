@@ -43,7 +43,7 @@ class QuestionController extends Controller
         $question->deskripsi = $request->deskripsi;
         $question->save();
 
-        return redirect('question')->with('message', 'Soal berhasil dibuat');
+        return redirect('question/'.$question->id.'/edit')->with('message', 'Soal berhasil dibuat');
     }
 
     /**

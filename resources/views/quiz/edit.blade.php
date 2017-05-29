@@ -10,8 +10,9 @@
 @section('content')
 <div class="container">
 <div class="row">
-    <h4>Edit Quiz {{ $quiz->nama }}</h4>
-    <div class="card-panel z-depth-0">
+    <h6 class="main-title">Edit Quiz</h6>
+    <h4 class="main-title">{{ $quiz->nama }}</h4>
+    <div class="card-panel">
         <form class="form" role="form" method="POST" action="/quizquestion/{{ $quiz->id }}">
             {!! csrf_field() !!}
             <input type="hidden" name="_method" value="put"/>
@@ -30,9 +31,9 @@
                 <tr>
                     <td data-label="Assign">
                     @if($quiz->questions()->where('question_id', $question->id)->exists())
-                    <input type="checkbox" class="filled-in" id="check" checked="checked" name="data::{{ $question->id }}"/><label for="check"><!--&nbsp;--></label>
+                    <input type="checkbox" class="filled-in" id="check{{ $question->id }}" checked="checked" name="data::{{ $question->id }}"/><label for="check{{ $question->id }}">Yes</label>
                     @else
-                    <input type="checkbox" class="filled-in" id="check" name="data::{{ $question->id }}"/><label for="check">No</label>
+                    <input type="checkbox" class="filled-in" id="check{{ $question->id }}" name="data::{{ $question->id }}"/><label for="check{{ $question->id }}">No</label>
                     @endif
                     </td>
                     <td data-label="Topik">{{ $question->topik }}</td>

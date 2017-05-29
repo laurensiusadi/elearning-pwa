@@ -1,18 +1,17 @@
 @extends('layouts.code')
 
+@section('title')
+    Editing Question
+@endsection
+
 @section('style')
-<link rel="stylesheet" href="{!! asset('codemirror/codemirror.css') !!}">
-<link rel="stylesheet" href="{!! asset('codemirror/material.css') !!}">
-<link rel="stylesheet" href="{!! asset('codemirror/addon/lint/lint.css') !!}">
-<link rel="stylesheet" href="{!! asset('codemirror/addon/hint/show-hint.css') !!}">
-<link rel="stylesheet" href="{!! asset('codemirror/addon/fold/foldgutter.css') !!}">
+@include('partials.codestyle')
 <link rel="stylesheet" href="{!! asset('css/trumbowyg.css') !!}">
 <style>.code_box textarea{position:relative;left:0;right:0;top:30px;bottom:0;resize:none;border:0;padding:10px;font-family:monospace}.code_box textarea:focus{outline:none;background:#EFEFEF}#output{height:440px;border:5px solid #DDD;overflow:hidden}#output iframe{width:100%;height:100%;border:0}</style>
 @endsection
 
 @section('content')
 <div class="container full">
-    <!-- <h5>Buat Soal Baru</h5> -->
     <div class="row" style="margin-bottom: 0">
         <form role="form" action="/question/{{$question->id}}/" method="POST">
             {{ csrf_field() }}
@@ -29,7 +28,7 @@
                     </div>
                     <div class="input-field">
                         <a href="/question" class="btn-flat white left" style="padding-left:0"><i class="material-icons left">arrow_back</i>Back</a>
-                        <button class="btn green waves-effect waves-dark right" type="submit" name="action">Save<i class="material-icons right">save</i></button>
+                        <button class="btn gradient-2 waves-effect waves-light right" type="submit" name="action">Save<i class="material-icons right">save</i></button>
                     </div><p class="clearfix"></p>
                 </div>
             </div>
@@ -54,27 +53,32 @@
         </form>
         <div class="col s12 m12 l4">
             <div class="card-panel z-depth-0">
-                <form method="POST" action="/classroom/{{$question->quiz->classroom->id}}/question/{{$question->id}}/answer">
+                <form method="POST" action="/question/{{$question->id}}/key">
                     {{ csrf_field() }}
                     <div class="input-field">
-                        <textarea placeholder="$expect('h1').to.be.attr('color', 'red')" type="text" name="checklist" class="materialize-textarea" style="font-family: monospace"></textarea>
+                        <input placeholder="$expect('h1').to.be.attr('color', 'red')" type="text" name="checklist" style="font-family: monospace" required/>
                         <label for="checklist">Challenges</label>
                     </div>
-                    <!-- <div class="input-field">
+                    <div class="input-field">
                         <input placeholder="H1 element must be red" type="text" name="message"/>
                         <label for="message">Message</label>
-                    </div> -->
+                    </div>
                     <div class="input-field">
-                        <a class="grey-text lighten-2" href="#modalexcept"><i class="material-icons">help</i></a>
-                        <button class="btn green waves-effect waves-dark right" type="submit" name="action">Save<i class="material-icons right">save</i></button>
+                        <a class="grey-text lighten-2" href="https://github.com/Codecademy/jquery-expect/" target="_black"><i class="material-icons">help</i></a>
+                        <!-- @include('key.helpmodal') -->
+                        <button class="btn green waves-effect waves-dark right" type="submit" name="action">Add<i class="material-icons right">playlist_add</i></button>
                     </div><p class="clearfix"></p>
                 </form>
-            </div>
-            <div class="card-panel z-depth-0">
-                <h6>Challenges</h6>
-                <ul class="collection" style="font-family:monospace;max-height:154px;overflow-y:auto;">
+                <h6 class="main-title" style="margin-top:30px">Challenges</h6>
+                <ul class="collection" style="font-family:monospace;max-height:182px;overflow-y:auto; margin-bottom:0">
                     @foreach($question->keys as $key)
-                        <li class="collection-item">{{ $loop->index+1 }}.&nbsp;{{ $key->checklist }}</li>
+                        <li class="collection-item">
+                            <a href="#modal{{$key->id}}edit" class="secondary-content right"><i class="material-icons tiny">edit</i></a>
+                            @include('key.editmodal')
+                            {{ $loop->index+1 }}.&nbsp;{{ $key->message }}<br/>
+                            &nbsp;&nbsp;&nbsp;<code class="grey-text">{{ $key->checklist }}</code>
+                        </br/>
+                        </li>
                     @endforeach
                 </ul>
             </div>
@@ -84,9 +88,9 @@
 @endsection
 
 @section('scripts')
-<script src="{{ asset('codemirror/codemirror-prod.js') }}"></script>
-<script src="{{ asset('js/codemirror-all.js') }}"></script>
-<script src="{{ asset('js/demo.js') }}"></script>
+<script src="{{ asset('codemirror/codemirror.js') }}"></script>
+@include('partials.codescript')
+<script src="{{ asset('js/code-grammar.js') }}"></script>
 <script>
     (function() {
         var html_editor = codemirror_grammar(document.querySelector("#html textarea"), [
@@ -102,6 +106,9 @@
 </script>
 <script src="{{ asset('js/wyg.js') }}"></script>
 <script>
+    $(document).ready(function(){
+        $('.modal').modal();
+    });
     $.trumbowyg.svgPath = '/images/icons.svg';
     $('#desc').trumbowyg({
         btns : [

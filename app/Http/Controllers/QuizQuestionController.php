@@ -16,6 +16,7 @@ class QuizQuestionController extends Controller
     {
         $classroom = Classroom::find($id);
         $quiz = Quiz::find($quiz_id);
+        $questions = $quiz->questions()->orderBy('created_at', 'asc')->get();
 
         $ismhs = false;
         // $user = User::find(Auth::id());
@@ -23,7 +24,7 @@ class QuizQuestionController extends Controller
             $ismhs = true;
         }
 
-        return view('quizquestion.index', ['classroom' => $classroom, 'quiz' => $quiz, 'ismhs' => $ismhs]);
+        return view('quizquestion.index', ['questions' => $questions,'classroom' => $classroom, 'quiz' => $quiz, 'ismhs' => $ismhs]);
     }
 
     public function show($id, $quiz_id, $question_id)
@@ -38,6 +39,7 @@ class QuizQuestionController extends Controller
             $answer->code_html = $question->template_html;
             $answer->code_css = $question->template_css;
             $answer->code_js = $question->template_js;
+            $answer->done = false;
             $answer->save();
         }
         $answer = Answer::where('question_id', $question_id)->where('user_id', Auth::user()->id)->get()->first();

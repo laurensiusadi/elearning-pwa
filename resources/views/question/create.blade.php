@@ -20,7 +20,7 @@
     <div class="row" style="margin-bottom: 0">
         <form role="form" action="{{ url('question') }}" method="POST">
             <div class="col s12 m12 l4">
-                <div class="card-panel z-depth-0" style="padding-bottom:20px">
+                <div class="card-panel" style="padding-bottom:20px">
                     {{ csrf_field() }}
                     <div class="input-field" style="margin-top:0.5rem">
                         <input placeholder="" name="topik" type="text" required>
@@ -56,7 +56,7 @@
             </div>
         </form>
         <div class="col s12 m12 l4">
-            <div class="card-panel z-depth-0">
+            <div class="card-panel">
                 <form>
                     <div class="input-field">
                         <input placeholder="$expect('h1').to.be.attr('color', 'red')" type="text" name="checklist" class="autocomplete" style="font-family: monospace"/>
@@ -74,9 +74,9 @@
 @endsection
 
 @section('scripts')
-<script src="{{ asset('codemirror/codemirror-prod.js') }}"></script>
-<script src="{{ asset('js/codemirror-all.js') }}"></script>
-<script src="{{ asset('js/demo.js') }}"></script>
+<script src="{{ asset('codemirror/codemirror.js') }}"></script>
+@include('partials.codescript')
+<script src="{{ asset('js/code-grammar.js') }}"></script>
 <script>
     (function() {
         var html_editor = codemirror_grammar_demo(document.querySelector("#html textarea"), [

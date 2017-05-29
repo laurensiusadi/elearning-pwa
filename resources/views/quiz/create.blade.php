@@ -3,9 +3,9 @@
 @section('content')
 <div class="container">
 <div class="row">
-    <div class="col l4 m5 s12">
+    <div class="col l4 m5 s12 side-content">
         <h5>Buat Quiz Baru</h5>
-        <div class="card-panel z-depth-0">
+        <div class="card-panel">
             <form role="form" method="POST" action="/classroom/{{$classroom->id}}/quiz">
                 {{ csrf_field() }}
                 <div class="input-field">
@@ -28,7 +28,7 @@
             </form><p class="clearfix"></p>
         </div>
     </div>
-    <div class="col l8 m7 s12">
+    <div class="col l8 m7 s12 main-content">
         <h5>List Quiz dari Classroom</h5>
         <ul class="collection">
         @if(count($quizes) > 0)

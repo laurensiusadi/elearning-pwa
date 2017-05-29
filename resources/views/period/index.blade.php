@@ -7,7 +7,7 @@
 <div class="container">
     <div class="row">
         <h4>Daftar Periode Perkuliahan</h4>
-        <div class="card-panel z-depth-0">
+        <div class="card-panel">
             <a class="btn green accent-4 left" href="/period/create">Add Periode</a>
             <table id="datatable" class="table highlight bordered">
     			<thead>

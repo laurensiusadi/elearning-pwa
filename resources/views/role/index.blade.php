@@ -6,7 +6,7 @@
 <div class="container">
     <div class="row">
         <h4>Daftar Role</h4>
-        <div class="card-panel z-depth-0">
+        <div class="card-panel">
         <a class="btn green accent-4 left" href="#modaladd">Add Role</a>
         @include('role.createmodal')
         <table id="datatable" class="table highlight bordered">

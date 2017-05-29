@@ -7,7 +7,7 @@
     <div class="row">
         <h5>Detail Informasi</h5>
         <h4>Classroom {{ $classroom->nama }}</h4>
-        <div class="card-panel z-depth-0">
+        <div class="card-panel">
             <table id="datatable" class="table highlight bordered">
                 <thead>
                     <tr>

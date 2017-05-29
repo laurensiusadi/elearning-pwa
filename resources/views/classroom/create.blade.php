@@ -4,7 +4,7 @@
 <div class="container">
     <div class="row">
         <h4>Buat Classroom Baru</h4>
-        <div class="card-panel z-depth-0">
+        <div class="card-panel">
             <form role="form" method="POST" action="{{ url('classroom') }}">
                 {{ csrf_field() }}
                 <div class="input-field">

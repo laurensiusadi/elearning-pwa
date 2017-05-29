@@ -7,7 +7,7 @@
     <div class="row">
         <h5>Detail Informasi</h5>
         <h4>Role User</h4>
-        <div class="card-panel z-depth-0">
+        <div class="card-panel">
             <form class="form" role="form" method="POST" action="{{ url('roleuser').'/'.$userid }}">
                 <span class="left">Nama: {{ $username }}</br>
                     Nomor Induk: {{ $nomorinduk }}

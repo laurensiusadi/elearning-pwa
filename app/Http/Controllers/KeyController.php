@@ -34,13 +34,12 @@ class KeyController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, $id)
+    public function store(Request $request, $question_id)
     {
-        $question = Question::find($id);
-
         $key = new Key;
-        $key->question_id = $id;
+        $key->question_id = $question_id;
         $key->checklist = $request->checklist;
+        $key->message = $request->message;
         $key->save();
 
         return back()->with('message','Challenges berhasil ditambahkan');
@@ -75,9 +74,14 @@ class KeyController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $question_id, $key_id)
     {
-        //
+        $key = Key::find($key_id);
+        $key->checklist = $request->checklist;
+        $key->message = $request->message;
+        $key->save();
+
+        return back()->with('message','Challenges berhasil diupdate');
     }
 
     /**

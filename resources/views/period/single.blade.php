@@ -8,31 +8,31 @@
         <h4>{{ $period->nama }}</h4>
         <div class="row">
             <div class="col s12 m6 l3">
-                <div class="card-panel z-depth-0">
+                <div class="card-panel">
                     <h6 class="small grey-text">Tahun</h6>
                     <h5 class="light">{{ $period->tahun }}</h5>
                 </div>
             </div>
             <div class="col s12 m6 l3">
-                <div class="card-panel z-depth-0">
+                <div class="card-panel">
                     <h6 class="small grey-text">Semester</h6>
                     <h5 class="light">{{ $period->semester }}</h5>
                 </div>
             </div>
             <div class="col s12 m6 l3">
-                <div class="card-panel z-depth-0">
+                <div class="card-panel">
                     <h6 class="small grey-text">Mulai</h6>
                     <h5 class="light">{{ Carbon::parse($period->mulai)->toFormattedDateString() }}</h5>
                 </div>
             </div>
             <div class="col s12 m6 l3">
-                <div class="card-panel z-depth-0">
+                <div class="card-panel">
                     <h6 class="small grey-text">Selesai</h6>
                     <h5 class="light">{{ Carbon::parse($period->selesai)->toFormattedDateString() }}</h5>
                 </div>
             </div>
             <div class="col s12">
-                <div class="card-panel z-depth-0">
+                <div class="card-panel">
                 @if(count($period->classrooms) > 0)
                 <table class="table highlight">
     			<thead>

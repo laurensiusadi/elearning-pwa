@@ -4,7 +4,7 @@
 <div class="container">
 <div class="row">
     <h5>Tambah Periode Perkuliahan</h5>
-    <div class="card-panel z-depth-0">
+    <div class="card-panel">
         <form role="form" method="POST" action="{{ url('period') }}">
             {{ csrf_field() }}
             <div class="input-field">

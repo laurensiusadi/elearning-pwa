@@ -37,7 +37,7 @@ var js_editor = codemirror_grammar(document.querySelector("#js textarea"), [
     {language : "javascript", grammar : js_grammar}
 ]);
 
-$("#run").click(function(){
+$(".run").click(function(){
     render();
 });
 

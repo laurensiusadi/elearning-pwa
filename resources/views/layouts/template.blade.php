@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
     <!-- Add to homescreen for Chrome on Android -->
     <link rel="manifest" href="/manifest.json">
-    <meta name="theme-color" content="#00c6ff">
+    <meta name="theme-color" content="#0072ff">
     <meta name="mobile-web-app-capable" content="yes">
     <!-- <link rel="icon" sizes="192x192" href="images/android-desktop.png"> -->
     <!-- Add to homescreen for Safari on iOS -->
@@ -22,10 +22,14 @@
     <meta name="msapplication-TileColor" content="#3372DF"> -->
     <!-- <link rel="shortcut icon" href="images/favicon.png"> -->
     <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,light,bolditalic&amp;lang=en"> -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" href="{!! asset('css/materialize.css') !!}">
+    <link rel="stylesheet" href="{!! asset('css/materialize-prod.css') !!}">
+    <link rel="stylesheet" href="{!! asset('fonts/montserrat/css/fonts.css') !!}">
+    <link rel="stylesheet" href="{!! asset('fonts/source-code-pro/css/fonts.css') !!}">
     @yield('style')
     @include('partials.style')
+    <style>
+        main { padding-top:80px }
+    </style>
     @if(Auth::check() AND Auth::user()->hasRole('admin'))
     <style>
         .container { width: 88% }

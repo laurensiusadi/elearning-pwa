@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
     <!-- Add to homescreen for Chrome on Android -->
     <link rel="manifest" href="/manifest.json">
-    <meta name="theme-color" content="#00c6ff">
+    <meta name="theme-color" content="#0072ff">
     <meta name="mobile-web-app-capable" content="yes">
     <!-- <link rel="icon" sizes="192x192" href="images/android-desktop.png"> -->
     <!-- Add to homescreen for Safari on iOS -->
@@ -22,10 +22,9 @@
     <meta name="msapplication-TileColor" content="#3372DF"> -->
     <!-- <link rel="shortcut icon" href="images/favicon.png"> -->
     <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,light,bolditalic&amp;lang=en"> -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="{!! asset('css/materialize-prod.css') !!}">
-    @yield('style')
     @include('partials.style')
+    @yield('style')
     <style>
         main { flex: 1 0 auto; padding-top: 54px; padding-bottom: 0 }
     </style>

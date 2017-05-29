@@ -5,8 +5,8 @@
 <div class="container">
     <h4>Pengumuman</h4>
     <div class="row">
-        <div class="col l4 m5 s12">
-            <div class="card z-depth-0">
+        <div class="col l4 m5 s12 side-content">
+            <div class="card">
             <div class="card-content">
                 <h5>Pengumuman Baru</h5></br>
                 <form role="form" method="POST" action="{{ url('/post') }}">
@@ -32,9 +32,9 @@
                 </form><p></p>
             </div></div>
         </div>
-        <div class="col l8 m7 s12">
+        <div class="col l8 m7 s12 main-content">
             @foreach($posts as $post)
-            <div class="card-panel z-depth-0">
+            <div class="card-panel">
                 @if(Auth::user()->hasRole('admin|dosen'))
                 <a class="delete modal-trigger right" href="#modal{{ $post->id }}">Delete</a>
                     @component('partials.deletemodal')

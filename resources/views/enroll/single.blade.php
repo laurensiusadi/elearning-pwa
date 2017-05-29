@@ -7,7 +7,7 @@
     <div class="row">
         <h5>Daftar Enrollment</h5>
         <h4>Classroom {{ $classroom->nama }}</h4>
-        <div class="card-panel z-depth-0">
+        <div class="card-panel">
         <form class="form" role="form" method="POST" action="{{ url('enroll').'/'.$classroom->id }}">
             <button type="submit" class="btn gradient-2 left"><i class="material-icons left">save</i> Simpan</button>
             {!! csrf_field() !!}

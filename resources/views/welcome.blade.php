@@ -3,12 +3,12 @@
 @section('content')
 <div class="container">
 <div class="row">
-    <div class="col l8 m6 s12" style="padding:65px 0 30px 20px">
+    <div class="col l8 m6 s12" style="padding:35px 0 30px 20px">
         <h5>coderoom</h5>
         <h3>Learn code<br/>anywhere anytime.</h3>
         <p class="grey-text light">Pemrograman Web<br/>Teknik Informatika<br/>Institut Teknologi Sepuluh Nopember</p>
     </div>
-    <div class="col l4 m6 s12" style="margin-top:40px">
+    <div class="col l4 m6 s12" style="margin-top:28px">
     <form role="form" method="POST" action="{{ url('/login') }}">
         {{ csrf_field() }}
         <h5 class="light center-align">Login and continue coding</h5>

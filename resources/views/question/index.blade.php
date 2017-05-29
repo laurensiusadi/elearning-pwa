@@ -23,7 +23,7 @@
                 @endforeach
             </ul>
             @else
-            <div class="card-panel z-depth-0">
+            <div class="card-panel">
                 <div class="clearfix">
                     <h5>Belum ada soal</h5>
                 </div>

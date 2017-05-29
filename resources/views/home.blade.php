@@ -4,13 +4,13 @@
 @section('content')
 <div class="container">
     <div class="row">
-    <div class="col l8 m7 s12">
+    <div class="col l8 m7 s12 main-content">
         @if(Auth::user()->hasRole('admin'))
         @include('admin.home')
         @else
-        <h4>Classroom Saya</h4>
+        <h5 class="main-title">Classroom Saya</h5>
         @foreach(Auth::user()->classrooms as $classroom)
-        <div class="card z-depth-0">
+        <div class="card">
             <div class="card-content">
                 <span class="card-title">{{ $classroom->nama }}</span>
                 <p>{{ $classroom->subject->nama }}</p>
@@ -23,12 +23,19 @@
         @endforeach
         @endif
     </div>
-    <div class="col l4 m5 s12">
-        <h4>Pengumuman</h4>
+    <div class="col l4 m5 s12 side-content">
+        <h5 class="main-title">Pengumuman</h5>
             @foreach($posts as $post)
-                <div class="card-panel z-depth-0">
+                    <p>{{ $post->content }}<br />
+                    <span class="grey-text small">{{ $post->user->name }}&nbsp;&bull;
+                    {{ Carbon::parse($post->created_at)->diffForHumans() }}
+                    @if($post->classroom_id != 0)
+                        <br/>{{ $post->classroom->nama }}
+                    @else
+                        <br/>Umum
+                    @endif</span>
                     @if(Auth::user()->hasRole('admin|dosen'))
-                    <a class="delete modal-trigger right" href="#modal{{ $post->id }}">Delete</a>
+                    <br/><a class="delete modal-trigger" href="#modal{{ $post->id }}">Delete</a></p>
                     @component('partials.deletemodal')
                         @slot('id')
                             {{ $post->id }}
@@ -37,17 +44,9 @@
                             /post/{{ $post->id }}
                         @endslot
                     @endcomponent
-                    @endif
-                    <p>{{ $post->content }}<br />
-                    <span class="grey-text small">{{ $post->user->name }}&nbsp;&bull;
-                    {{ Carbon::parse($post->created_at)->diffForHumans() }}
-                    @if($post->classroom_id != 0)
-                        &bull;&nbsp;{{ $post->classroom->nama }}
                     @else
-                        &bull;&nbsp;Umum
-                    @endif</span>
                     </p>
-                </div>
+                    @endif
             @endforeach
             {{ $posts->links() }}
     </div>
