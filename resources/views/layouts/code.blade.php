@@ -15,7 +15,7 @@
     <!-- Add to homescreen for Safari on iOS -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <meta name="apple-mobile-web-app-title" content="codekita">
+    <meta name="apple-mobile-web-app-title" content="coderoom">
     <!-- <link rel="apple-touch-icon-precomposed" href="images/ios-desktop.png"> -->
     <!-- Tile icon for Win8 (144x144 + tile color) -->
     <!-- <meta name="msapplication-TileImage" content="images/touch/ms-touch-icon-144x144-precomposed.png">

@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-    <h4 class="left">Daftar Soal</h4>
+    <h4 class="left">Bank Soal</h4>
     <a class="btn green accent-4 right" href="/question/create">Add Question</a>
         <div class="row clearfix">
             @if($questions->count()>0)

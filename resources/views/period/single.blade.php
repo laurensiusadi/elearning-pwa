@@ -7,13 +7,13 @@
         <h5>Periode Perkuliahan</h5>
         <h4>{{ $period->nama }}</h4>
         <div class="row">
-            <div class="col s12 m6 l3">
+            <div class="col s6 m6 l3">
                 <div class="card-panel">
                     <h6 class="small grey-text">Tahun</h6>
                     <h5 class="light">{{ $period->tahun }}</h5>
                 </div>
             </div>
-            <div class="col s12 m6 l3">
+            <div class="col s6 m6 l3">
                 <div class="card-panel">
                     <h6 class="small grey-text">Semester</h6>
                     <h5 class="light">{{ $period->semester }}</h5>
@@ -45,11 +45,11 @@
     			<tbody>
     				@foreach($period->classrooms as $classroom)
     				<tr>
-    					<td>{{ $classroom->nama }}</td>
-    					<td>{{ $classroom->subject->nama }}</td>
-    					<td>
-    						<a class="btn btn-small blue tooltipped" data-position="bottom" data-delay="50" data-tooltip="Detail" href="{{ url('classroom').'/'.$classroom->id }}"><i class="material-icons">list</i></a>
-                            <a class="btn btn-small green tooltipped" data-position="bottom" data-delay="50" data-tooltip="Enrollment" href="{{ url('classroom').'/'.$classroom->id }}"><i class="material-icons">group</i></a>
+    					<td data-label="Nama Classroom">{{ $classroom->nama }}</td>
+    					<td data-label="Matakuliah">{{ $classroom->subject->nama }}</td>
+    					<td data-label="Action">
+    						<a class="btn btn-small blue tooltipped" data-position="bottom" data-delay="50" data-tooltip="Detail" href="{{ url('classroom').'/'.$classroom->id }}"><i class="material-icons">arrow_forward</i></a>
+                            <a class="btn btn-small green tooltipped" data-position="bottom" data-delay="50" data-tooltip="Enrollment" href="{{ url('enroll').'/'.$classroom->id }}"><i class="material-icons">group</i></a>
     						<a class="btn btn-small amber tooltipped" data-position="bottom" data-delay="50" data-tooltip="Edit" href="{{ url('classroom').'/'.$classroom->id }}/edit"><i class="material-icons">edit</i></a>
                             <a class="btn btn-small red modal-trigger tooltipped" data-position="bottom" data-delay="50" data-tooltip="Delete" href="#modal{{ $classroom->id }}"><i class="material-icons">delete</i></a>
                             @component('partials.deletemodal')

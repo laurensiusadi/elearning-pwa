@@ -23,12 +23,12 @@
                 <li><a href="{{ url('login') }}">Please log in</a></li>
             @else
                 <li><a href="{{ url('home') }}">Home</a></li>
-                <li><a href="{{ url('user') }}">Welcome, {{ Auth::user()->name }}</a></li>
+                <!-- <li><a href="{{ url('user') }}">Welcome, {{ Auth::user()->name }}</a></li> -->
                 <li><a href="{{ url('logout') }}">Logout</a></li>
                 @if(Auth::user()->hasRole('dosen'))
                 <li><div class="divider"></div></li>
-                <li><a href="{{ url('classroom') }}"><i class="material-icons left">assignment</i>Classroom</a></li>
-                <li><a href="{{ url('question') }}"><i class="material-icons">question_answer</i>Question</a></li>
+                <!-- <li><a href="{{ url('classroom') }}"><i class="material-icons left">assignment</i>Classroom</a></li> -->
+                <li><a href="{{ url('question') }}"><i class="material-icons">question_answer</i>Bank Soal</a></li>
                 @endif
             @endif
         </ul>

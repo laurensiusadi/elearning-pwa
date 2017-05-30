@@ -26,7 +26,6 @@
 					<td data-label="Slug">{{ $role->slug }}</td>
 					<td data-label="Deskripsi">{{ $role->description }}</td>
 					<td data-label="Aksi">
-                        <!-- <a class="btn-flat white-text waves-effect blue tooltipped" data-position="bottom" data-delay="50" data-tooltip="Detail" href="{{ url('role').'/'.$role->id }}"><i class="material-icons">list</i></a> -->
                         <a class="btn btn-small white-text waves-effect amber tooltipped" data-position="bottom" data-delay="50" data-tooltip="Edit" href="#modal{{ $role->id }}edit"><i class="material-icons">edit</i></a>
                         @include('role.editmodal')
 						<a class="btn btn-small white-text waves-effect green tooltipped" data-position="bottom" data-delay="50" data-tooltip="Permission Role" href="{{ url('permissionrole').'/'.$role->id }}"><i class="material-icons">visibility_off</i></a>

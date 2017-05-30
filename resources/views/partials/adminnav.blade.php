@@ -1,8 +1,8 @@
 <nav role="navigation">
 <div class="nav-wrapper">
-    <a id="logo-container" href="{{ url('/') }}" class="brand-logo center show-on-medium hide-on-med-and-up">codekita</a>
+    <a id="logo-container" href="{{ url('/') }}" class="brand-logo center show-on-medium hide-on-med-and-up">coderoom</a>
     <ul id="nav-mobile" class="side-nav fixed">
-        <li><a href="{{ url('/') }}">codekita</a></li>
+        <li><a href="{{ url('/') }}">coderoom</a></li>
         <li><a href="{{ url('home') }}">Home</a></li>
         <li><a href="{{ url('user') }}">Welcome, {{ Auth::user()->name }}</a></li>
         <li><a href="{{ url('logout') }}">Logout</a></li>

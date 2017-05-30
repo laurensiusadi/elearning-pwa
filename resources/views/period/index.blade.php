@@ -31,7 +31,8 @@
     					<td data-label="Tanggal Selesai">{{ Carbon::parse($period->selesai)->toFormattedDateString() }}</td>
     					<td data-label="Aksi">
                             <a class="btn btn-small blue tooltipped" data-position="bottom" data-delay="50" data-tooltip="Detail" href="{{ url('period').'/'.$period->id }}"><i class="material-icons">list</i></a>
-                            <a class="btn btn-small amber tooltipped" data-position="bottom" data-delay="50" data-tooltip="Edit" href="{{ url('period').'/'.$period->id }}/edit"><i class="material-icons">edit</i></a>
+                            <a class="btn btn-small amber tooltipped" data-position="bottom" data-delay="50" data-tooltip="Edit" href="#modal{{ $period->id }}edit"><i class="material-icons">edit</i></a>
+                            @include('period.editmodal')
                             <a class="btn btn-small red modal-trigger tooltipped" data-position="bottom" data-delay="50" data-tooltip="Delete" href="#modal{{ $period->id }}"><i class="material-icons">delete</i></a>
                             @component('partials.deletemodal')
                                 @slot('id')

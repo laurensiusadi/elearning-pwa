@@ -101,17 +101,15 @@
 <script src="{{ asset('js/jquery.expect.js') }}"></script>
 <script>
 $('#rend-full').click(function(evt) {
-        $('#rend').toggleClass('fullSize');
-        $('#fullscreen').toggleClass('hiddendiv');
-        $('#fullscreen-exit').toggleClass('hiddendiv');
+    $('#rend').toggleClass('fullSize');
+    $('#fullscreen').toggleClass('hiddendiv');
+    $('#fullscreen-exit').toggleClass('hiddendiv');
 });
 </script>
 <script>
 describe('$expect', function () {
 @foreach($question->keys as $key)
-it('{{ $key->message }}', function () {
-    {!! $key->checklist !!}
-});
+it('{{ $key->message }}', function () { {!! $key->checklist !!} });
 @endforeach
 });
 </script>

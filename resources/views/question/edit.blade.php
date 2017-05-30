@@ -7,7 +7,7 @@
 @section('style')
 @include('partials.codestyle')
 <link rel="stylesheet" href="{!! asset('css/trumbowyg.css') !!}">
-<style>.code_box textarea{position:relative;left:0;right:0;top:30px;bottom:0;resize:none;border:0;padding:10px;font-family:monospace}.code_box textarea:focus{outline:none;background:#EFEFEF}#output{height:440px;border:5px solid #DDD;overflow:hidden}#output iframe{width:100%;height:100%;border:0}</style>
+<style>.code_box textarea{position:relative;left:0;right:0;top:30px;bottom:0;resize:none;border:0;padding:10px;font-family:monospace}.code_box textarea:focus{outline:none;background:#EFEFEF}</style>
 @endsection
 
 @section('content')
@@ -27,7 +27,7 @@
                         <label class="active" for="deskripsi" style="padding-bottom:6px">Deskripsi</label>
                     </div>
                     <div class="input-field">
-                        <a href="/question" class="btn-flat white left" style="padding-left:0"><i class="material-icons left">arrow_back</i>Back</a>
+                        <a href="{{ URL::previous() }}" class="btn-flat white left" style="padding-left:0"><i class="material-icons left">arrow_back</i>Back</a>
                         <button class="btn gradient-2 waves-effect waves-light right" type="submit" name="action">Save<i class="material-icons right">save</i></button>
                     </div><p class="clearfix"></p>
                 </div>
@@ -57,7 +57,7 @@
                     {{ csrf_field() }}
                     <div class="input-field">
                         <input placeholder="$expect('h1').to.be.attr('color', 'red')" type="text" name="checklist" style="font-family: monospace" required/>
-                        <label for="checklist">Challenges</label>
+                        <label for="checklist">Challenge</label>
                     </div>
                     <div class="input-field">
                         <input placeholder="H1 element must be red" type="text" name="message"/>
@@ -70,16 +70,20 @@
                     </div><p class="clearfix"></p>
                 </form>
                 <h6 class="main-title" style="margin-top:30px">Challenges</h6>
-                <ul class="collection" style="font-family:monospace;max-height:182px;overflow-y:auto; margin-bottom:0">
+                <ul class="collection" style="max-height:182px;overflow-y:auto; margin-bottom:0">
+                    @if($question->keys->count() > 0)
                     @foreach($question->keys as $key)
                         <li class="collection-item">
                             <a href="#modal{{$key->id}}edit" class="secondary-content right"><i class="material-icons tiny">edit</i></a>
                             @include('key.editmodal')
                             {{ $loop->index+1 }}.&nbsp;{{ $key->message }}<br/>
-                            &nbsp;&nbsp;&nbsp;<code class="grey-text">{{ $key->checklist }}</code>
+                            <code class="grey-text">{{ $key->checklist }}</code>
                         </br/>
                         </li>
                     @endforeach
+                    @else
+                        <li class="collection-item grey-text">No challenge yet. Add challenge above.</li>
+                    @endif
                 </ul>
             </div>
         </div>

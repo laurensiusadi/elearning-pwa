@@ -25,7 +25,6 @@
 					<td data-label="Periode">{{ $classroom->period->nama }}</td>
 					<td data-label="Matakuliah">{{ $classroom->subject->nama }}</td>
 					<td data-label="Action">
-						<!-- <a class="btn btn-small blue tooltipped" data-position="bottom" data-delay="50" data-tooltip="Detail" href="{{ url('classroom').'/'.$classroom->id }}"><i class="material-icons">list</i></a> -->
                         <a class="btn btn-small green tooltipped" data-position="bottom" data-delay="50" data-tooltip="Enrolled" href="{{ url('enroll').'/'.$classroom->id }}"><i class="material-icons">group</i></a>
                         <a class="btn btn-small white-text waves-effect amber tooltipped" data-position="bottom" data-delay="50" data-tooltip="Edit" href="#modal{{ $classroom->id }}edit"><i class="material-icons">edit</i></a>
                         @include('classroom.editmodal')

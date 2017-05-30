@@ -1,17 +1,14 @@
 @extends('layouts.code')
 
 @section('title')
-    Question Create
+    Create New Question
 @endsection
 
 @section('style')
-<link rel="stylesheet" href="{!! asset('codemirror/codemirror.css') !!}">
-<link rel="stylesheet" href="{!! asset('codemirror/material.css') !!}">
-<link rel="stylesheet" href="{!! asset('codemirror/addon/lint/lint.css') !!}">
-<link rel="stylesheet" href="{!! asset('codemirror/addon/hint/show-hint.css') !!}">
-<link rel="stylesheet" href="{!! asset('codemirror/addon/fold/foldgutter.css') !!}">
+@include('partials.codestyle')
 <link rel="stylesheet" href="{!! asset('css/trumbowyg.css') !!}">
-<style>.code_box textarea{position:relative;left:0;right:0;top:30px;bottom:0;resize:none;border:0;padding:10px;font-family:monospace}.code_box textarea:focus{outline:none;background:#EFEFEF}#output{height:440px;border:5px solid #DDD;overflow:hidden}#output iframe{width:100%;height:100%;border:0}</style>
+<style>.code_box textarea{position:relative;left:0;right:0;top:30px;bottom:0;resize:none;border:0;padding:10px;font-family:monospace}.code_box textarea:focus{outline:none;background:#EFEFEF}
+</style>
 @endsection
 
 @section('content')
@@ -20,7 +17,7 @@
     <div class="row" style="margin-bottom: 0">
         <form role="form" action="{{ url('question') }}" method="POST">
             <div class="col s12 m12 l4">
-                <div class="card-panel" style="padding-bottom:20px">
+                <div class="card-panel z-depth-0" style="padding-bottom:20px">
                     {{ csrf_field() }}
                     <div class="input-field" style="margin-top:0.5rem">
                         <input placeholder="" name="topik" type="text" required>
@@ -32,7 +29,7 @@
                     </div>
                     <div class="input-field">
                         <a href="/question" class="btn-flat white left" style="padding-left:0"><i class="material-icons left">arrow_back</i>Back</a>
-                        <button class="btn green waves-effect waves-dark right" type="submit" name="action">Save<i class="material-icons right">save</i></button>
+                        <button class="btn gradient-2 waves-effect waves-light right" type="submit" name="action">Save<i class="material-icons right">save</i></button>
                     </div><p class="clearfix"></p>
                 </div>
             </div>
@@ -56,16 +53,20 @@
             </div>
         </form>
         <div class="col s12 m12 l4">
-            <div class="card-panel">
+            <div class="card-panel z-depth-0">
                 <form>
                     <div class="input-field">
-                        <input placeholder="$expect('h1').to.be.attr('color', 'red')" type="text" name="checklist" class="autocomplete" style="font-family: monospace"/>
+                        <input placeholder="$expect('h1').to.be.attr('color', 'red')" type="text" name="checklist" class="autocomplete" style="font-family: monospace" disabled/>
                         <label for="checklist">Challenges</label>
                     </div>
                     <div class="input-field">
-                        <input placeholder="H1 element must be red" type="text" name="message"/>
+                        <input placeholder="H1 element must be red" type="text" name="message" disabled/>
                         <label for="message">Message</label>
                     </div>
+                    <div class="input-field">
+                        <span class="left">Save everything else first</span>
+                        <button class="btn green waves-effect waves-dark right" type="submit" name="action" disabled>Add<i class="material-icons right">playlist_add</i></button>
+                    </div><p class="clearfix"></p>
                 </form>
             </div>
         </div>
@@ -79,13 +80,13 @@
 <script src="{{ asset('js/code-grammar.js') }}"></script>
 <script>
     (function() {
-        var html_editor = codemirror_grammar_demo(document.querySelector("#html textarea"), [
+        var html_editor = codemirror_grammar(document.querySelector("#html textarea"), [
             {language : "htmlmixed", grammar : htmlmixed_grammar}
         ]);
-        var css_editor = codemirror_grammar_demo(document.querySelector("#css textarea"), [
+        var css_editor = codemirror_grammar(document.querySelector("#css textarea"), [
             {language : "css", grammar : css_grammar}
         ]);
-        var js_editor = codemirror_grammar_demo(document.querySelector("#js textarea"), [
+        var js_editor = codemirror_grammar(document.querySelector("#js textarea"), [
             {language : "javascript", grammar : js_grammar}
         ]);
     }());

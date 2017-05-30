@@ -15,7 +15,7 @@
     <!-- Add to homescreen for Safari on iOS -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <meta name="apple-mobile-web-app-title" content="codekita">
+    <meta name="apple-mobile-web-app-title" content="coderoom">
     <!-- <link rel="apple-touch-icon-precomposed" href="images/ios-desktop.png"> -->
     <!-- Tile icon for Win8 (144x144 + tile color) -->
     <!-- <meta name="msapplication-TileImage" content="images/touch/ms-touch-icon-144x144-precomposed.png">
@@ -23,8 +23,6 @@
     <!-- <link rel="shortcut icon" href="images/favicon.png"> -->
     <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,light,bolditalic&amp;lang=en"> -->
     <link rel="stylesheet" href="{!! asset('css/materialize-prod.css') !!}">
-    <link rel="stylesheet" href="{!! asset('fonts/montserrat/css/fonts.css') !!}">
-    <link rel="stylesheet" href="{!! asset('fonts/source-code-pro/css/fonts.css') !!}">
     @yield('style')
     @include('partials.style')
     <style>

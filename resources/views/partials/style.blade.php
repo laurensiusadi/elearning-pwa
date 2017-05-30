@@ -67,7 +67,6 @@
         #datatable_wrapper > .row > div { float:none; width:100% }
         #datatable_filter input { margin: 8px auto 0; width: 94% }
         .card-panel > a, .card-panel > form > button { float:none; width:100% }
-        .row > h4, .row > h5 { text-align: center }
         .btn { margin: 2px auto; padding: 0 0.75rem; height: 30px; line-height: 30px }
         /*.tooltipped { padding: 0 0.8rem; margin: 0 4px }*/
     }

@@ -56,8 +56,9 @@
     					</td>
     					<td data-label="Deskripsi">{{ $permission->description }}</td>
     					<td data-label="Aksi">
-                            <a class="btn btn-small blue tooltipped" data-position="bottom" data-delay="50" data-tooltip="Detail" href="{{ url('permission').'/'.$permission->id }}"><i class="material-icons">list</i></a>
-                            <a class="btn btn-small amber tooltipped" data-position="bottom" data-delay="50" data-tooltip="Edit" href="{{ url('permission').'/'.$permission->id }}/edit"><i class="material-icons">edit</i></a>
+                            <!-- <a class="btn btn-small blue tooltipped" data-position="bottom" data-delay="50" data-tooltip="Detail" href="{{ url('permission').'/'.$permission->id }}"><i class="material-icons">list</i></a> -->
+                            <a class="btn btn-small amber tooltipped" data-position="bottom" data-delay="50" data-tooltip="Edit" href="#modal{{$permission->id}}edit"><i class="material-icons">edit</i></a>
+                            @include('permission.editmodal')
                             <a class="btn btn-small red modal-trigger tooltipped" data-position="bottom" data-delay="50" data-tooltip="Delete" href="#modal{{ $permission->id }}delete"><i class="material-icons">delete</i></a>
                             @component('partials.deletemodal')
                                 @slot('id')
