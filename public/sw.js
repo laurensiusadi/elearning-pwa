@@ -48,6 +48,8 @@ self.addEventListener('activate', function(event) {
 });
 
 self.addEventListener('fetch', function(event) {
+    if (event.request.method !== 'GET') { return; }
+    if (/http:/.test(event.request.url)) { return; }
     event.respondWith(
         fetch(event.request).then(function(response) {
             var networkResponse = response.clone();
