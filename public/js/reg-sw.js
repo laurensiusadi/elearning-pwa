@@ -1,9 +1,7 @@
 if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('/sw.js').then(function(registration) {
-        // Registration was successful
         console.log('[ServiceWorker] Registration successful with scope: ', registration.scope);
     }).catch(function(err) {
-        // registration failed :(
         console.log('[ServiceWorker] Registration failed: ', err);
     });
     navigator.serviceWorker.addEventListener('controllerchange', function(event) {

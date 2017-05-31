@@ -1625,7 +1625,7 @@ function HTML(runner) {
 
   if (!root) return error('#mocha div missing, add it to your document');
 
-  root.appendChild(stat);
+  // root.appendChild(stat);
 
   if (progress) progress.size(40);
 
@@ -1633,7 +1633,7 @@ function HTML(runner) {
     if (suite.root) return;
 
     // suite
-    var el = fragment('<div class="suite"><h1>%s</h1></div>', suite.title);
+    var el = fragment('<ul class="collection"></ul>', suite.title);
 
     // container
     stack[0].appendChild(el);
@@ -1663,16 +1663,17 @@ function HTML(runner) {
 
     // test
     if ('passed' == test.state) {
-      var el = fragment('<div class="test pass %e"><h2>%e<span class="duration">%ems</span></h2></div>', test.speed, test.title, test.duration);
+      var el = fragment('<li class="collection-item test pass %e"><i class="material-icons left green-text text-accent-4">check_circle</i>%e<!--<span class="duration">%ems</span>--></li>', test.speed, test.title, test.duration);
     } else if (test.pending) {
-      var el = fragment('<div class="test pass pending"><h2>%e</h2></div>', test.title);
+      var el = fragment('<li class="collection-item test pass pending"><i class="material-icons left grey-text">pause_circle_filled</i>%e</li>', test.title);
     } else {
-      var el = fragment('<div class="test fail"><h2>%e</h2></div>', test.title);
+      var el = fragment('<li class="collection-item test fail"><i class="material-icons left red-text">cancel</i>%e</li>', test.title);
       var str = test.err.stack || test.err.toString();
 
       // FF / Opera do not add the message
       if (!~str.indexOf(test.err.message)) {
-        str = test.err.message + '\n' + str;
+        //   str = test.err.message + '\n' + str;
+        str = test.err.message;
       }
 
       // <=IE7 stringifies to [Object Error]. Since it can be overloaded, we
@@ -1688,13 +1689,13 @@ function HTML(runner) {
     }
 
     // toggle code
-    var h2 = el.getElementsByTagName('h2')[0];
-
-    on(h2, 'click', function(){
-      pre.style.display = 'none' == pre.style.display
-        ? 'block'
-        : 'none';
-    });
+    // var h2 = el.getElementsByTagName('h2')[0];
+    //
+    // on(h2, 'click', function(){
+    //   pre.style.display = 'none' == pre.style.display
+    //     ? 'block'
+    //     : 'none';
+    // });
 
     // code
     // TODO: defer

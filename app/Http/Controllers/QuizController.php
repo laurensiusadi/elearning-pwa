@@ -58,22 +58,6 @@ class QuizController extends Controller
         ->where('elearningnew.enrollment.id', '=', $id)
         ->first();
 
-        if (!file_exists('kumpulan_sourcecode/'.$classroomid->classroom_id . "/" . $quiz->id)) {
-            mkdir('kumpulan_sourcecode/'.$classroomid->classroom_id."/".$quiz->id, 0777, true);
-        }
-
-        $file = fopen('kumpulan_sourcecode/'.$classroomid->classroom_id.'/'.$quiz->id.'/dosen'.$id.'.cpp', 'w');
-        fwrite($file, $quiz->jwb);
-        fclose($file);
-
-        if (!file_exists('similarity_plugin/input/'.$classroomid->classroom_id . "/" . $quiz->id)) {
-            mkdir('similarity_plugin/input/'.$classroomid->classroom_id."/".$quiz->id, 0777, true);
-        }
-
-        $filesimilarity = fopen('similarity_plugin/input/'.$classroomid->classroom_id.'/'.$quiz->id.'/0_'.$quiz->id.'_dosen_'.$quiz->nama.'.cpp', 'w');
-        fwrite($filesimilarity, $quiz->jwb);
-        fclose($filesimilarity);
-
         return redirect('classroom/'.$id.'/quiz/'.$quiz->id)->with('message', 'Quiz baru berhasil ditambahkan');
     }
 
@@ -101,39 +85,22 @@ class QuizController extends Controller
     {
         $this->validate($request, [
             'nama' => 'required',
-            'waktupengerjaan' => 'required',
-            'des' => 'required',
+            'mulai' => 'required',
+            'selesai' => 'required',
             ]);
 
         // input biasa
-        $quiz = Quiz::find($quiz_id);
+        $quiz = new Quiz;
+        $quiz->classroom_id = $id;
         $quiz->nama = $request->nama;
-        $quiz->wmulai = explode(' - ', $request->waktupengerjaan)[0];
-        $quiz->wselesai = explode(' - ', $request->waktupengerjaan)[1];
-        $quiz->des = $request->des;
-        $quiz->jwb = $request->jwb;
+        $quiz->mulai = $request->mulai;
+        $quiz->selesai = $request->selesai;
         $quiz->save();
 
         $classroomid = DB::table('elearningnew.enrollment')
         ->select('elearningnew.enrollment.classroom_id')
         ->where('elearningnew.enrollment.id', '=', $id)
         ->first();
-
-        if (!file_exists('kumpulan_sourcecode/'.$classroomid->classroom_id . "/" . $quiz->id)) {
-            mkdir('kumpulan_sourcecode/'.$classroomid->classroom_id."/".$quiz->id, 0777, true);
-        }
-
-        $file = fopen('kumpulan_sourcecode/'.$classroomid->classroom_id.'/'.$quiz_id.'/dosen'.$id.'.cpp', 'w');
-        fwrite($file, $quiz->jwb);
-        fclose($file);
-
-        if (!file_exists('similarity_plugin/input/'.$classroomid->classroom_id . "/" . $quiz->id)) {
-            mkdir('similarity_plugin/input/'.$classroomid->classroom_id."/".$quiz->id, 0777, true);
-        }
-
-        $filesimilarity = fopen('similarity_plugin/input/'.$classroomid->classroom_id.'/'.$quiz->id.'/0_'.$quiz->id.'_dosen_'.$quiz->nama.'.cpp', 'w');
-        fwrite($filesimilarity, $quiz->jwb);
-        fclose($filesimilarity);
 
         return redirect('classroom/'.$id.'/quiz/'.$quiz_id)->with('message', 'Quiz berhasil diupdate');
     }
@@ -149,10 +116,6 @@ class QuizController extends Controller
         }
 
         $classroomid = $quiz->classroom->id;
-
-        if (file_exists($classroomid . "/" . $id)) {
-            $status = rmdir($classroomid . "/" . $id);
-        }
 
         return back()->with('message', 'Quiz berhasil dihapus');
     }

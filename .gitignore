@@ -6,3 +6,5 @@
 /.idea
 Homestead.json
 Homestead.yaml
+
+yarn.lock

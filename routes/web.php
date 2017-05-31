@@ -77,11 +77,8 @@ Route::group(['middleware' => ['auth', 'acl', 'enroll'],
     'is' => env('ROLE_MHS')],
     function () {
         Route::get('/classroom/{id}/quiz/{quiz_id}/question/{question_id}', 'QuizQuestionController@show');
-        Route::get('/classroom/{id}/quiz/{quiz_id}/question/{question_id}/answer/create', 'AnswerController@create');
-        Route::post('/classroom/{id}/quiz/{quiz_id}/question/{question_id}/answer', 'AnswerController@store');
-        Route::get('/classroom/{id}/quiz/{quiz_id}/question/{question_id}/answer/{answer_id}/edit', 'AnswerController@edit');
         Route::put('/classroom/{id}/quiz/{quiz_id}/question/{question_id}/answer', 'AnswerController@update');
-        Route::delete('/classroom/{id}/quiz/{quiz_id}/question/{question_id}/answer/{answer_id}', 'AnswerController@destroy');
+        Route::put('/classroom/{id}/quiz/{quiz_id}/question/{question_id}/answer/done', 'AnswerController@done');
     });
 
 Route::group(['middleware' => ['auth', 'acl'],

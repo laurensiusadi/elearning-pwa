@@ -28,18 +28,17 @@
                 <span class="description">{!! $question->deskripsi !!}</span>
                 <br/>
                 <h6 class="main-title">CHALLENGES</h6>
-                <ul class="collection" style="font-family:monospace">
+                <div id="mocha">
+                <ul id="challenges-list" class="collection" style="font-family:monospace">
                     @foreach($question->keys as $key)
                         <li class="collection-item">
-                            <!-- <i class="material-icons left green-text text-accent-4">check_circle</i> -->
                             <i class="material-icons left grey-text text-lighten-1">cancel</i>
                         &nbsp;{{ $key->message }}</li>
                     @endforeach
                 </ul>
-                <button id="judge" type="button" class="col s12 run btn white-text green accent-4 waves-effect waves-light">Run</button>
-                <div class="col s12">
-                    <div id="mocha"></div>
                 </div>
+                <button id="judge" type="button" class="col s12 run btn white-text green accent-4 waves-effect waves-light">Run</button>
+                @include('question.modalnext')
             </div>
         </div>
         <form method="POST" action="/classroom/{{ $quiz->classroom->id }}/quiz/{{ $quiz->id }}/question/{{ $question->id }}/answer">
@@ -80,7 +79,7 @@
                 </div>
             </div>
         	<section id="output">
-        		<iframe></iframe>
+        		<iframe id="iframe"></iframe>
         	</section>
         </div>
     </div>
@@ -100,6 +99,11 @@
 <script src="{{ asset('js/expect.js') }}"></script>
 <script src="{{ asset('js/jquery.expect.js') }}"></script>
 <script>
+$(document).ready(function(){
+    $('.modal').modal({
+        dismissible: false
+    });
+});
 $('#rend-full').click(function(evt) {
     $('#rend').toggleClass('fullSize');
     $('#fullscreen').toggleClass('hiddendiv');
@@ -109,7 +113,7 @@ $('#rend-full').click(function(evt) {
 <script>
 describe('$expect', function () {
 @foreach($question->keys as $key)
-it('{{ $key->message }}', function () { {!! $key->checklist !!} });
+it('{{ $key->message }}', function () { "{!! $key->checklist !!}".replace ("').","')).").replace("$expect('","$expect($('#iframe').contents().find('") });
 @endforeach
 });
 </script>
@@ -117,10 +121,27 @@ it('{{ $key->message }}', function () { {!! $key->checklist !!} });
 window.DONE = false;
 $(function () {
     document.getElementById("judge").addEventListener("click", function(){
-        mocha.run(function () {
-            window.DONE = true;
-        });
-        Materialize.toast('Checked', 4000, 'blue');
+        var challenges = $("#mocha ul");
+        if(window.DONE == true) {
+            location.reload();
+        }
+        else if(window.DONE == false) {
+            var challenges = $("#mocha ul");
+            var checklists = document.querySelectorAll('.collection-item').length;
+            if(challenges && checklists>0) {
+                challenges.remove();
+            }
+            mocha.run(function () {
+                window.DONE = true;
+                var tests = document.querySelectorAll('.test').length;
+                var failures = document.querySelectorAll('.test.fail').length;
+                if(!failures && tests>0){
+                    console.log("No failures");
+                    $('#modalnext').modal('open');
+                }
+            });
+            Materialize.toast('Checked', 4000, 'blue');
+        }
     });
 });
 </script>

@@ -47,6 +47,16 @@ class AnswerController extends Controller
         return back()->with('message', 'Answer saved');
     }
 
+    public function done(Request $request, $id, $quiz_id, $question_id)
+    {
+        $answerId = Answer::where('question_id', $question_id)->where('user_id', Auth::user()->id)->get()->first()->id;
+        $answer = Answer::find($answerId);
+        $answer->done = true;
+        $answer->save();
+
+        return redirect('/classroom/'.$id.'/quiz/'.$quiz_id.'/question/')->with('message', 'Question done');
+    }
+
     public function destroy($id)
     {
         //

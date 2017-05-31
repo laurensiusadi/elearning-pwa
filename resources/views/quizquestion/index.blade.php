@@ -15,6 +15,8 @@
         <a href="/classroom/{{$quiz->classroom->id}}/quiz/{{$quiz->id}}/edit"
             class="btn-link">Choose questions for this quiz <i class="material-icons tiny">edit</i></a>
         @endif</h4>
+        <a href="/classroom/{{$quiz->classroom->id}}/quiz/{{$quiz->id}}/edit"
+            class="offline-btn btn gradient-2">Save offline <i class="material-icons tiny right">file_download</i></a>
         <div class="card-panel">
             @if($quiz->questions->count() == 0)
             <h6>Belum ada soal</h6>
@@ -55,4 +57,28 @@
         </div>
     </div>
 </div>
+@endsection
+@section('scripts')
+<script>
+    var cacheButton = document.querySelector('.offline-btn');
+    if(cacheButton) {
+        cacheButton.addEventListener('click', function(event) {
+            event.preventDefault();
+            var pages = [];
+
+            @foreach($questions as $question)
+pages.push("/classroom/{{ $quiz->classroom->id }}/quiz/{{ $quiz->id }}/question/{{ $question->id }}");
+            @endforeach
+
+            caches.open('shell-content').then(function(cache) {
+                var updateCache = cache.addAll(pages);
+                updateCache.then(function() {
+                    Materialize.toast('Quiz now available offline', 4000, 'gradient-2');
+                }).catch(function (error) {
+                    Materialize.toast('Quiz ccould not be saved offline', 4000, 'materialize-red');
+                });
+            });
+        });
+    }
+</script>
 @endsection
