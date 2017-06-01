@@ -5,7 +5,7 @@
 <div class="container">
     <div class="row">
         <h6 class="main-title">Daftar Soal</h6>
-        <h4 class="main-title" style="margin: 0 0 5px 0">Quiz {{ $quiz->nama }}
+        <h4 class="main-title" style="margin: 0 0 5px 0">Quiz {{ $quiz->nama }}</h4>
         <h6 class="grey-text" style="margin: 0 0 25px 0"><strong>
             <i class="material-icons tiny">date_range</i>&nbsp;&nbsp;{{ Carbon::parse($quiz->mulai)->toFormattedDateString() }} &ndash; {{ Carbon::parse($quiz->selesai)->toFormattedDateString() }}&nbsp;&nbsp;
             <!-- <i class="material-icons tiny">today</i>&nbsp;&nbsp;{{ Carbon::parse($quiz->created_at)->diffForHumans() }}<br /> -->
@@ -14,9 +14,10 @@
         @if(Auth::user()->hasRole('dosen'))
         <a href="/classroom/{{$quiz->classroom->id}}/quiz/{{$quiz->id}}/edit"
             class="btn-link">Choose questions for this quiz <i class="material-icons tiny">edit</i></a>
-        @endif</h4>
+        @else
         <a href="/classroom/{{$quiz->classroom->id}}/quiz/{{$quiz->id}}/edit"
             class="offline-btn btn gradient-2">Save offline <i class="material-icons tiny right">file_download</i></a>
+        @endif
         <div class="card-panel">
             @if($quiz->questions->count() == 0)
             <h6>Belum ada soal</h6>

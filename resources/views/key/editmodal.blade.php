@@ -16,7 +16,6 @@
             <div class="modal-footer">
                 <button type="button" class="modal-close btn btn-flat left">Cancel</button>
                 <button class="btn green waves-effect waves-light right" type="submit" name="action">Save<i class="material-icons right">save</i></button>
-                <button class="btn red darken-1 waves-effect waves-light right" type="button" name="action">Delete<i class="material-icons right">delete</i></button>
             </div>
         </form>
   </div>

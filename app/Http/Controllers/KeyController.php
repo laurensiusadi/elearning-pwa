@@ -90,8 +90,14 @@ class KeyController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($question_id, $key_id)
     {
-        //
+        $key = Key::find($key_id);
+        try {
+            $key->delete();
+        } catch (QueryException $e) {
+            return back()->with('error', 'Challenge gagal dihapus');
+        }
+        return back()->with('message','Challenges berhasil dihapus');
     }
 }

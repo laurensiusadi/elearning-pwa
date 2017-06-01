@@ -31,6 +31,7 @@ class QuizQuestionController extends Controller
     {
         $quiz = Quiz::find($quiz_id);
         $question = Question::find($question_id);
+        $keys = $question->keys;
         if(Auth::user()->hasRole('mhs') AND Answer::where('question_id', $question_id)->where('user_id', Auth::user()->id)->get()->count() == 0 )
         {
             $answer = new Answer;
@@ -43,8 +44,18 @@ class QuizQuestionController extends Controller
             $answer->save();
         }
         $answer = Answer::where('question_id', $question_id)->where('user_id', Auth::user()->id)->get()->first();
+        function str_replace_first($from, $to, $subject)
+        {
+            $from = '/'.preg_quote($from, '/').'/';
+            return preg_replace($from, $to, $subject, 1);
+        }
+        foreach ($keys as $key) {
+            $first = str_replace_first("').","')).",$key->checklist);
+            $second = str_replace("expect('","expect($('#iframe').contents().find('",$first);
+            $key->checklist = $second;
+        }
 
-        return view('question.single', compact('quiz', 'question', 'answer'));
+        return view('question.single', compact('quiz', 'question', 'answer', 'keys'));
     }
 
     public function update(Request $request, $id)

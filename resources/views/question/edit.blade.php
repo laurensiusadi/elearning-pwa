@@ -74,7 +74,16 @@
                     @if($question->keys->count() > 0)
                     @foreach($question->keys as $key)
                         <li class="collection-item">
-                            <a href="#modal{{$key->id}}edit" class="secondary-content right"><i class="material-icons tiny">edit</i></a>
+                            <a href="#modal{{ $key->id }}delete" class="secondary-content right grey-text"><i class="material-icons tiny">delete</i></a>
+                            @component('partials.deletemodal')
+                                @slot('id')
+                                    {{$key->id}}delete
+                                @endslot
+                                @slot('action')
+                                    /question/{{$question->id}}/key/{{$key->id}}
+                                @endslot
+                            @endcomponent
+                            <a href="#modal{{$key->id}}edit" class="secondary-content right grey-text"><i class="material-icons tiny">edit</i>&nbsp;</a>
                             @include('key.editmodal')
                             {{ $loop->index+1 }}.&nbsp;{{ $key->message }}<br/>
                             <code class="grey-text">{{ $key->checklist }}</code>

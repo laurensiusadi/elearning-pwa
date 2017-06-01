@@ -71,6 +71,7 @@ Route::group(['middleware' => ['auth', 'acl'],
         Route::resource('/quizquestion', 'QuizQuestionController');
         Route::post('/question/{question_id}/key', 'KeyController@store');
         Route::put('/question/{question_id}/key/{key_id}', 'KeyController@update');
+        Route::delete('/question/{question_id}/key/{key_id}', 'KeyController@destroy');
     });
 
 Route::group(['middleware' => ['auth', 'acl', 'enroll'],

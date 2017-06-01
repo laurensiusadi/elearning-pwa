@@ -112,8 +112,8 @@ $('#rend-full').click(function(evt) {
 </script>
 <script>
 describe('$expect', function () {
-@foreach($question->keys as $key)
-it('{{ $key->message }}', function () { "{!! $key->checklist !!}".replace ("').","')).").replace("$expect('","$expect($('#iframe').contents().find('") });
+@foreach($keys as $key)
+it('{{ $key->message }}', function () { {!! $key->checklist !!} });
 @endforeach
 });
 </script>
@@ -127,15 +127,13 @@ $(function () {
         }
         else if(window.DONE == false) {
             var challenges = $("#mocha ul");
-            var checklists = document.querySelectorAll('.collection-item').length;
-            if(challenges && checklists>0) {
+            if("challenges") {
                 challenges.remove();
             }
             mocha.run(function () {
                 window.DONE = true;
-                var tests = document.querySelectorAll('.test').length;
                 var failures = document.querySelectorAll('.test.fail').length;
-                if(!failures && tests>0){
+                if(!failures){
                     console.log("No failures");
                     $('#modalnext').modal('open');
                 }
