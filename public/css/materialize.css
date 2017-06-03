@@ -4386,6 +4386,7 @@ nav .input-field label.active i {
 
 a {
   text-decoration: none;
+  cursor: pointer;
 }
 
 html {

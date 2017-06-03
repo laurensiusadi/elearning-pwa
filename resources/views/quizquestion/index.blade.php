@@ -27,15 +27,15 @@
                 @foreach($questions as $question)
                 @if(Auth::user()->hasRole('mhs'))
                     @if($question->answers()->count() > 0)
-                        @if($question->answers()->where('user_id', Auth::user()->id)->first()->done == true)
+                        @if($question->answers()->where('user_id', Auth::user()->id)->count() == 0)
+                        <li class="collection-item">{{ $loop->index+1 }}. {{ $question->topik }}
+                            <a href="/classroom/{{ $quiz->classroom->id }}/quiz/{{ $quiz->id }}/question/{{ $question->id }}" class="secondary-content"><i class="material-icons right">arrow_forward</i></a>
+                        </li>
+                        @elseif($question->answers()->where('user_id', Auth::user()->id)->first()->done == true)
                             <li class="collection-item">{{ $loop->index+1 }}. {{ $question->topik }}
                             <a href="/classroom/{{ $quiz->classroom->id }}/quiz/{{ $quiz->id }}/question/{{ $question->id }}" class="secondary-content"><i class="material-icons right">check</i></a>
                             </li>
                             <?php $beforeDone = true; ?>
-                        @elseif($question->answers()->where('user_id', Auth::user()->id)->first()->done == false)
-                        <li class="collection-item">{{ $loop->index+1 }}. {{ $question->topik }}
-                            <a href="/classroom/{{ $quiz->classroom->id }}/quiz/{{ $quiz->id }}/question/{{ $question->id }}" class="secondary-content"><i class="material-icons right">arrow_forward</i></a>
-                        </li>
                         @endif
                     @elseif($beforeDone == true)
                     <li class="collection-item">{{ $loop->index+1 }}. {{ $question->topik }}

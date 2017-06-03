@@ -35,9 +35,9 @@
         <i class="material-icons blue-grey-text">visibility_off</i>&nbsp;&nbsp;Permission
         </div>
     </div></a>
-    <a href="{{ url('convention') }}"><div class="col s12 m12 l6">
+    <!-- <a href="{{ url('convention') }}"><div class="col s12 m12 l6">
         <div class="card-panel black-text valign-wrapper">
         <i class="material-icons blue-grey-text">library_books</i>&nbsp;&nbsp;Code Convention
         </div>
-    </div></a>
+    </div></a> -->
 </div>

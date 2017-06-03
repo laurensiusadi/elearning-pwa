@@ -37,7 +37,6 @@
                     @endforeach
                 </ul>
                 </div>
-                <button id="judge" type="button" class="col s12 run btn white-text green accent-4 waves-effect waves-light">Run</button>
                 @include('question.modalnext')
             </div>
         </div>
@@ -62,7 +61,8 @@
                 <textarea name="js">{!! $answer->code_js !!}</textarea>
     		</div>
             <div class="col s12" style="position:relative;top:-44px;z-index:7;padding:0 8px;float:right">
-                <button type="submit" class="btn white-text gradient-2 right waves-effect waves-light">Save</button>
+                <button id="judge" type="button" class="run btn z-depth-3 white-text green accent-4 waves-effect waves-light">Run</button>
+                <button type="submit" class="btn z-depth-3 white-text gradient-2 right waves-effect waves-light">Save</button>
             </div>
         </div>
         </form>
@@ -111,7 +111,7 @@ $('#rend-full').click(function(evt) {
 });
 </script>
 <script>
-describe('$expect', function () {
+describe('Challenges', function () {
 @foreach($keys as $key)
 it('{{ $key->message }}', function () { {!! $key->checklist !!} });
 @endforeach
@@ -137,8 +137,8 @@ $(function () {
                     console.log("No failures");
                     $('#modalnext').modal('open');
                 }
+                Materialize.toast('Checked', 3000, 'blue');
             });
-            Materialize.toast('Checked', 4000, 'blue');
         }
     });
 });

@@ -25,10 +25,13 @@
                 <li><a href="{{ url('home') }}">Home</a></li>
                 <!-- <li><a href="{{ url('user') }}">Welcome, {{ Auth::user()->name }}</a></li> -->
                 <li><a href="{{ url('logout') }}">Logout</a></li>
-                @if(Auth::user()->hasRole('dosen'))
                 <li><div class="divider"></div></li>
+                @if(Auth::user()->hasRole('dosen'))
                 <!-- <li><a href="{{ url('classroom') }}"><i class="material-icons left">assignment</i>Classroom</a></li> -->
                 <li><a href="{{ url('question') }}"><i class="material-icons">question_answer</i>Bank Soal</a></li>
+                @foreach(Auth::user()->classrooms() as $classroom)
+                <li><a href=""><i class="material-icons">assignment</i>{{$classroom->nama}}</a></li>
+                @endforeach
                 @endif
             @endif
         </ul>

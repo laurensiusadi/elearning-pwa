@@ -3,8 +3,8 @@
 <link rel="stylesheet" href="{!! asset('css/dataTables.materialize.css') !!}">
 <style>
     #datatable_wrapper > .row > div { float:none!important; width:100%;}
-    #datatable_filter { margin: 8px 3% 0 3% }
-    #datatable_filter input { width: 94% }
+    #datatable_filter { margin: 0 10px 0 auto }
+    #datatable_filter input { width: 100% }
 </style>
 @endsection
 @section('content')
@@ -23,7 +23,6 @@
                 <tr>
                     <th>Assign</th>
                     <th>Topik</th>
-                    <th>Tipe</th>
                 </tr>
             </thead>
             <tbody>
@@ -36,8 +35,7 @@
                     <input type="checkbox" class="filled-in" id="check{{ $question->id }}" name="data::{{ $question->id }}"/><label for="check{{ $question->id }}">No</label>
                     @endif
                     </td>
-                    <td data-label="Topik">{{ $question->topik }}</td>
-                    <td data-label="Tipe">{{ $question->tipe }}
+                    <td data-label="Topik">{{ $question->topik }}
                         <input type="hidden" name="questions_id[]" value="{{ $question->id }}"></input>
                     </td>
                 </tr>

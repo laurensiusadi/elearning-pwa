@@ -19,7 +19,7 @@ var render = function() {
     iframe_doc.write(source);
     iframe_doc.close();
 
-    Materialize.toast('Rendered', 1000, 'grey');
+    Materialize.toast('Rendered', 2000, 'grey');
 };
 
 // HTML EDITOR

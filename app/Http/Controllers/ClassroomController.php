@@ -110,10 +110,6 @@ class ClassroomController extends Controller
             return redirect('classroom')->with('error', 'Kelas gagal dihapus, data masih direferensikan');
         }
 
-        if (file_exists($id)) {
-            $status = rmdir($id);
-        }
-
         return redirect('classroom')->with('message', 'Kelas '.$classroom->nama.' berhasil dihapus');
     }
 }

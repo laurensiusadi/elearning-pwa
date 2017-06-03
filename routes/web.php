@@ -26,13 +26,13 @@ Route::get('/offline', function(){
     return view('offline');
 });
 
-Route::post('/plagiarism', 'PlagiarismController@check');
-Route::get('/plagiarism/{classroom}/{quiz}/{filter}', 'PlagiarismController@index');
-Route::get('/plagiarism/{classroom}/{quiz}/{filter}/{nrp}', 'PlagiarismController@show');
-
-Route::post('/similarity', 'SimilarityController@check');
-Route::get('/similarity/{classroom}/{quiz}', 'SimilarityController@index');
-Route::get('/similarity/{classroom}/{quiz}/{nrp}', 'SimilarityController@show');
+// Route::post('/plagiarism', 'PlagiarismController@check');
+// Route::get('/plagiarism/{classroom}/{quiz}/{filter}', 'PlagiarismController@index');
+// Route::get('/plagiarism/{classroom}/{quiz}/{filter}/{nrp}', 'PlagiarismController@show');
+//
+// Route::post('/similarity', 'SimilarityController@check');
+// Route::get('/similarity/{classroom}/{quiz}', 'SimilarityController@index');
+// Route::get('/similarity/{classroom}/{quiz}/{nrp}', 'SimilarityController@show');
 
 // Route::get('/', function () {
 // 	return view('welcome');
@@ -49,7 +49,7 @@ Route::group(['middleware' => ['auth', 'acl'],
         Route::resource('/permissionuser', 'PermissionUserController');
         Route::resource('/period', 'PeriodController');
         Route::resource('/subject', 'SubjectController');
-        Route::resource('/convention', 'ConventionController');
+        // Route::resource('/convention', 'ConventionController');
         Route::resource('/classroom', 'ClassroomController');
         Route::resource('/enroll', 'EnrollController');
     });
@@ -91,18 +91,16 @@ Route::group(['middleware' => ['auth', 'acl'],
 Route::group(['middleware' => ['auth', 'acl'],
     'is' => env('ROLE_DOSEN').'|'.env('ROLE_MHS')],
     function () {
-        Route::get('/convention/getregex/{for}', 'ConventionController@getConventionRule');
-        Route::get('/convention/getconvmessage/{for}', 'ConventionController@getConventionMessage');
-        Route::get('/convention/getconvmin/{for}', 'ConventionController@getConventionMinimal');
+        // Route::get('/convention/getregex/{for}', 'ConventionController@getConventionRule');
+        // Route::get('/convention/getconvmessage/{for}', 'ConventionController@getConventionMessage');
+        // Route::get('/convention/getconvmin/{for}', 'ConventionController@getConventionMinimal');
 
         Route::group(['middleware' => ['enroll']],
         function () {
             Route::get('/enroll', 'EnrollController@index');
             Route::get('/classroom/{id}/quiz', 'QuizController@index');
             Route::get('/classroom/{id}/quiz/{quiz_id}', 'QuizController@show');
-
             Route::get('/classroom/{id}/quiz/{quiz_id}/question', 'QuizQuestionController@index');
-
             Route::get('/classroom/{id}/quiz/{quiz_id}/answer', 'AnswerController@index');
             Route::get('/classroom/{id}/quiz/{quiz_id}/answer/{answer_id}', 'AnswerController@show');
         });

@@ -10,31 +10,6 @@ use Auth;
 
 class AnswerController extends Controller
 {
-    public function index()
-    {
-        //
-    }
-
-    public function create()
-    {
-        //
-    }
-
-    public function store(Request $request)
-    {
-        //
-    }
-
-    public function show($id)
-    {
-        //
-    }
-
-    public function edit($id)
-    {
-        //
-    }
-
     public function update(Request $request, $id, $quiz_id, $question_id)
     {
         $answerId = Answer::where('question_id', $question_id)->where('user_id', Auth::user()->id)->get()->first()->id;
@@ -47,7 +22,7 @@ class AnswerController extends Controller
         return back()->with('message', 'Answer saved');
     }
 
-    public function done(Request $request, $id, $quiz_id, $question_id)
+    public function done($id, $quiz_id, $question_id)
     {
         $answerId = Answer::where('question_id', $question_id)->where('user_id', Auth::user()->id)->get()->first()->id;
         $answer = Answer::find($answerId);
@@ -57,8 +32,4 @@ class AnswerController extends Controller
         return redirect('/classroom/'.$id.'/quiz/'.$quiz_id.'/question/')->with('message', 'Question done');
     }
 
-    public function destroy($id)
-    {
-        //
-    }
 }

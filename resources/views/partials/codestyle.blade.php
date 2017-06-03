@@ -27,7 +27,7 @@ nav{background-color:#252E36}
 #mocha .test.fail pre{color:#000}
 /*#mocha .test.fail::before{content:'✖';font-size:12px;display:block;float:left;margin-right:5px;color:#c00}*/
 #mocha .test pre.error{color:#c00}
-#mocha .test pre{display:inline-block;font:12px/1.5 monaco,monospace;margin:5px;padding:15px;border:1px solid #eee;border-bottom-color:#ddd;-webkit-border-radius:3px;-webkit-box-shadow:0 1px 3px #eee}
+#mocha .test pre{font:12px/1.5 monaco,monospace;margin:5px;padding:15px;border:1px solid #eee;border-bottom-color:#ddd;-webkit-border-radius:3px;-webkit-box-shadow:0 1px 3px #eee}
 #error{color:#c00;font-size:1.5px em;font-weight:100;letter-spacing:1px}
 #stats{font-size:12px;margin:0;color:#888}
 #stats .progress{float:right;padding-top:0;height:40px}

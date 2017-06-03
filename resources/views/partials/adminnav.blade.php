@@ -14,7 +14,7 @@
         <li><a href="{{ url('subject') }}"><i class="material-icons left">class</i>Mata Kuliah</a></li>
         <li><a href="{{ url('role') }}"><i class="material-icons left">supervisor_account</i>Role</a></li>
         <li><a href="{{ url('permission') }}"><i class="material-icons left">visibility_off</i>Permission</a></li>
-        <li><a href="{{ url('convention') }}"><i class="material-icons left">library_books</i>Code Convention</a></li>
+        <!-- <li><a href="{{ url('convention') }}"><i class="material-icons left">library_books</i>Code Convention</a></li> -->
     </ul>
     <a href="#" data-activates="nav-mobile" class="button-collapse show-on-medium hide-on-med-and-up"><i class="material-icons left">menu</i></a>
 </div>
