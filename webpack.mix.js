@@ -26,6 +26,10 @@ mix.styles([
     'public/css/materialize.css',
 ], 'public/css/materialize-prod.css');
 
+mix.styles([
+    'public/css/trumbowyg.css',
+], 'public/css/trumbowyg.min.css');
+
 // mix.scripts([
 //     'public/codemirror/codemirror.js',
 // ], 'public/codemirror/codemirror-prod.js');

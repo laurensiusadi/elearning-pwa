@@ -11,26 +11,6 @@ use DB;
 
 class PermissionUserController extends Controller
 {
-    public function index()
-    {
-        //
-    }
-
-    public function create()
-    {
-        //
-    }
-
-    public function store(Request $request)
-    {
-        //
-    }
-
-    public function show($id)
-    {
-        //
-    }
-
     public function edit($id)
     {
         $permissions = DB::table('permissions')
@@ -42,15 +22,5 @@ class PermissionUserController extends Controller
                         ->get();
 
         return view('permissionuser.edit', ['permissions' => Permission::hydrate($permissions), 'roleid' => $id]);
-    }
-
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    public function destroy($id)
-    {
-        //
     }
 }

@@ -24,7 +24,7 @@ class QuizQuestionController extends Controller
             $ismhs = true;
         }
 
-        return view('quizquestion.index', compact('questions', 'classroom', 'quiz', 'ismhs','userAnswersDone'));
+        return view('quizquestion.index', compact('questions', 'classroom', 'quiz', 'ismhs'));
     }
 
     public function show($id, $quiz_id, $question_id)

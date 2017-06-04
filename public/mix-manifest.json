@@ -1,4 +1,5 @@
 {
   "/mix.js": "/mix.js",
-  "/css/materialize-prod.css": "/css/materialize-prod.css"
+  "/css/materialize-prod.css": "/css/materialize-prod.css",
+  "/css/trumbowyg.min.css": "/css/trumbowyg.min.css"
 }

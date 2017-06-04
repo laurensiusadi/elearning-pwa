@@ -65,7 +65,6 @@ Route::group(['middleware' => ['auth', 'acl'],
             Route::get('/classroom/{id}/quiz/{quiz_id}/edit', 'QuizController@edit');
             Route::put('/classroom/{id}/quiz/{quiz_id}', 'QuizController@update');
             Route::delete('/classroom/{id}/quiz/{quiz_id}', 'QuizController@destroy');
-            Route::get('/classroom/{id}/quiz/{quiz_id}/question/create', 'QuizQuestionController@create');
         });
         Route::resource('/question', 'QuestionController');
         Route::resource('/quizquestion', 'QuizQuestionController');
@@ -101,7 +100,5 @@ Route::group(['middleware' => ['auth', 'acl'],
             Route::get('/classroom/{id}/quiz', 'QuizController@index');
             Route::get('/classroom/{id}/quiz/{quiz_id}', 'QuizController@show');
             Route::get('/classroom/{id}/quiz/{quiz_id}/question', 'QuizQuestionController@index');
-            Route::get('/classroom/{id}/quiz/{quiz_id}/answer', 'AnswerController@index');
-            Route::get('/classroom/{id}/quiz/{quiz_id}/answer/{answer_id}', 'AnswerController@show');
         });
     });
