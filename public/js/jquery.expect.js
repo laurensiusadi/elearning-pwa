@@ -656,9 +656,9 @@
 
     if ('number' === typeof val) {
       this.assert(
-          text.length === val
-        , msg || 'expected ' + inspect(this.obj) + ' text to be of length ' + val + ' but got ' + text.length
-        , msg || 'expected ' + inspect(this.obj) + ' text to not be of length ' + val);
+          text.length >= val
+        , msg || 'expected ' + inspect(this.obj) + ' text to be at least ' + val + ' character but got ' + text.length
+        , msg || 'expected ' + inspect(this.obj) + ' text to not be less than' + val + 'character');
     } else if (val instanceof RegExp) {
       this.assert(
           val.test(text)
@@ -868,7 +868,7 @@
   }
 
   /**
-  * Asserts that at least one currently selected element passes the given 
+  * Asserts that at least one currently selected element passes the given
   * assertion function.
   *
   * @param {Function} assertionFn
@@ -899,7 +899,7 @@
       numFailedChildren < this.obj.length
       , msg || 'expected ' + inspect(this.obj) + ' to have at least one ' +
       'element that passed the any assertion'
-      , msg || 'expected ' + inspect(this.obj) + ' to have no elements that ' + 
+      , msg || 'expected ' + inspect(this.obj) + ' to have no elements that ' +
       'passed the any assertion'
       );
     return this;

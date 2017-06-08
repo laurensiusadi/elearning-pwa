@@ -22,16 +22,16 @@
                     </p>
                 </div>
                 <div class="card-action">
-					<a class="btn btn-small blue tooltipped" data-position="bottom" data-delay="50" data-tooltip="Detail" href="/classroom/{{ $classroom->id }}/quiz/{{$quiz->id}}/question">Enter <i class="material-icons right">arrow_forward</i></a>
+					<a class="btn btn-small blue tooltipped" data-position="bottom" data-delay="50" data-tooltip="Detail" href="/classroom/{{ $classroom->id }}/quiz/{{$quiz->id}}/question">Masuk <i class="material-icons right">arrow_forward</i></a>
 					@if($ismhs == false)
 					<a class="btn btn-small amber tooltipped" data-position="bottom" data-delay="50" data-tooltip="Edit" href="/classroom/{{ $classroom->id }}/quiz/{{$quiz->id}}/edit"><i class="material-icons">edit</i></a>
-                    <a class="btn btn-small red modal-trigger tooltipped" data-position="bottom" data-delay="50" data-tooltip="Delete" href="#modal{{ $quiz->id }}"><i class="material-icons">delete</i></a>
+                    <a class="btn btn-small red modal-trigger tooltipped" data-position="bottom" data-delay="50" data-tooltip="Delete" href="#modal{{ $quiz->id }}delete"><i class="material-icons">delete</i></a>
                     @component('partials.deletemodal')
                         @slot('id')
-                            {{ $quiz->id }}
+                            {{ $quiz->id }}delete
                         @endslot
                         @slot('action')
-                            {{ url('quiz').'/'.$quiz->id }}
+                            /classroom/{{$classroom->id}}/quiz/{{$quiz->id}}
                         @endslot
                     @endcomponent
 					@endif

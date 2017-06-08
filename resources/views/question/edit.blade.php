@@ -27,7 +27,7 @@
                         <label class="active" for="deskripsi" style="padding-bottom:6px">Deskripsi</label>
                     </div>
                     <div class="input-field">
-                        <a href="{{ URL::previous() }}" class="btn-flat white left" style="padding-left:0"><i class="material-icons left">arrow_back</i>Back</a>
+                        <a href="/question" class="btn-flat white left" style="padding-left:0"><i class="material-icons left">arrow_back</i>Back</a>
                         <button class="btn gradient-2 waves-effect waves-light right" type="submit" name="action">Save<i class="material-icons right">save</i></button>
                     </div><p class="clearfix"></p>
                 </div>

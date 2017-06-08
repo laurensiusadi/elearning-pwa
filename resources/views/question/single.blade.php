@@ -2,7 +2,9 @@
 @extends('layouts.code')
 
 @section('title')
-    {{ $quiz->nama }}
+    <a href="/classroom/{{$quiz->classroom->id}}/quiz/{{$quiz->id}}/question">
+        <i class="material-icons left">arrow_back</i>{{ $quiz->nama }}
+    </a>
 @endsection
 
 @section('style')

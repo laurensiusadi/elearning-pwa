@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Post;
 use App\User;
-use App\Enrollment;
+use App\Question;
 use DB;
 use Input;
 use Auth;
@@ -21,6 +21,7 @@ class HomeController extends Controller
     public function index()
     {
         $posts = Post::latest()->paginate(3);
-        return view('home', compact('posts'));
+        $questionsCount = Question::all()->count();
+        return view('home', compact('posts','questionsCount'));
     }
 }

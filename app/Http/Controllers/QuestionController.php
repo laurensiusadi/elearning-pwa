@@ -41,6 +41,9 @@ class QuestionController extends Controller
         $question = new Question;
         $question->topik = $request->topik;
         $question->deskripsi = $request->deskripsi;
+        $question->template_html = $request->html;
+        $question->template_css = $request->css;
+        $question->template_js = $request->js;
         $question->save();
 
         return redirect('question/'.$question->id.'/edit')->with('message', 'Soal berhasil dibuat');

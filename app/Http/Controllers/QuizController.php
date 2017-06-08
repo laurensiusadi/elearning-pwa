@@ -18,7 +18,7 @@ class QuizController extends Controller
     public function index($id)
     {
         $classroom = Classroom::find($id);
-        $quizes = $classroom->quizes;
+        $quizes = $classroom->quizes()->orderBy('id', 'ASC')->get();
 
         $ismhs = false;
         // $user = User::find(Auth::id());
@@ -33,7 +33,7 @@ class QuizController extends Controller
     {
         $enroll = Enrollment::find($id);
         $classroom = Classroom::find($enroll->classroom_id);
-        $quizes = $classroom->quizes;
+        $quizes = $classroom->quizes()->orderBy('created_at', 'DESC')->get();
         return view('quiz.create', compact('classroom', 'enroll', 'quizes'));
     }
 
@@ -53,7 +53,7 @@ class QuizController extends Controller
         $quiz->selesai = $request->selesai;
         $quiz->save();
 
-        return redirect('classroom/'.$id.'/quiz/'.$quiz->id)->with('message', 'Quiz baru berhasil ditambahkan');
+        return redirect('classroom/'.$id.'/quiz')->with('message', 'Quiz baru berhasil ditambahkan');
     }
 
     public function show($id, $quiz_id)
@@ -92,19 +92,19 @@ class QuizController extends Controller
         $quiz->selesai = $request->selesai;
         $quiz->save();
 
-        return redirect('classroom/'.$id.'/quiz/'.$quiz_id)->with('message', 'Quiz berhasil diupdate');
+        return redirect('classroom/'.$id.'/quiz')->with('message', 'Quiz berhasil diupdate');
     }
 
-    public function destroy($id)
+    public function destroy($id, $quiz_id)
     {
-        $quiz = Quiz::find($id);
+        $quiz = Quiz::find($quiz_id);
 
         try {
             $quiz->delete();
         } catch (QueryException $e) {
-            return redirect('classroom/'.$id.'/quiz')->with('error', 'Quiz gagal dihapus, data masih direferensikan');
+            return redirect('classroom/'.$id.'/quiz')->with('error', 'Quiz gagal dihapus');
         }
 
-        return back()->with('message', 'Quiz berhasil dihapus');
+        return redirect('classroom/'.$id.'/quiz')->with('message', 'Quiz berhasil dihapus');
     }
 }

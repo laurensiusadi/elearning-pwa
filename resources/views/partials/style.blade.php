@@ -42,7 +42,7 @@
     .col.l4 h5.main-title:after { content:""; background: linear-gradient(to left, #00c6ff , #0072ff); height:3px; width:40px; display:block; margin: 10px 0 40px 0 }
     .main-content .card { margin-bottom: 1.75rem }
     .side-content p { padding-bottom: 1rem; border-bottom: 1px solid lightgrey }
-    .side-content a.delete { color: lightgrey }
+    .side-content a.delete { color: lightpink }
     .side-content a.delete:hover { color:red; text-decoration: none; cursor: pointer }
     .card .card-title, .card-panel .title { font-weight: 500}
     .btn-small { padding: 0 0.75rem }

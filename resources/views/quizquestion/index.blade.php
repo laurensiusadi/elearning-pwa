@@ -16,9 +16,10 @@
             class="btn-link">Choose questions for this quiz <i class="material-icons tiny">edit</i></a>
         @else
         <a href="/classroom/{{$quiz->classroom->id}}/quiz/{{$quiz->id}}/edit"
-            class="offline-btn btn gradient-2">Save offline <i class="material-icons tiny right">file_download</i></a>
+            class="offline-btn btn gradient-2">Save offline <i class="material-icons tiny right">file_download</i>
+        </a>
         @endif
-        <div class="card-panel">
+        <div class="card-panel" style="margin-top:20px">
             @if($quiz->questions->count() == 0)
             <h6>Belum ada soal</h6>
             @else
@@ -27,24 +28,35 @@
                 @foreach($questions as $question)
                 @if(Auth::user()->hasRole('mhs'))
                     @if($question->answers()->count() > 0)
-                        @if($question->answers()->where('user_id', Auth::user()->id)->count() == 0)
+                        @if($question->answers()->where('user_id', Auth::user()->id)->count() == 0 AND $loop->index == 0)
                         <li class="collection-item">{{ $loop->index+1 }}. {{ $question->topik }}
-                            <a href="/classroom/{{ $quiz->classroom->id }}/quiz/{{ $quiz->id }}/question/{{ $question->id }}" class="secondary-content"><i class="material-icons right">arrow_forward</i></a>
+                            <a href="/classroom/{{ $quiz->classroom->id }}/quiz/{{ $quiz->id }}/question/{{ $question->id }}" class="secondary-content"> FIRST <i class="material-icons right">arrow_forward</i></a>
+                        </li>
+                        @elseif($question->answers()->where('user_id', Auth::user()->id)->first()->done == false)
+                        <li class="collection-item">{{ $loop->index+1 }}. {{ $question->topik }}
+                            <a href="/classroom/{{ $quiz->classroom->id }}/quiz/{{ $quiz->id }}/question/{{ $question->id }}" class="secondary-content"> NOT DONE <i class="material-icons right">arrow_forward</i></a>
+                            <?php $beforeDone = false; ?>
                         </li>
                         @elseif($question->answers()->where('user_id', Auth::user()->id)->first()->done == true)
                             <li class="collection-item">{{ $loop->index+1 }}. {{ $question->topik }}
-                            <a href="/classroom/{{ $quiz->classroom->id }}/quiz/{{ $quiz->id }}/question/{{ $question->id }}" class="secondary-content"><i class="material-icons right">check</i></a>
+                            <a href="/classroom/{{ $quiz->classroom->id }}/quiz/{{ $quiz->id }}/question/{{ $question->id }}" class="green-text text-accent-4 secondary-content">DONE <i class="material-icons right">check</i></a>
                             </li>
                             <?php $beforeDone = true; ?>
                         @endif
+                    @elseif($question->answers()->count() == 0 AND $loop->index == 0)
+                    <li class="collection-item">{{ $loop->index+1 }}. {{ $question->topik }}
+                        <a href="/classroom/{{ $quiz->classroom->id }}/quiz/{{ $quiz->id }}/question/{{ $question->id }}" class="secondary-content">FIRST <i class="material-icons right">arrow_forward</i></a>
+                        <?php $beforeDone = false; ?>
+                    </li>
                     @elseif($beforeDone == true)
                     <li class="collection-item">{{ $loop->index+1 }}. {{ $question->topik }}
-                        <a href="/classroom/{{ $quiz->classroom->id }}/quiz/{{ $quiz->id }}/question/{{ $question->id }}" class="secondary-content"><i class="material-icons right">arrow_forward</i></a>
+                        <a href="/classroom/{{ $quiz->classroom->id }}/quiz/{{ $quiz->id }}/question/{{ $question->id }}" class="secondary-content">NEXT <i class="material-icons right">arrow_forward</i></a>
                         <?php $beforeDone = false; ?>
                     </li>
                     @else
                     <li class="collection-item">{{ $loop->index+1 }}. {{ $question->topik }}
-                        <a disabled class="secondary-content right grey-text"><i class="material-icons right">lock_outline</i></a>
+                        <a href="/classroom/{{ $quiz->classroom->id }}/quiz/{{ $quiz->id }}/question/{{ $question->id }}" class="secondary-content grey-text"> <i class="material-icons right">arrow_forward</i></a>
+                        <?php $beforeDone = false; ?>
                     </li>
                     @endif
                 @else
@@ -72,11 +84,13 @@ pages.push("/classroom/{{ $quiz->classroom->id }}/quiz/{{ $quiz->id }}/question/
             @endforeach
 
             caches.open('shell-content').then(function(cache) {
+                $('.offline-btn').html('Saving offline <div class="preloader-wrapper tiny right active" style="top:8px;margin-left:15px"><div class="spinner-layer spinner-white-only"><div class="circle-clipper left"><div class="circle"></div></div><div class="gap-patch"><div class="circle"></div></div><div class="circle-clipper right"><div class="circle"></div></div></div></div>')
                 var updateCache = cache.addAll(pages);
                 updateCache.then(function() {
-                    Materialize.toast('Quiz now available offline', 4000, 'gradient-2');
+                     $('.offline-btn').html('Offline Ready <i class="material-icons right">check</i>');
+                    // Materialize.toast('Quiz now available offline', 4000, 'gradient-2');
                 }).catch(function (error) {
-                    Materialize.toast('Quiz ccould not be saved offline', 4000, 'materialize-red');
+                    Materialize.toast('Quiz could not be saved offline', 4000, 'materialize-red');
                 });
             });
         });

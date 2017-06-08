@@ -7325,6 +7325,11 @@ input[type=range]:focus::-ms-fill-upper {
   height: 48px;
 }
 
+.preloader-wrapper.tiny {
+  width: 20px;
+  height: 20px;
+}
+
 .preloader-wrapper.small {
   width: 36px;
   height: 36px;
@@ -7380,6 +7385,11 @@ input[type=range]:focus::-ms-fill-upper {
 .spinner-green,
 .spinner-green-only {
   border-color: #0f9d58;
+}
+
+.spinner-white,
+.spinner-white-only {
+  border-color: white;
 }
 
 /**
@@ -7689,7 +7699,7 @@ input[type=range]:focus::-ms-fill-upper {
 .circle-clipper .circle {
   width: 200%;
   height: 100%;
-  border-width: 3px;
+  border-width: 2px;
   /* STROKEWIDTH */
   border-style: solid;
   border-color: inherit;

@@ -21,6 +21,13 @@
             </div>
         </div>
         @endforeach
+        @if(Auth::user()->hasRole('dosen'))
+        <h5 class="main-title">Bank Soal</h5>
+        <div class="card-panel">
+            <h5>Ada {{ $questionsCount }} Soal</h5>
+            <a href="/question">Lihat Bank Soal <i class="material-icons tiny">arrow_forward</i></a>
+        </div>
+        @endif
         @endif
     </div>
     <div class="col l4 m5 s12 side-content">
