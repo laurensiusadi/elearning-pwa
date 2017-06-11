@@ -4,7 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Auth;
-use App\Classroom;
+use App\Enrollment;
 
 class EnrollmentCheck
 {
@@ -17,9 +17,9 @@ class EnrollmentCheck
      */
     public function handle($request, Closure $next)
     {
-        $classroomId = $request->route('id');
-        $classroom = Classroom::with('users')->where('id', $classroomId)->first();
-        if(!$classroom->users()->wherePivot('user_id', Auth::user()->id)->exists()) {
+        $enrollmentId = $request->route('id');
+        $enrollment = Enrollment::find($enrollmentId);
+        if(!$enrollment->where('user_id', Auth::id())->exists()) {
             return redirect('home')->with('error', 'User not enrolled on classroom');
         }
         else {

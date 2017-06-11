@@ -3,8 +3,8 @@
 @section('content')
 <div class="container">
 <div class="row">
-    <div class="col l8 m6 s12" style="padding:35px 0 30px 20px">
-        <h5>coderoom</h5>
+    <div class="col l8 m6 s12" style="padding:40px 0 30px 20px">
+        <img src="/images/coderoom-type-emblem.svg" alt="coderoom">
         <h3>Learn code<br/>anywhere anytime.</h3>
         <p class="grey-text light">Pemrograman Web<br/>Teknik Informatika<br/>Institut Teknologi Sepuluh Nopember</p>
     </div>
@@ -15,11 +15,11 @@
         <div class="card-panel" style="margin-top:25px">
             <div class="input-field">
                 <input placeholder="Your Email Address" id="email" name="email" type="email" class="validate" value="{{ old('email') }}" required>
-                <label for="email">Email</label>
+                <label class="active" for="email">Email</label>
             </div>
             <div class="input-field" required >
                 <input placeholder="Input password" name="password" type="password" class="validate">
-                <label for="password">Password</label>
+                <label class="active" for="password">Password</label>
             </div>
             <div class="input-field" style="padding-top:10px">
                 <button class="btn gradient-2 waves-effect waves-light" type="submit" name="action" style="width:100%">Login</button>

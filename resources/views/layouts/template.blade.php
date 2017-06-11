@@ -6,33 +6,27 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
-    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="manifest" href="/manifest.json">
-    <meta name="theme-color" content="#0072ff">
+    <meta name="theme-color" content="#252E36">
     <meta name="mobile-web-app-capable" content="yes">
-    <!-- <link rel="icon" sizes="192x192" href="images/android-desktop.png"> -->
-    <!-- Add to homescreen for Safari on iOS -->
+    <link rel="icon" href="/images/favicon32x32.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/images/icons/icon-192x192.png">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="apple-mobile-web-app-title" content="coderoom">
-    <!-- <link rel="apple-touch-icon-precomposed" href="images/ios-desktop.png"> -->
-    <!-- Tile icon for Win8 (144x144 + tile color) -->
-    <!-- <meta name="msapplication-TileImage" content="images/touch/ms-touch-icon-144x144-precomposed.png">
-    <meta name="msapplication-TileColor" content="#3372DF"> -->
-    <!-- <link rel="shortcut icon" href="images/favicon.png"> -->
-    <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,light,bolditalic&amp;lang=en"> -->
+    <link rel="apple-touch-icon" type="image/png" sizes="192x192" href="images/icons/coderoom-emblem.png">
     <link rel="stylesheet" href="{!! asset('css/materialize-prod.css') !!}">
     @yield('style')
     @include('partials.style')
     <style>
-        main { padding-top:80px }
+        main { padding:80px 10px 0px 10px }
     </style>
     @if(Auth::check() AND Auth::user()->hasRole('admin'))
     <style>
         .container { width: 88% }
         header, main, footer { padding-left: 300px }
-        .side-nav { overflow-y: scroll; padding-bottom: 100px }
+        /*.side-nav { overflow-y: scroll; padding-bottom: 100px }*/
         @media only screen and (max-width : 992px) {
             header, main, footer { padding-left: 0 }
             .side-nav li:first-child { display: none }
@@ -41,7 +35,7 @@
             main { padding-top: 40px }
             nav { background-color: transparent; box-shadow: none}
             .side-nav li:first-child { line-height: 56px }
-            .side-nav li:first-child a { background-color: #0072FF; color: white; font-size: 1.6rem; line-height: 56px; height: 96px; padding-top: 40px}
+            .side-nav li:first-child a { background-color: #252E36; color: white; font-size: 1.6rem; line-height: 56px; height: 96px; padding-top: 40px}
         }
     </style>
     @endif

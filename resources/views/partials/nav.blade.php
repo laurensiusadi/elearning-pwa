@@ -1,14 +1,14 @@
 <nav role="navigation">
     <div class="nav-wrapper">
         @if (!Auth::check())
-        <a id="logo-container" href="{{ url('/') }}" class="brand-logo center">coderoom</a>
+        <a id="logo-container" href="{{ url('/') }}" class="brand-logo center"><img src="/images/coderoom-logo-white.svg" alt="coderoom"></a>
         @else
-        <a id="logo-container" href="{{ url('home') }}" class="brand-logo center">coderoom</a>
+        <a id="logo-container" href="{{ url('home') }}" class="brand-logo center"><img src="/images/coderoom-logo-white.svg" alt="coderoom"></a>
         @endif
         <ul class="right hide-on-med-and-down">
             @if (!Auth::check())
                 <li><a href="{{ url('login') }}">Log in</a></li>
-                <li><a class="btn-flat white waves-effect" style="color:#0072FF; text-transform: none" href="{{ url('register') }}">Sign up</a></li>
+                <li><a class="btn-flat white waves-effect" style="color:#252E36; text-transform: none" href="{{ url('register') }}">Sign up</a></li>
             @else
                 <li><a href="{{ url('home') }}">Home</a></li>
                 <li><a class="dropdown-button" href="#!" data-activates="dropdown-user">Welcome, {{ Auth::user()->name }}<i class="material-icons right">arrow_drop_down</i></a></li>

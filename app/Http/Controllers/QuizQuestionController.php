@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Classroom;
 use App\Quiz;
 use App\Question;
+use App\Enrollment;
 use App\User;
 use App\Answer;
 use Auth;
@@ -14,7 +15,8 @@ class QuizQuestionController extends Controller
 {
     public function index($id, $quiz_id)
     {
-        $classroom = Classroom::find($id);
+        $enrollment = Enrollment::find($id);
+        $classroom = Classroom::find($enrollment->classroom_id);
         $quiz = Quiz::find($quiz_id);
         $questions = $quiz->questions()->orderBy('created_at', 'asc')->get();
 
@@ -29,6 +31,8 @@ class QuizQuestionController extends Controller
 
     public function show($id, $quiz_id, $question_id)
     {
+        $enrollment = Enrollment::find($id);
+        $classroom = Classroom::find($enrollment->classroom_id);
         $quiz = Quiz::find($quiz_id);
         $question = Question::find($question_id);
         $keys = $question->keys;
@@ -55,12 +59,14 @@ class QuizQuestionController extends Controller
             $key->checklist = $second;
         }
 
-        return view('question.single', compact('quiz', 'question', 'answer', 'keys'));
+        return view('question.single', compact('quiz', 'question', 'answer', 'keys', 'classroom'));
     }
 
     public function update(Request $request, $id)
     {
-        $quiz = Question::find($id);
+        $quiz= Quiz::find($id);
+        $quiz->nama = $request->nama;
+        $quiz->save();
         foreach ($request['questions_id'] as $question_id) {
             if (!empty($request['data::'.$question_id])) {
                 $question = Question::find($question_id);

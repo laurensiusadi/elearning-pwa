@@ -22,7 +22,7 @@
                     </div>
                     <div class="input-field">
                         <textarea placeholder="" class="materialize-textarea" name="content" type="text" required></textarea>
-                        <label for="text">Konten</label>
+                        <label class="active" for="text">Konten</label>
                     </div>
                     <div class="input-field">
                         <button class="btn btn-flat grey lighten-4 waves-effect waves-dark" type="submit" name="action" style="padding-inline-start:45px; width:100%">Buat

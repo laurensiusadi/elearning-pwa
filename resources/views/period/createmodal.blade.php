@@ -6,15 +6,15 @@
         {{ csrf_field() }}
         <div class="input-field">
             <input placeholder="" name="nama" type="text" required>
-            <label for="nama">Nama</label>
+            <label class="active" for="nama">Nama</label>
         </div>
         <div class="input-field">
             <input placeholder="" name="tahun" type="text" required>
-            <label for="tahun">Tahun</label>
+            <label class="active" for="tahun">Tahun</label>
         </div>
         <div class="input-field">
             <input placeholder="" name="semester" type="text" required>
-            <label for="semester">Semester</label>
+            <label class="active" for="semester">Semester</label>
         </div>
         <div class="input-field">
             <input placeholder="" name="mulai" type="date" class="datepicker">

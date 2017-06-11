@@ -17,7 +17,8 @@ class QuizController extends Controller
 {
     public function index($id)
     {
-        $classroom = Classroom::find($id);
+        $enrollment = Enrollment::find($id);
+        $classroom = Classroom::find($enrollment->classroom_id);
         $quizes = $classroom->quizes()->orderBy('id', 'ASC')->get();
 
         $ismhs = false;
@@ -85,7 +86,7 @@ class QuizController extends Controller
             ]);
 
         // input biasa
-        $quiz = new Quiz;
+        $quiz = Quiz::find($quiz_id);
         $quiz->classroom_id = $id;
         $quiz->nama = $request->nama;
         $quiz->mulai = $request->mulai;

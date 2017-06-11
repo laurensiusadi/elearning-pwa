@@ -2,7 +2,7 @@
 @extends('layouts.code')
 
 @section('title')
-    <a href="/classroom/{{$quiz->classroom->id}}/quiz/{{$quiz->id}}/question">
+    <a href="/classroom/{{$classroom->enrollmentId($classroom)}}/quiz/{{$quiz->id}}/question">
         <i class="material-icons left">arrow_back</i>{{ $quiz->nama }}
     </a>
 @endsection
@@ -42,7 +42,7 @@
                 @include('question.modalnext')
             </div>
         </div>
-        <form method="POST" action="/classroom/{{ $quiz->classroom->id }}/quiz/{{ $quiz->id }}/question/{{ $question->id }}/answer">
+        <form method="POST" action="/classroom/{{ $classroom->id }}/quiz/{{ $quiz->id }}/question/{{ $question->id }}/answer">
         {{ csrf_field() }}
         <input type="hidden" name="_method" value="put"/>
         <div id="code" class="col l4 m12 s12" style="margin-top:0.5rem; margin-bottom: 1rem; max-height:490px ">

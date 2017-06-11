@@ -7,15 +7,15 @@
             <input type="hidden" name="_method" value="put"></input>
             <div class="input-field">
                 <input name="name" value="{{ $role->name }}" type="text" required>
-                <label for="name">Nama Role</label>
+                <label class="active" for="name">Nama Role</label>
             </div>
             <div class="input-field">
                 <input name="slug" value="{{ $role->slug }}" type="text" required>
-                <label for="slug">Slug</label>
+                <label class="active" for="slug">Slug</label>
             </div>
             <div class="input-field">
                 <textarea class="materialize-textarea" name="description" type="text" required>{{ $role->description }}</textarea>
-                <label for="description">Deskripsi</label>
+                <label class="active" for="description">Deskripsi</label>
             </div>
             <div class="modal-footer">
                 <button type="button" class="modal-close btn btn-flat left">Cancel</button>

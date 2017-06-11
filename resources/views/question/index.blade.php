@@ -1,15 +1,31 @@
+<?php use Carbon\Carbon; ?>
 @extends('layouts.template')
-
+@section('style')
+<link rel="stylesheet" href="{!! asset('css/dataTables.materialize.css') !!}">
+@endsection
 @section('content')
 <div class="container">
-    <h4 class="left">Bank Soal</h4>
-    <a class="btn green accent-4 right" href="/question/create">Add Question</a>
-        <div class="row clearfix">
+    <div class="row">
+    <h4>Bank Soal</h4>
+    <div class="card-panel">
+    <a class="btn green accent-4 left" href="/question/create">Add Question</a>
             @if($questions->count()>0)
-            <ul class="collection">
+            <table id="datatable" class="table highlight bordered">
+            <thead>
+                <tr>
+                    <th>Topik Soal</th>
+                    <th>Tanggal Dibuat</th>
+                    <th>Aksi</th>
+                </tr>
+            </thead>
+            <tbody>
                 @foreach($questions as $question)
-                <li class="collection-item">{{ $question->topik }}
-                    <a href="#modal{{ $question->id }}delete" class="btn-link right">Delete</a>
+                <tr>
+                <td data-label="Topik Soal">{{ $question->topik }}</td>
+                <td data-label="Tanggal Dibuat">{{ Carbon::parse($question->created_at)->toFormattedDateString() }}</td>
+                <td data-label="Aksi">
+                    <a href="/question/{{ $question->id }}/edit" class="btn btn-small amber"><i class="material-icons">edit</i></a>
+                    <a href="#modal{{ $question->id }}delete" class="btn btn-small red"><i class="material-icons">delete</i></a>
                     @component('partials.deletemodal')
                         @slot('id')
                             {{ $question->id }}delete
@@ -18,17 +34,13 @@
                             {{ url('question').'/'.$question->id }}
                         @endslot
                     @endcomponent
-                    <a href="/question/{{ $question->id }}/edit" class="btn-link right">Edit&nbsp;&nbsp;</a>
-                </li>
+                </td>
                 @endforeach
-            </ul>
+            </table>
             @else
-            <div class="card-panel">
-                <div class="clearfix">
-                    <h5>Belum ada soal</h5>
-                </div>
-            </div>
+            <h5>Belum ada soal</h5>
             @endif
+    </div>
     </div>
 </div>
 @endsection
@@ -38,4 +50,5 @@
       $('.modal').modal();
     });
 </script>
+@include('partials.datatable')
 @endsection

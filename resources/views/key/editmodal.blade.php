@@ -7,11 +7,11 @@
             <input type="hidden" name="_method" value="put"/>
             <div class="input-field">
                 <input value="{{ $key->checklist }}" type="text" name="checklist" style="font-family: monospace" required/>
-                <label for="checklist">Challenges</label>
+                <label class="active" for="checklist">Challenges</label>
             </div>
             <div class="input-field">
                 <input value="{{ $key->message }}" type="text" name="message"/>
-                <label for="message">Message</label>
+                <label class="active" for="message">Message</label>
             </div>
             <div class="modal-footer">
                 <button type="button" class="modal-close btn btn-flat left">Cancel</button>

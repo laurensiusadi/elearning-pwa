@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
     <!-- Add to homescreen for Chrome on Android -->
     <link rel="manifest" href="/manifest.json">
-    <meta name="theme-color" content="#0072ff">
+    <meta name="theme-color" content="#0055FF">
     <meta name="mobile-web-app-capable" content="yes">
     <!-- <link rel="icon" sizes="192x192" href="images/android-desktop.png"> -->
     <!-- Add to homescreen for Safari on iOS -->

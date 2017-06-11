@@ -1,4 +1,4 @@
-<?php use Carbon\Carbon; ?>
+<?php use Carbon\Carbon; use App\Enrollment; ?>
 @extends('layouts.template')
 
 @section('content')
@@ -17,7 +17,7 @@
                 <p>{{ $classroom->period->nama }}</p>
             </div>
             <div class="card-action">
-            <a class="btn gradient-2 waves-effect waves-light" href="/classroom/{{ $classroom->id }}/quiz/">Masuk</a>
+            <a class="btn gradient-2 waves-effect waves-light" href="/classroom/{{ $classroom->enrollmentId($classroom) }}/quiz/">Masuk</a>
             </div>
         </div>
         @endforeach
@@ -33,6 +33,7 @@
     <div class="col l4 m5 s12 side-content">
         <h5 class="main-title">Pengumuman</h5>
             @foreach($posts as $post)
+                @if(in_array($post->classroom_id, Auth::user()->classrooms->pluck('id')->toArray()) OR $post->classroom_id == 0)
                     <p>{{ $post->content }}<br />
                     <span class="grey-text small">{{ $post->user->name }}&nbsp;&bull;
                     {{ Carbon::parse($post->created_at)->diffForHumans() }}
@@ -41,7 +42,7 @@
                     @else
                         <br/>Umum
                     @endif</span>
-                    @if(Auth::user()->hasRole('admin|dosen'))
+                    @if(Auth::user()->hasRole('admin|dosen') AND Auth::id() == $post->user_id)
                     <br/><a class="delete modal-trigger" href="#modal{{ $post->id }}">Delete</a></p>
                     @component('partials.deletemodal')
                         @slot('id')
@@ -54,6 +55,7 @@
                     @else
                     </p>
                     @endif
+                @endif
             @endforeach
             {{ $posts->links() }}
     </div>

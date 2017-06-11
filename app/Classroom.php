@@ -3,10 +3,17 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Enrollment;
+use Auth;
 
 class Classroom extends Model
 {
     protected $table = 'elearningnew.classroom';
+
+    public function enrollmentId($classroom)
+    {
+        return Enrollment::where('classroom_id',$classroom->id)->where('user_id', Auth::id())->first()->id;
+    }
 
     public function enrolls()
     {

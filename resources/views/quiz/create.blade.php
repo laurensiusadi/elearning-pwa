@@ -10,7 +10,7 @@
                 {{ csrf_field() }}
                 <div class="input-field">
                     <input placeholder="" name="nama" type="text" required>
-                    <label for="nama">Nama Quiz</label>
+                    <label class="active" for="nama">Nama Quiz</label>
                 </div>
                 <div class="input-field">
                     <input placeholder="" name="mulai" class="datepicker-m" required>
@@ -29,12 +29,12 @@
         </div>
     </div>
     <div class="col l8 m7 s12 main-content">
-        <h5>List Quiz dari Classroom</h5>
+        <h5>List Quiz dari Classroom {{$classroom->nama}}</h5>
         <ul class="collection">
         @if(count($quizes) > 0)
         @foreach( $quizes as $quiz)
         <li class="collection-item">{{ $loop->index+1 }}. {{ $quiz->nama }}
-            <a href="/classroom/{{$classroom->id}}/quiz/{{$quiz->id}}/question" class="right">Masuk</a>
+            <a href="/classroom/{{$classroom->enrollmentId($classroom)}}/quiz/{{$quiz->id}}/question" class="right">Masuk</a>
             <a href="#modal{{ $quiz->id }}delete" class="right" style="margin-right:14px">Delete</a>
             @component('partials.deletemodal')
                 @slot('id')

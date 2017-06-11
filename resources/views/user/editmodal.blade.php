@@ -7,23 +7,23 @@
             <input type="hidden" name="_method" value="put"/>
             <div class="input-field">
                 <input name="nomorinduk" value="{{ $user->nomorinduk }}" type="text" required>
-                <label for="nomorinduk">NRP / NIDN</label>
+                <label class="active" for="nomorinduk">NRP / NIDN</label>
             </div>
             <div class="input-field">
                 <input name="name" value="{{ $user->name }}" type="text" required>
-                <label for="name">Nama User</label>
+                <label class="active" for="name">Nama User</label>
             </div>
             <div class="input-field">
                 <input name="email" value="{{ $user->email }}" type="email" required>
-                <label for="email">Email</label>
+                <label class="active" for="email">Email</label>
             </div>
             <div class="input-field">
                 <input placeholder="" name="password" type="password" required>
-                <label for="password">Password</label>
+                <label class="active" for="password">Password</label>
             </div>
             <div class="input-field">
                 <input placeholder="" type="password" class="form-control" name="password_confirmation">
-                <label for="password_confirmation">Re-type Password</label>
+                <label class="active" for="password_confirmation">Re-type Password</label>
             </div>
             <div class="modal-footer">
                 <button type="button" class="modal-close btn btn-flat left">Cancel</button>

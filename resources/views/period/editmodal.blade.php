@@ -7,15 +7,15 @@
             <input type="hidden" name="_method" value="put"></input>
             <div class="input-field">
                 <input value="{{$period->nama}}" name="nama" type="text" required>
-                <label for="nama">Nama</label>
+                <label class="active" for="nama">Nama</label>
             </div>
             <div class="input-field">
                 <input value="{{$period->tahun}}" name="tahun" type="text" required>
-                <label for="tahun">Tahun</label>
+                <label class="active" for="tahun">Tahun</label>
             </div>
             <div class="input-field">
                 <input value="{{$period->semester}}" name="semester" type="text" required>
-                <label for="semester">Semester</label>
+                <label class="active" for="semester">Semester</label>
             </div>
             <div class="input-field">
                 <input value="{{$period->mulai}}" name="mulai" type="date" class="datepicker">

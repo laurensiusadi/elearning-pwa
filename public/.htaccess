@@ -26,5 +26,5 @@
 </FilesMatch>
 
 <IfModule mod_deflate.c>
-    AddOutputFilterByType DEFLATE text/text text/html text/plain text/xml text/css application/x-javascript application/javascript
+    AddOutputFilterByType DEFLATE text/text text/html text/plain text/xml text/css text/json application/x-javascript application/javascript
 </IfModule>

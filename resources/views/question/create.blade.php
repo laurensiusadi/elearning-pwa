@@ -21,7 +21,7 @@
                     {{ csrf_field() }}
                     <div class="input-field" style="margin-top:0.5rem">
                         <input placeholder="" name="topik" type="text" required>
-                        <label for="topik">Topik</label>
+                        <label class="active" for="topik">Topik</label>
                     </div>
                     <div class="input-field">
                         <textarea id="desc" placeholder="Penjelasan tentang topik dan arahan mengerjakan" name="deskripsi"></textarea>
@@ -57,11 +57,11 @@
                 <form>
                     <div class="input-field">
                         <input placeholder="$expect('h1').to.be.attr('color', 'red')" type="text" name="checklist" class="autocomplete" style="font-family: monospace" disabled/>
-                        <label for="checklist">Challenges</label>
+                        <label class="active" for="checklist">Challenges</label>
                     </div>
                     <div class="input-field">
                         <input placeholder="H1 element must be red" type="text" name="message" disabled/>
-                        <label for="message">Message</label>
+                        <label class="active" for="message">Message</label>
                     </div>
                     <div class="input-field">
                         <span class="left">Save everything else first</span>

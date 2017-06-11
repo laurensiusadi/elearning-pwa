@@ -56,6 +56,11 @@
 <script>
     $(document).ready(function(){
       $('.modal').modal();
+      $('.datepicker').pickadate({
+          selectMonths: true,
+          selectYears: 5,
+          format: 'yyyy-mm-dd',
+      });
     });
 </script>
 @include('partials.datatable')

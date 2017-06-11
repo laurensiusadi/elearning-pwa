@@ -1,4 +1,4 @@
-<?php use Carbon\Carbon; ?>
+<?php use Carbon\Carbon; use App\Enrollment; ?>
 @extends('layouts.template')
 
 @section('content')
@@ -8,7 +8,7 @@
             <h6 class="main-title">Daftar Quiz</h6>
             <h4 class="main-title">Classroom {{ $classroom->nama }}</h4>
             @if($ismhs == false)
-            <a href="/classroom/{{$classroom->id}}/quiz/create"
+            <a href="/classroom/{{$classroom->enrollmentId($classroom)}}/quiz/create"
                 class="btn green accent-3 waves-effect" style="margin-bottom: 0.5rem">Tambah Quiz</a>
             @endif
 			@foreach($quizes as $quiz)
@@ -22,16 +22,16 @@
                     </p>
                 </div>
                 <div class="card-action">
-					<a class="btn btn-small blue tooltipped" data-position="bottom" data-delay="50" data-tooltip="Detail" href="/classroom/{{ $classroom->id }}/quiz/{{$quiz->id}}/question">Masuk <i class="material-icons right">arrow_forward</i></a>
+					<a class="btn btn-small gradient-2 tooltipped" data-position="bottom" data-delay="50" data-tooltip="Detail" href="/classroom/{{ $classroom->enrollmentId($classroom) }}/quiz/{{$quiz->id}}/question">Masuk <i class="material-icons right">arrow_forward</i></a>
 					@if($ismhs == false)
-					<a class="btn btn-small amber tooltipped" data-position="bottom" data-delay="50" data-tooltip="Edit" href="/classroom/{{ $classroom->id }}/quiz/{{$quiz->id}}/edit"><i class="material-icons">edit</i></a>
+					<a class="btn btn-small amber tooltipped" data-position="bottom" data-delay="50" data-tooltip="Edit" href="/classroom/{{ $classroom->enrollmentId($classroom) }}/quiz/{{$quiz->id}}/edit"><i class="material-icons">edit</i></a>
                     <a class="btn btn-small red modal-trigger tooltipped" data-position="bottom" data-delay="50" data-tooltip="Delete" href="#modal{{ $quiz->id }}delete"><i class="material-icons">delete</i></a>
                     @component('partials.deletemodal')
                         @slot('id')
                             {{ $quiz->id }}delete
                         @endslot
                         @slot('action')
-                            /classroom/{{$classroom->id}}/quiz/{{$quiz->id}}
+                            /classroom/{{$classroom->enrollmentId($classroom)}}/quiz/{{$quiz->id}}
                         @endslot
                     @endcomponent
 					@endif
@@ -53,7 +53,7 @@
                     </div>
                     <div class="input-field">
                         <textarea placeholder="" class="materialize-textarea" name="content" type="text" required></textarea>
-                        <label for="text">Konten</label>
+                        <label class="active" for="text">Konten</label>
                     </div>
                     <div class="input-field">
                         <button class="btn-flat white-text slate waves-effect waves-dark" type="submit" name="action" style="padding-inline-start:45px; width:100%">Buat<i class="material-icons right">send</i>

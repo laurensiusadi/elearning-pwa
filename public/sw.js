@@ -1,6 +1,12 @@
 var cacheName = "shell-content";
 var filesToCache = [
-    "/css/materialize-prod.css", "/codemirror/codemirror.css", "/codemirror/material.css", "/codemirror/addon/lint/lint.css", "/codemirror/addon/hint/show-hint.css", "/codemirror/addon/fold/foldgutter.css", "/js/jquery.min.js", "/js/materialize.min.js", "/js/code-render.js", "/js/code-grammar.js", "/css/trumbowyg.css", "/js/wyg.js", "/fonts/roboto/Roboto-Medium.woff2", "/fonts/roboto/Roboto-Regular.woff2", "/fonts/roboto/Roboto-Light.woff2", "/offline",
+    "/css/materialize-prod.css", "/css/dataTables.materialize.css", "/css/mocha.css",
+    "/codemirror/codemirror.css", "/codemirror/material.css", "/codemirror/addon/lint/lint.css", "/codemirror/addon/hint/show-hint.css", "/codemirror/addon/fold/foldgutter.css",
+    "/js/mocha.js", "/js/expect.js", "/js/jquery.expect.js", "/js/jquery.datatables.min.js", "/js/jquery.min.js", "/js/materialize.min.js", "/js/code-render.js", "/js/code-grammar.js", "/css/trumbowyg.css", "/js/wyg.js",
+    "/fonts/worksans/WorkSans-Light.ttf", "/fonts/worksans/WorkSans-Regular.ttf", "/fonts/worksans/WorkSans-SemiBold.ttf", "/fonts/worksans/WorkSans-Bold.ttf", "/fonts/MaterialIcons-Regular.ttf", "/fonts/MaterialIcons-Regular.woff", "/fonts/MaterialIcons-Regular.woff2",
+    "/images/coderoom-logo-white.svg", "/images/coderoom-logo-white.svg", "/images/coderoom-type-emblem.svg", "/images/favicon32x32.png", "/images/icons.svg",
+    "/images/icons/icon-72x72.png", "/images/icons/icon-96x96.png", "/images/icons/icon-128x128.png", "/images/icons/icon-144x144.png", "/images/icons/icon-152x152.png", "/images/icons/icon-192x192.png", "/images/icons/icon-384x384.png", "/images/icons/icon-512x512.png",
+    "/offline"
 ];
 
 self.addEventListener("install", function(event) {
@@ -28,15 +34,24 @@ self.addEventListener("activate", function(event) {
 
 self.addEventListener("fetch", function(event) {
     if (event.request.method !== "GET") { return; }
-    event.respondWith(
-        fetch(event.request).then(function(response) {
-            var networkResponse = response.clone();
-            caches.open(cacheName).then(function(cache) {
-                cache.put(event.request, networkResponse);
-            }).catch()
-            return response;
-        }).catch(function() {
-            return caches.match(event.request);
-        })
-    );
+    if (event.request.url.split('.').pop().match(/^(css|png|svg|ttf|woff|woff2)$/)) {
+        event.respondWith(
+            caches.match(event.request).then(function(response) {
+                return response || fetch(event.request);
+            })
+        );
+    }
+    else {
+        event.respondWith(
+            fetch(event.request).then(function(response) {
+                var networkResponse = response.clone();
+                caches.open(cacheName).then(function(cache) {
+                    cache.put(event.request, networkResponse);
+                }).catch()
+                return response;
+            }).catch(function() {
+                return caches.match(event.request);
+            })
+        );
+    }
 });

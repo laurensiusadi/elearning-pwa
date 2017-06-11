@@ -20,7 +20,7 @@
                 <div class="card-panel z-depth-0" style="padding-bottom:20px">
                     <div class="input-field" style="margin-top:0.5rem">
                         <input placeholder="" value="{{ $question->topik }}" name="topik" type="text" required>
-                        <label for="topik">Topik</label>
+                        <label class="active" for="topik">Topik</label>
                     </div>
                     <div class="input-field">
                         <textarea id="desc" placeholder="Penjelasan tentang topik dan arahan mengerjakan" name="deskripsi">{!! $question->deskripsi !!}</textarea>
@@ -57,11 +57,11 @@
                     {{ csrf_field() }}
                     <div class="input-field">
                         <input placeholder="$expect('h1').to.be.attr('color', 'red')" type="text" name="checklist" style="font-family: monospace" required/>
-                        <label for="checklist">Challenge</label>
+                        <label class="active" for="checklist">Challenge</label>
                     </div>
                     <div class="input-field">
                         <input placeholder="H1 element must be red" type="text" name="message"/>
-                        <label for="message">Message</label>
+                        <label class="active" for="message">Message</label>
                     </div>
                     <div class="input-field">
                         <a class="grey-text lighten-2" href="https://github.com/Codecademy/jquery-expect/" target="_black"><i class="material-icons">help</i></a>

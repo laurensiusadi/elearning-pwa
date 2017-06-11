@@ -8,23 +8,23 @@
         <form role="form" method="POST" action="{{ url('period') }}">
             {{ csrf_field() }}
             <div class="input-field">
-                <input placeholder="" name="nama" type="text" required>
-                <label for="nama">Nama</label>
+                <input placeholder="Contoh: Semester Genap 2016/2017" name="nama" type="text" required>
+                <label class="active" for="nama">Nama</label>
             </div>
             <div class="input-field">
-                <input placeholder="" name="tahun" type="tel" required>
-                <label for="tahun">Tahun</label>
+                <input placeholder="Isi angka tahun" name="tahun" type="tel" required>
+                <label class="active" for="tahun">Tahun</label>
             </div>
             <div class="input-field">
-                <input placeholder="" name="semester" type="tel" required>
-                <label for="semester">Semester</label>
+                <input placeholder="Isi dengan angka 1 atau 2" name="semester" type="tel" required>
+                <label class="active" for="semester">Semester</label>
             </div>
             <div class="input-field">
-                <input placeholder="" name="mulai" type="date" class="datepicker">
+                <input placeholder="Klik disini untuk memilih" name="mulai" type="date" class="datepicker">
                 <label class="active" for="mulai">Tanggal Mulai</label>
             </div>
             <div class="input-field">
-                <input placeholder="" name="selesai" type="date" class="datepicker">
+                <input placeholder="Klik disini untuk memilih" name="selesai" type="date" class="datepicker">
                 <label class="active" for="selesai">Tanggal Selesai</label>
             </div>
             <div class="input-field">
@@ -41,7 +41,8 @@
 <script>
     $('.datepicker').pickadate({
         selectMonths: true,
-        selectYears: 15
+        selectYears: 5,
+        format: 'yyyy-mm-dd',
     });
 </script>
 @endsection

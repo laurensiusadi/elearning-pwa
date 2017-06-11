@@ -7,7 +7,7 @@
             <input type="hidden" name="_method" value="put"/>
             <div class="input-field">
                 <input value="{{ $classroom->nama }}" name="nama" type="text" required>
-                <label for="nama">Nama Classroom</label>
+                <label class="active" for="nama">Nama Classroom</label>
             </div>
             <div class="input-field">
                 <select name="period_id">

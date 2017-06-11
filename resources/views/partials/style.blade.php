@@ -1,6 +1,5 @@
 <style>
-    html,body { min-width: 320px; background-color: #EDEFF0 }
-    nav {background-color:#0072FF}
+    html,body { min-width: 320px; background-color: #ECEEF1 }
     h1,h2,h3,h4,h5,h6 { font-weight: 300 }
     h4.main-title { margin: 0 0 25px 0 }
     h5.main-title { font-size:16px; letter-spacing:1px; font-weight: 500; text-transform:uppercase; margin: 10px 0 20px 0 }
@@ -24,8 +23,8 @@
     }
     .gradient-2 {
         background: #00c6ff; /* fallback for old browsers */
-        background: -webkit-linear-gradient(to left, #00c6ff , #0072ff); /* Chrome 10-25, Safari 5.1-6 */
-        background: linear-gradient(to left, #00c6ff , #0072ff); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+        background: -webkit-linear-gradient(to left, #00c6ff , #0055FF); /* Chrome 10-25, Safari 5.1-6 */
+        background: linear-gradient(to left, #00c6ff , #0055FF); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
     }
     .slate { background:#252e36 }
     .slate-text { color:#252e36 }
@@ -34,12 +33,12 @@
     body { display: flex; min-height: 100vh; flex-direction: column }
     main { flex: 1 0 auto; padding-bottom: 30px; padding-top: 60px }
     nav { top: 0; position: fixed; z-index: 999 ; transition: top 0.25s ease-in-out; box-shadow: 0 0 25px 0 rgba(0,0,0,0.3); -moz-box-shadow: 0 0 25px 0 rgba(0,0,0,0.3); -webkit-box-shadow: 0 0 25px 0 rgba(0,0,0,0.3); }
-    nav { background-color: #0072ff }
+    nav { background-color: #252E36 }
     .nav-up { top: -52px }
     .container.full { margin: 0 auto; width: 97%; padding: 0 8px;}
     .container > .row > .col > h4 { margin-top:0 }
     .col > .col { padding-left: 0; padding-right: 0 }
-    .col.l4 h5.main-title:after { content:""; background: linear-gradient(to left, #00c6ff , #0072ff); height:3px; width:40px; display:block; margin: 10px 0 40px 0 }
+    .col.l4 h5.main-title:after { content:""; background: linear-gradient(to left, #00c6ff , #0055FF); height:3px; width:40px; display:block; margin: 10px 0 40px 0 }
     .main-content .card { margin-bottom: 1.75rem }
     .side-content p { padding-bottom: 1rem; border-bottom: 1px solid lightgrey }
     .side-content a.delete { color: lightpink }

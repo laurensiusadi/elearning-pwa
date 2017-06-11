@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Period;
+use Carbon\Carbon;
 
 class PeriodController extends Controller
 {
@@ -25,6 +26,8 @@ class PeriodController extends Controller
             'nama' => 'required',
             'tahun' => 'required|digits:4',
             'semester' => 'required|digits:1',
+            'mulai' => 'date',
+            'selesai' => 'date',
         ]);
 
         // input biasa
@@ -32,8 +35,8 @@ class PeriodController extends Controller
         $period->nama = $request->nama;
         $period->tahun = $request->tahun;
         $period->semester = $request->semester;
-        $period->mulai = $request->mulai;
-        $period->selesai = $request->selesai;
+        $period->mulai = Carbon::createFromFormat('Y-m-d', $request->mulai);
+        $period->selesai = Carbon::createFromFormat('Y-m-d', $request->selesai);
         $period->save();
 
         return redirect('period')->with('message', 'Periode baru berhasil ditambahkan');
@@ -75,8 +78,8 @@ class PeriodController extends Controller
         $period->nama = $request->nama;
         $period->tahun = $request->tahun;
         $period->semester = $request->semester;
-        $period->mulai = $request->mulai;
-        $period->selesai = $request->selesai;
+        $period->mulai = Carbon::createFromFormat('Y-m-d', $request->mulai);
+        $period->selesai = Carbon::createFromFormat('Y-m-d', $request->selesai);
         $period->save();
 
         return redirect('period')->with('message', 'Periode berhasil diupdate');
