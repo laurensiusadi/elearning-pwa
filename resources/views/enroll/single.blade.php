@@ -1,6 +1,6 @@
 @extends('layouts.template')
 @section('style')
-<link rel="stylesheet" href="{!! asset('css/dataTables.materialize.css') !!}">
+<link rel="stylesheet" href="{!! asset('css/datatables.materialize.css') !!}">
 @endsection
 @section('content')
 <div class="container">
@@ -46,12 +46,11 @@
                             </div>
     						@endif
     					</td>
-    					<td data-label="NRP / NIDN">{{ $user->nomorinduk }}</td>
+    					<td data-label="NRP / NIDN">{{ $user->nomorinduk or '&ndash;' }}</td>
     					<td data-label="User">{{ $user->name }}</td>
     					<td data-label="Email">{{ $user->email }}</td>
-    					<td data-label="Role">@if(!empty($user->roles->first()))
-                            {{ $user->roles->implode('name', ', ') }}
-                            @else &mdash; @endif
+    					<td data-label="Role">{{ !empty($user->roles->first()) ?
+                             $user->roles->implode('name', ', ') : '&ndash;' }}
                             <input type="hidden" name="user_id[]" value="{{ $user->id }}"></input>
                         </td>
     				</tr>

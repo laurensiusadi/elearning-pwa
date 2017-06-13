@@ -1,12 +1,18 @@
 <?php use Carbon\Carbon; use App\Enrollment; ?>
 @extends('layouts.template')
 
+@section('title')
+    <a href="/classroom/{{$classroom->enrollmentId($classroom)}}/quiz">
+        <i class="material-icons left">arrow_back</i>{{ $classroom->nama }}
+    </a>
+@endsection
+
 @section('content')
 <div class="container">
     <div class="row">
         <h6 class="main-title">Daftar Soal</h6>
         <h4 class="main-title" style="margin: 0 0 5px 0">Quiz {{ $quiz->nama }}</h4>
-        <h6 class="grey-text" style="margin: 0 0 25px 0; font-weight: 400">
+        <h6 style="margin: 0 0 25px 0; font-weight: 400">
             <i class="material-icons tiny">date_range</i>&nbsp;&nbsp;{{ Carbon::parse($quiz->mulai)->toFormattedDateString() }} &ndash; {{ Carbon::parse($quiz->selesai)->toFormattedDateString() }}&nbsp;&nbsp;
             <!-- <i class="material-icons tiny">today</i>&nbsp;&nbsp;{{ Carbon::parse($quiz->created_at)->diffForHumans() }}<br /> -->
             <i class="material-icons tiny">assignment</i>&nbsp;&nbsp;{{$quiz->questions->count()}} Soal
@@ -80,7 +86,7 @@
             var pages = [];
 
             @foreach($questions as $question)
-pages.push("/classroom/{{ Enrollment::where('classroom_id',$classroom->id)->where('user_id', Auth::id())->first()->id }}/quiz/{{ $quiz->id }}/question/{{ $question->id }}");
+pages.push(new Request('/classroom/{{ Enrollment::where('classroom_id',$classroom->id)->where('user_id', Auth::id())->first()->id }}/quiz/{{ $quiz->id }}/question/{{ $question->id }}', {credentials: 'same-origin'}),);
             @endforeach
 
             caches.open('shell-content').then(function(cache) {

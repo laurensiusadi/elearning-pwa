@@ -9,6 +9,9 @@
         @include('admin.home')
         @else
         <h5 class="main-title">Classroom Saya</h5>
+        @if(Auth::user()->classrooms->count() == 0)
+        <h3 class="light">Hubungi administrator untuk mendapatkan kelas</h3>
+        @else
         @foreach(Auth::user()->classrooms as $classroom)
         <div class="card">
             <div class="card-content">
@@ -21,6 +24,7 @@
             </div>
         </div>
         @endforeach
+        @endif
         @if(Auth::user()->hasRole('dosen'))
         <h5 class="main-title">Bank Soal</h5>
         <div class="card-panel">

@@ -77,7 +77,7 @@ Route::group(['middleware' => ['auth', 'acl', 'enroll'],
     'is' => env('ROLE_MHS')],
     function () {
         Route::get('/classroom/{id}/quiz/{quiz_id}/question/{question_id}', 'QuizQuestionController@show');
-        Route::put('/classroom/{id}/quiz/{quiz_id}/question/{question_id}/answer', 'AnswerController@update');
+        Route::post('/classroom/{id}/quiz/{quiz_id}/question/{question_id}/answer', 'AnswerController@update');
         Route::put('/classroom/{id}/quiz/{quiz_id}/question/{question_id}/answer/done', 'AnswerController@done');
     });
 

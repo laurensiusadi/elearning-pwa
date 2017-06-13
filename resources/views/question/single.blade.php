@@ -42,9 +42,8 @@
                 @include('question.modalnext')
             </div>
         </div>
-        <form method="POST" action="/classroom/{{ $classroom->id }}/quiz/{{ $quiz->id }}/question/{{ $question->id }}/answer">
+        <form method="POST" action="/classroom/{{ $classroom->enrollmentId($classroom) }}/quiz/{{ $quiz->id }}/question/{{ $question->id }}/answer">
         {{ csrf_field() }}
-        <input type="hidden" name="_method" value="put"/>
         <div id="code" class="col l4 m12 s12" style="margin-top:0.5rem; margin-bottom: 1rem; max-height:490px ">
             <div class="col s12">
                 <ul class="tabs" style="background-color: #1a2327">
@@ -63,8 +62,8 @@
                 <textarea name="js">{!! $answer->code_js !!}</textarea>
     		</div>
             <div class="col s12" style="position:relative;top:-44px;z-index:7;padding:0 8px;float:right">
-                <button id="judge" type="button" class="run btn z-depth-3 white-text green accent-4 waves-effect waves-light">Run</button>
-                <button type="submit" class="btn z-depth-3 white-text gradient-2 right waves-effect waves-light">Save</button>
+                <button id="judge" type="button" class="update run btn z-depth-3 white-text green accent-4 waves-effect waves-light">Run</button>
+                <button type="submit" class="update btn z-depth-3 white-text gradient-2 right waves-effect waves-light">Save</button>
             </div>
         </div>
         </form>
@@ -91,7 +90,83 @@
 <script src="{{ asset('codemirror/codemirror.js') }}"></script>
 @include('partials.codescript')
 <script src="{{ asset('js/code-grammar.js') }}"></script>
-<script src="{{ asset('js/code-render.js') }}"></script>
+<script>
+(function() {
+    var prepareSource = function() {
+        var code = "\<!DOCTYPE html\>\<html\>\<head\>";
+        code += "\<style\>"  + css_editor.getValue() + "\<\/style\>";
+        code += "\<body\>" + html_editor.getValue();
+        code += "\<script\>" + js_editor.getValue() + "\<\/script\>";
+        code += "\</body\>\<\/html\>";
+        return code;
+    };
+
+    var render = function() {
+        var source = prepareSource();
+
+        var iframe = document.querySelector('#output iframe'),
+        iframe_doc = iframe.contentDocument;
+
+        iframe_doc.open();
+        iframe_doc.write(source);
+        iframe_doc.close();
+
+        Materialize.toast('Rendered', 2000, 'grey');
+    };
+
+    // HTML EDITOR
+    var html_editor = codemirror_grammar(document.querySelector("#html textarea"), [
+        {language : "htmlmixed", grammar : htmlmixed_grammar}
+    ]);
+
+    // CSS EDITOR
+    var css_editor = codemirror_grammar(document.querySelector("#css textarea"), [
+        {language : "css", grammar : css_grammar}
+    ]);
+
+    // JAVASCRIPT EDITOR
+    var js_editor = codemirror_grammar(document.querySelector("#js textarea"), [
+        {language : "javascript", grammar : js_grammar}
+    ]);
+
+    $(".run").click(function(){
+        render();
+    });
+
+    $(".update").click(function(e) {
+        e.preventDefault();
+        var url = "/classroom/{{ $classroom->enrollmentId($classroom) }}/quiz/{{ $quiz->id }}/question/{{ $question->id }}/answer";
+        var $answer = {};
+        $answer.qid = '{{ $question->id }}';
+        $answer.html = html_editor.getValue();
+        $answer.css = css_editor.getValue();
+        $answer.js = js_editor.getValue();
+
+        $.ajax({
+            headers: { 'X-CSRF-Token' : $('meta[name=csrf-token]').attr('content') },
+            type: "POST",
+            url: url,
+            data: $answer,
+            cache: false,
+            success: function(data){
+                render();
+                Materialize.toast('Saved', 3000, 'blue');
+                console.log(data);
+            },
+            error: function(data) {
+                Materialize.toast('Not Saved', 3000, 'materialize-red');
+                console.log(data);
+            }
+        });
+    });
+
+    window.onload = function() {
+        render();
+    };
+}());
+
+</script>
+<!-- <script src="{{ asset('js/code-render.js') }}"></script> -->
 <script src="{{ asset('js/mocha.js') }}"></script>
 <script>mocha.setup({
   ui: 'bdd',

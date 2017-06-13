@@ -5,7 +5,7 @@
     <title>coderoom</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <meta name="description" content="">
+    <meta name="description" content="Offline Capable Web Dev Course">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="manifest" href="/manifest.json">
     <meta name="theme-color" content="#252E36">
@@ -20,7 +20,7 @@
     @yield('style')
     @include('partials.style')
     <style>
-        main { padding:80px 10px 0px 10px }
+        main { margin:0px 10px 0px 10px; padding-top:80px }
     </style>
     @if(Auth::check() AND Auth::user()->hasRole('admin'))
     <style>
@@ -80,7 +80,24 @@
     })(jQuery);
     </script>
     @endif
-    <script src="/js/reg-sw.js"></script>
+    <script>
+    if ("serviceWorker" in navigator) {
+        window.addEventListener('load', function() {
+            navigator.serviceWorker.register("/sw.js").then(function(registration) {
+                console.log("[ServiceWorker] Registration successful with scope: ", registration.scope);
+            }).catch(function(err) {
+                console.log("[ServiceWorker] Registration failed: ", err);
+            });
+        });
+        navigator.serviceWorker.addEventListener("controllerchange", function(event) {
+            navigator.serviceWorker.controller.addEventListener("statechange", function() {
+                if (this.state === "activated") {
+                    Materialize.toast("Offline ready", 4000, "green accent-4");
+                }
+            });
+        });
+    }
+    </script>
     @yield('scripts')
     @include('partials.session')
     <footer class="page-footer slate">

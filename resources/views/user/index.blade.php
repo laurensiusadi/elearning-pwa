@@ -1,6 +1,6 @@
 @extends('layouts.template')
 @section('style')
-<link rel="stylesheet" href="{!! asset('css/dataTables.materialize.css') !!}">
+<link rel="stylesheet" href="{!! asset('css/datatables.materialize.css') !!}">
 @endsection
 @section('content')
 <div class="container">
@@ -22,7 +22,7 @@
         <tbody>
             @foreach($users as $user)
             <tr>
-                <td data-label="ID Number">{{ $user->nomorinduk }}</td>
+                <td data-label="ID Number">{{ $user->nomorinduk or '&ndash;' }}</td>
                 <td data-label="Nama">{{ $user->name }}</td>
                 <td data-label="Email">{{ $user->email }}</td>
                 <td data-label="Action">

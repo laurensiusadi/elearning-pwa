@@ -19,7 +19,7 @@ class EnrollmentCheck
     {
         $enrollmentId = $request->route('id');
         $enrollment = Enrollment::find($enrollmentId);
-        if(!$enrollment->where('user_id', Auth::id())->exists()) {
+        if($enrollment->user_id !== Auth::id()) {
             return redirect('home')->with('error', 'User not enrolled on classroom');
         }
         else {

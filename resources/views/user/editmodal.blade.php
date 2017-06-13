@@ -6,7 +6,7 @@
             {!! csrf_field() !!}
             <input type="hidden" name="_method" value="put"/>
             <div class="input-field">
-                <input name="nomorinduk" value="{{ $user->nomorinduk }}" type="text" required>
+                <input name="nomorinduk" value="{{ $user->nomorinduk }}" type="text">
                 <label class="active" for="nomorinduk">NRP / NIDN</label>
             </div>
             <div class="input-field">
@@ -18,7 +18,7 @@
                 <label class="active" for="email">Email</label>
             </div>
             <div class="input-field">
-                <input placeholder="" name="password" type="password" required>
+                <input placeholder="" name="password" type="password">
                 <label class="active" for="password">Password</label>
             </div>
             <div class="input-field">

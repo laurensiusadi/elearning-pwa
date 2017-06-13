@@ -1,7 +1,7 @@
 <?php use Carbon\Carbon; ?>
 @extends('layouts.template')
 @section('style')
-<link rel="stylesheet" href="{!! asset('css/dataTables.materialize.css') !!}">
+<link rel="stylesheet" href="{!! asset('css/datatables.materialize.css') !!}">
 @endsection
 @section('content')
 <div class="container">
