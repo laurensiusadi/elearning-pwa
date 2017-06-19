@@ -17,10 +17,10 @@ class CreateAnswerTable extends Migration
             $table->increments('id');
             $table->integer('question_id')->unsigned();
             $table->integer('user_id')->unsigned();
-            $table->text('code');
-            $table->integer('durasi');
-            $table->integer('errsyntax');
-            $table->integer('errconvention');
+            $table->text('code_html')->nullable();
+            $table->text('code_css')->nullable();
+            $table->text('code_js')->nullable();
+            $table->text('done')->nullable();
             $table->timestamps();
         });
     }

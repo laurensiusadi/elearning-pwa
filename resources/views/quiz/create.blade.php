@@ -6,7 +6,7 @@
     <div class="col l4 m5 s12 side-content">
         <h5>Buat Quiz Baru</h5>
         <div class="card-panel">
-            <form role="form" method="POST" action="/classroom/{{$classroom->id}}/quiz">
+            <form role="form" method="POST" action="/classroom/{{$classroom->enrollmentId($classroom)}}/quiz">
                 {{ csrf_field() }}
                 <div class="input-field">
                     <input placeholder="" name="nama" type="text" required>

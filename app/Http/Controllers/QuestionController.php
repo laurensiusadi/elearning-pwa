@@ -101,12 +101,12 @@ class QuestionController extends Controller
     public function destroy($id)
     {
         $question = Question::find($id);
-        try {
+        if($question->quizes->isEmpty()) {
             $question->delete();
-        } catch (QueryException $e) {
-            return back()->with('error', 'Soal gagal dihapus');
+            return back()->with('message', 'Soal berhasil dihapus');
         }
-
-        return back()->with('message', 'Soal berhasil dihapus');
+        else {
+            return back()->with('error', 'Soal '.$question->topik.' masih dipakai di Quiz');
+        }
     }
 }

@@ -61,7 +61,7 @@
     		<div id="js" class="col s12 code_box">
                 <textarea name="js">{!! $answer->code_js !!}</textarea>
     		</div>
-            <div class="col s12" style="position:relative;top:-44px;z-index:7;padding:0 8px;float:right">
+            <div class="col s12 slate" style="z-index:7;padding:8px;">
                 <button id="judge" type="button" class="update run btn z-depth-3 white-text green accent-4 waves-effect waves-light">Run</button>
                 <button type="submit" class="update btn z-depth-3 white-text gradient-2 right waves-effect waves-light">Save</button>
             </div>
@@ -117,17 +117,17 @@
     // HTML EDITOR
     var html_editor = codemirror_grammar(document.querySelector("#html textarea"), [
         {language : "htmlmixed", grammar : htmlmixed_grammar}
-    ]);
+    ], 390);
 
     // CSS EDITOR
     var css_editor = codemirror_grammar(document.querySelector("#css textarea"), [
         {language : "css", grammar : css_grammar}
-    ]);
+    ], 390);
 
     // JAVASCRIPT EDITOR
     var js_editor = codemirror_grammar(document.querySelector("#js textarea"), [
         {language : "javascript", grammar : js_grammar}
-    ]);
+    ], 390);
 
     $(".run").click(function(){
         render();
@@ -168,11 +168,11 @@
 </script>
 <!-- <script src="{{ asset('js/code-render.js') }}"></script> -->
 <script src="{{ asset('js/mocha.js') }}"></script>
-<script>mocha.setup({
+<!-- <script>mocha.setup({
   ui: 'bdd',
   ignoreLeaks: true,
   asyncOnly: true,
-});</script>
+});</script> -->
 <script src="{{ asset('js/expect.js') }}"></script>
 <script src="{{ asset('js/jquery.expect.js') }}"></script>
 <script>
@@ -188,24 +188,36 @@ $('#rend-full').click(function(evt) {
 });
 </script>
 <script>
+window.DONE = false;
+mocha.setup({
+  ui: 'bdd',
+  asyncOnly: true,
+});
 describe('Challenges', function () {
 @foreach($keys as $key)
 it('{{ $key->message }}', function () { {!! $key->checklist !!} });
 @endforeach
 });
-</script>
-<script>
-window.DONE = false;
 $(function () {
     document.getElementById("judge").addEventListener("click", function(){
-        var challenges = $("#mocha ul");
         if(window.DONE == true) {
-            location.reload();
+            console.log(window.DONE);
+            window.DONE = false;
+            console.log(window.DONE);
+            mocha.setup({
+              ui: 'bdd',
+              asyncOnly: true,
+            });
+            describe('Challenges', function () {
+            @foreach($keys as $key)
+            it('{{ $key->message }}', function () { {!! $key->checklist !!} });
+            @endforeach
+            });
         }
-        else if(window.DONE == false) {
-            var challenges = $("#mocha ul");
-            if("challenges") {
-                challenges.remove();
+        if(window.DONE == false) {
+            var checklist = $("#mocha>ul");
+            if("checklist") {
+                checklist.remove();
             }
             mocha.run(function () {
                 window.DONE = true;

@@ -17,6 +17,7 @@ class CreateKeyTable extends Migration
             $table->increments('id');
             $table->integer('question_id')->unsigned();
             $table->string('checklist');
+            $table->string('message');
             $table->timestamps();
         });
     }

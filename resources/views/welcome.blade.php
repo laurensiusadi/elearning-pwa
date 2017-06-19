@@ -4,7 +4,7 @@
 <div class="container">
 <div class="row">
     <div class="col l8 m6 s12" style="padding:40px 0 30px 20px">
-        <img src="/images/coderoom-type-emblem.svg" alt="coderoom">
+        Aksara
         <h3>Learn code<br/>anywhere anytime.</h3>
         <p class="light">Pemrograman Web<br/>Departemen Teknik Informatika<br/>Institut Teknologi Sepuluh Nopember</p>
     </div>

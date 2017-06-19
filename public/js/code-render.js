@@ -25,17 +25,17 @@ var render = function() {
 // HTML EDITOR
 var html_editor = codemirror_grammar(document.querySelector("#html textarea"), [
     {language : "htmlmixed", grammar : htmlmixed_grammar}
-]);
+], 442);
 
 // CSS EDITOR
 var css_editor = codemirror_grammar(document.querySelector("#css textarea"), [
     {language : "css", grammar : css_grammar}
-]);
+], 442);
 
 // JAVASCRIPT EDITOR
 var js_editor = codemirror_grammar(document.querySelector("#js textarea"), [
     {language : "javascript", grammar : js_grammar}
-]);
+], 442);
 
 $(".run").click(function(){
     render();

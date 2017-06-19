@@ -40,6 +40,7 @@ class QuizController extends Controller
 
     public function store(Request $request, $id)
     {
+        $enrollment = Enrollment::find($id);
         $this->validate($request, [
             'nama' => 'required',
             'mulai' => 'required',
@@ -48,7 +49,7 @@ class QuizController extends Controller
 
         // input biasa
         $quiz = new Quiz;
-        $quiz->classroom_id = $id;
+        $quiz->classroom_id = $enrollment->classroom_id;
         $quiz->nama = $request->nama;
         $quiz->mulai = $request->mulai;
         $quiz->selesai = $request->selesai;
@@ -60,34 +61,35 @@ class QuizController extends Controller
     public function show($id, $quiz_id)
     {
         $quiz = Quiz::find($quiz_id);
-
+        $enrollment = Enrollment::find($id);
         $ismhs = false;
         if (User::find(Auth::id())->where('role_user', 'mhs')) {
             $ismhs = true;
         }
 
-        return view('quiz.single', ['quiz' => $quiz, 'enrollid' => $id, 'ismhs' => $ismhs]);
+        return view('quiz.single', ['quiz' => $quiz, 'enrollid' => $enrollmen->id, 'ismhs' => $ismhs]);
     }
 
     public function edit($id, $quiz_id)
     {
+        $enrollment = Enrollment::find($id);
         $quiz = Quiz::find($quiz_id);
-        $classroomId = $id;
+        $classroomId = $enrollment->classroom_id;
         $allQuestions = Question::all();
         return view('quiz.edit', compact('quiz', 'classroomId', 'allQuestions'));
     }
 
     public function update(Request $request, $id, $quiz_id)
     {
+        $enrollment = Enrollment::find($id);
         $this->validate($request, [
             'nama' => 'required',
             'mulai' => 'required',
             'selesai' => 'required',
             ]);
 
-        // input biasa
         $quiz = Quiz::find($quiz_id);
-        $quiz->classroom_id = $id;
+        $quiz->classroom_id = $enrollment->classroom_id;
         $quiz->nama = $request->nama;
         $quiz->mulai = $request->mulai;
         $quiz->selesai = $request->selesai;

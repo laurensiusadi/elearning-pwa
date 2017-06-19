@@ -1,4 +1,4 @@
-function codemirror_grammar(code, langs)
+function codemirror_grammar(code, langs, height)
 {
     if ( langs.mode )
     {
@@ -13,7 +13,7 @@ function codemirror_grammar(code, langs)
             foldGutter: true,
         };
         var editor = CodeMirror.fromTextArea(code, opts);
-        editor.setSize(null, 442);
+        editor.setSize(null, height);
         return editor;
     }
 
@@ -93,6 +93,6 @@ function codemirror_grammar(code, langs)
     opts[main_mode.matchType] = true;
     var editor = CodeMirror.fromTextArea(code, opts);
 
-    editor.setSize(null, 442);
+    editor.setSize(null, height);
     return editor;
 }

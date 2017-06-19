@@ -2,26 +2,20 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>coderoom</title>
+    <title>Aksara</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
-    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="description" content="Offline Capable Web Dev Course">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="manifest" href="/manifest.json">
-    <meta name="theme-color" content="#0055FF">
+    <meta name="theme-color" content="#252E36">
     <meta name="mobile-web-app-capable" content="yes">
-    <!-- <link rel="icon" sizes="192x192" href="images/android-desktop.png"> -->
-    <!-- Add to homescreen for Safari on iOS -->
+    <link rel="icon" href="/images/favicon32x32.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/images/icons/icon-192x192.png">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <meta name="apple-mobile-web-app-title" content="coderoom">
-    <!-- <link rel="apple-touch-icon-precomposed" href="images/ios-desktop.png"> -->
-    <!-- Tile icon for Win8 (144x144 + tile color) -->
-    <!-- <meta name="msapplication-TileImage" content="images/touch/ms-touch-icon-144x144-precomposed.png">
-    <meta name="msapplication-TileColor" content="#3372DF"> -->
-    <!-- <link rel="shortcut icon" href="images/favicon.png"> -->
-    <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,light,bolditalic&amp;lang=en"> -->
+    <meta name="apple-mobile-web-app-title" content="Aksara">
+    <link rel="apple-touch-icon" type="image/png" sizes="192x192" href="/images/icons/icon-192x192.png">
     <link rel="stylesheet" href="{!! asset('css/materialize-prod.css') !!}">
     @include('partials.style')
     @yield('style')
@@ -68,7 +62,7 @@
     <footer class="page-footer slate">
         <div class="footer-copyright">
             <div class="grey-text container full">
-            © 2017 Copyright Text
+            © 2017 Copyright
             <a class="grey-text right" href="https://laurensi.us">Made by Laurensius Adi</a>
             </div>
         </div>

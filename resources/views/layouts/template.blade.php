@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>coderoom</title>
+    <title>Aksara</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="description" content="Offline Capable Web Dev Course">
@@ -14,8 +14,8 @@
     <link rel="icon" type="image/png" sizes="192x192" href="/images/icons/icon-192x192.png">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <meta name="apple-mobile-web-app-title" content="coderoom">
-    <link rel="apple-touch-icon" type="image/png" sizes="192x192" href="images/icons/coderoom-emblem.png">
+    <meta name="apple-mobile-web-app-title" content="Aksara">
+    <link rel="apple-touch-icon" type="image/png" sizes="192x192" href="/images/icons/icon-192x192.png">
     <link rel="stylesheet" href="{!! asset('css/materialize-prod.css') !!}">
     @yield('style')
     @include('partials.style')
@@ -120,7 +120,7 @@
         </div> -->
         <div class="footer-copyright">
             <div class="grey-text container full">
-            © 2017 Copyright Text
+            © 2017 Copyright
             <a class="grey-text right" href="https://laurensi.us">Made by Laurensius Adi</a>
             </div>
         </div>

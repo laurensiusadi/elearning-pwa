@@ -17,7 +17,9 @@ class CreateQuestionTable extends Migration
             $table->increments('id');
             $table->string('topik', 50);
             $table->text('deskripsi');
-            $table->text('template');
+            $table->text('template_html')->nullable();
+            $table->text('template_css')->nullable();
+            $table->text('template_js')->nullable();
             $table->timestamps();
         });
     }

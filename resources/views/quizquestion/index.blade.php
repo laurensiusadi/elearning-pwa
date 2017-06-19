@@ -86,7 +86,7 @@
             var pages = [];
 
             @foreach($questions as $question)
-pages.push(new Request('/classroom/{{ Enrollment::where('classroom_id',$classroom->id)->where('user_id', Auth::id())->first()->id }}/quiz/{{ $quiz->id }}/question/{{ $question->id }}', {credentials: 'same-origin'}),);
+pages.push(new Request('/classroom/{{ Enrollment::where('classroom_id',$classroom->id)->where('user_id', Auth::id())->first()->id }}/quiz/{{ $quiz->id }}/question/{{ $question->id }}', {credentials: 'include'}),);
             @endforeach
 
             caches.open('shell-content').then(function(cache) {

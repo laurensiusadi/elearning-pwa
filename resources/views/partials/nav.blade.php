@@ -1,9 +1,9 @@
 <nav role="navigation">
     <div class="nav-wrapper">
         @if (!Auth::check())
-        <a id="logo-container" href="{{ url('/') }}" class="brand-logo center"><img src="/images/coderoom-logo-white.svg" alt="coderoom"></a>
+        <a id="logo-container" href="{{ url('/') }}" class="brand-logo center">Aksara</a>
         @else
-        <a id="logo-container" href="{{ url('home') }}" class="brand-logo center"><img src="/images/coderoom-logo-white.svg" alt="coderoom"></a>
+        <a id="logo-container" href="{{ url('home') }}" class="brand-logo center">Aksara</a>
         @endif
         <ul class="right hide-on-med-and-down">
             @if (!Auth::check())

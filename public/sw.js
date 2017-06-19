@@ -33,7 +33,6 @@ self.addEventListener("activate", function(event) {
 });
 
 self.addEventListener("fetch", function(event) {
-    if (event.request.method !== "GET") { return; }
     if (event.request.url !== "/sw.js" && event.request.url.split('.').pop().match(/^(js|css|png|svg|ttf|woff|woff2)$/)) {
         event.respondWith(
             caches.match(event.request).then(function(response) {
@@ -41,13 +40,14 @@ self.addEventListener("fetch", function(event) {
             })
         );
     }
-    else {
+    else if (event.request.method === 'GET' &&
+       event.request.headers.get('accept').includes('text/html')) {
         event.respondWith(
             fetch(event.request).then(function(response) {
                 var networkResponse = response.clone();
                 caches.open(cacheName).then(function(cache) {
                     cache.put(event.request, networkResponse);
-                }).catch()
+                })
                 return response;
             }).catch(function() {
                 return caches.match(event.request);
